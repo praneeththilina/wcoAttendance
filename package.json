@@ -1,0 +1,10 @@
+{
+  "name": "wcoattendance",
+  "version": "1.0.0",
+  "description": "Root package.json to fix CI build issue",
+  "scripts": {
+    "install": "cd backend && pnpm install && cd ../frontend && pnpm install",
+    "build": "cd backend && pnpm build && cd ../frontend && pnpm build",
+    "test": "cd backend && pnpm test && cd ../frontend && pnpm test"
+  }
+}

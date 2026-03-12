@@ -1,3 +1,7 @@
 
 > aa-attendance-frontend@1.0.0 type-check /app/frontend
 > tsc --noEmit
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
