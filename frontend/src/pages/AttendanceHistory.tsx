@@ -59,7 +59,7 @@ export function AttendanceHistory() {
       <div className="max-w-md mx-auto bg-background-light dark:bg-background-dark">
         {/* Header */}
         <header className="flex items-center bg-white dark:bg-slate-900 p-4 border-b border-primary/10 sticky top-0 z-10">
-          <button
+          <button aria-label="Go back"
             onClick={() => navigate(-1)}
             className="text-primary flex size-10 items-center justify-center rounded-full hover:bg-primary/10"
           >
