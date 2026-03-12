@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clientService, attendanceService } from '@/services/auth';
 import { BottomNav } from '@/components/layout';
@@ -9,7 +9,6 @@ export function ChangeClientLocation() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
   const [clients, setClients] = useState<Client[]>([]);
-  const [filteredClients, setFilteredClients] = useState<Client[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isChanging, setIsChanging] = useState(false);
 
@@ -17,26 +16,22 @@ export function ChangeClientLocation() {
     loadClients();
   }, []);
 
-  useEffect(() => {
+  const filteredClients = useMemo(() => {
     if (searchQuery.trim() === '') {
-      setFilteredClients(clients);
-    } else {
-      const query = searchQuery.toLowerCase();
-      setFilteredClients(
-        clients.filter(
-          (client) =>
-            client.name.toLowerCase().includes(query) ||
-            client.city.toLowerCase().includes(query)
-        )
-      );
+      return clients;
     }
+    const query = searchQuery.toLowerCase();
+    return clients.filter(
+      (client) =>
+        client.name.toLowerCase().includes(query) ||
+        client.city.toLowerCase().includes(query)
+    );
   }, [searchQuery, clients]);
 
   const loadClients = async () => {
     try {
       const data = await clientService.getAll();
       setClients(data);
-      setFilteredClients(data);
     } catch (error: any) {
       console.error('Failed to load clients:', error);
     } finally {
