@@ -32,7 +32,7 @@ export function Leaves() {
       ]);
       setBalance(balData);
       setRequests(reqData.records);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load leaves data:', error);
     } finally {
       setIsLoading(false);

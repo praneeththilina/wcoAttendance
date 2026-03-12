@@ -24,7 +24,7 @@ export function AdminLeaves() {
       setIsLoading(true);
       const data = await leaveService.getAllRequests(1, 100, statusFilter || undefined);
       setRequests(data.records);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load leave requests:', error);
     } finally {
       setIsLoading(false);

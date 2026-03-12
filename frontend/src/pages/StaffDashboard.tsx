@@ -25,7 +25,7 @@ export function StaffDashboard() {
     try {
       const data = await adminService.getAllStaff();
       setStaff(data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load staff:', error);
     } finally {
       setIsLoading(false);
@@ -39,7 +39,7 @@ export function StaffDashboard() {
       setShowAddModal(false);
       loadStaff();
       setNewStaff({ firstName: '', lastName: '', email: '', employeeId: '', password: '', role: 'employee' });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to add staff:', error);
       alert('Failed to add staff member. Check console.');
     }

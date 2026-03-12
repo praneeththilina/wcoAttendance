@@ -52,7 +52,7 @@ export function LoginPage() {
 
         navigate(roleRedirects[response.data.user.role] || ROUTES.DASHBOARD);
       }
-    } catch (error) {
+    } catch (error: any) {
       const errorMessage = error?.response?.data?.error?.message || error?.message || 'Login failed. Please try again.';
       setError(errorMessage);
     } finally {

@@ -39,7 +39,7 @@ export function ClientSelection() {
       const data = await clientService.getAll();
       setClients(data);
       setFilteredClients(data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load clients:', error);
     } finally {
       setIsLoading(false);

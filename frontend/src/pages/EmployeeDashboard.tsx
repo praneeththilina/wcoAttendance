@@ -31,7 +31,7 @@ export function EmployeeDashboard() {
     setIsCheckingIn(true);
     try {
       navigate(ROUTES.CLIENT_SELECTION);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Check-in failed:', error);
     } finally {
       setIsCheckingIn(false);
@@ -41,7 +41,7 @@ export function EmployeeDashboard() {
   const handleCheckOut = async () => {
     try {
       navigate(ROUTES.CHECKOUT);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Check-out failed:', error);
     }
   };
@@ -145,7 +145,7 @@ export function EmployeeDashboard() {
             >
               <span className="material-symbols-outlined mr-3 text-3xl">location_on</span>
               <div className="flex flex-col items-start">
-                <span className="text-lg font-bold">Check In</span>
+                <span className="text-lg font-bold">{isCheckedIn ? "Update Location" : "Check In"}</span>
                 <span className="text-xs opacity-80">Capture current GPS location</span>
               </div>
             </button>

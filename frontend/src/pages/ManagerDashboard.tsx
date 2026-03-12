@@ -24,7 +24,7 @@ export function ManagerDashboard() {
       setIsLoading(true);
       const response = await apiClient.get('/manager/dashboard');
       setStats(response.data.data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load manager dashboard:', error);
     } finally {
       setIsLoading(false);

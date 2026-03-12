@@ -50,7 +50,7 @@ export function AdminDashboard() {
         atOffice: data.atOffice,
         atClientSites: data.atClientSites,
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load dashboard:', error);
     } finally {
       setIsLoading(false);

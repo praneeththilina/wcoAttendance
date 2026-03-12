@@ -20,7 +20,7 @@ export function Clients() {
       setIsLoading(true);
       const data = await clientService.getAll();
       setClients(data);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load clients:', error);
     } finally {
       setIsLoading(false);
