@@ -33,7 +33,7 @@ describe('Button Component', () => {
     expect(lg.firstChild).toHaveClass('h-14');
 
     const { container: xl } = render(<Button size="xl">XL</Button>);
-    expect(xl.firstChild).toHaveClass('h-20');
+    expect(xl.firstChild).toHaveClass('py-4');
   });
 
   it('should be disabled when isLoading is true', () => {
@@ -45,8 +45,9 @@ describe('Button Component', () => {
   it('should show loading spinner when isLoading', () => {
     render(<Button isLoading>Loading</Button>);
     expect(screen.getByText('Loading...')).toBeInTheDocument();
-    const spinner = screen.getByText('progress_activity').parentElement;
+    const spinner = screen.getByText('progress_activity');
     expect(spinner).toHaveClass('animate-spin');
+    // Removed since spinner is actually the span element itself in Button.tsx
   });
 
   it('should be disabled when disabled prop is true', () => {

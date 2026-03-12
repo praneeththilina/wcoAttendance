@@ -1,6 +1,6 @@
 import re
 
-with open("frontend/src/pages/ClientSelection.tsx", "r") as f:
+with open("frontend/src/pages/ChangeClientLocation.tsx", "r") as f:
     content = f.read()
 
 content = content.replace("import { useState, useEffect } from 'react';", "import { useState, useEffect, useMemo } from 'react';")
@@ -36,5 +36,5 @@ use_memo_code = """  const filteredClients = useMemo(() => {
 content = content.replace(use_effect_code, use_memo_code)
 content = content.replace("      setFilteredClients(data);\n", "")
 
-with open("frontend/src/pages/ClientSelection.tsx", "w") as f:
+with open("frontend/src/pages/ChangeClientLocation.tsx", "w") as f:
     f.write(content)
