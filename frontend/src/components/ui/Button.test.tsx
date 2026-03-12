@@ -47,6 +47,7 @@ describe('Button Component', () => {
     expect(screen.getByText('Loading...')).toBeInTheDocument();
     const spinner = screen.getByText('progress_activity');
     expect(spinner).toHaveClass('animate-spin');
+    // Removed since spinner is actually the span element itself in Button.tsx
   });
 
   it('should be disabled when disabled prop is true', () => {

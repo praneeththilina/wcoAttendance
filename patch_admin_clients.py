@@ -1,6 +1,6 @@
 import re
 
-with open("frontend/src/pages/ClientSelection.tsx", "r") as f:
+with open("frontend/src/pages/AdminClients.tsx", "r") as f:
     content = f.read()
 
 content = content.replace("import { useState, useEffect } from 'react';", "import { useState, useEffect, useMemo } from 'react';")
@@ -15,7 +15,8 @@ use_effect_code = """  useEffect(() => {
         clients.filter(
           (client) =>
             client.name.toLowerCase().includes(query) ||
-            client.city.toLowerCase().includes(query)
+            client.city.toLowerCase().includes(query) ||
+            client.address?.toLowerCase().includes(query)
         )
       );
     }
@@ -29,12 +30,13 @@ use_memo_code = """  const filteredClients = useMemo(() => {
     return clients.filter(
       (client) =>
         client.name.toLowerCase().includes(query) ||
-        client.city.toLowerCase().includes(query)
+        client.city.toLowerCase().includes(query) ||
+        client.address?.toLowerCase().includes(query)
     );
   }, [searchQuery, clients]);"""
 
 content = content.replace(use_effect_code, use_memo_code)
 content = content.replace("      setFilteredClients(data);\n", "")
 
-with open("frontend/src/pages/ClientSelection.tsx", "w") as f:
+with open("frontend/src/pages/AdminClients.tsx", "w") as f:
     f.write(content)

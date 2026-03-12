@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Mobile Admin Attendance Dashboard</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-white dark:bg-background-dark shadow-2xl overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center bg-white dark:bg-background-dark p-4 justify-between sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
+<div class="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Attendance Dashboard</h2>
+<div class="flex gap-2 items-center justify-end">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100">notifications</span>
+</button>
+<div class="size-8 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
+<img alt="Admin Profile" class="size-full object-cover" data-alt="Professional male HR admin avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuClG7qU97CVTpqVk4sBdfc0z-1AhprGn6tQipQQx-YbeMnf77M3c6wK9yZsadKf7jAX43fz-5rM0U8BVV_Jp1eu36i_hHFEJOJ0pg8iw05GpLo66fyNXSwqZuEYed62TCc2H-J8ojxMy3aUU99s3kjwktq3bGe3j32mcZkeKsE94i6kD3B3ph2hFCrr2JGz3TcKRB7ovSHzwhCs0ZkwHOHwLFu5n9qvnQ8ggCcHhX4QgnnpnWzFfBalPv4eGXz5Yaf3NKprwkcpMuTb"/>
+</div>
+</div>
+</header>
+<!-- Stats Horizontal Scroll -->
+<div class="flex overflow-x-auto gap-4 p-4 no-scrollbar">
+<div class="flex min-w-[160px] flex-col gap-2 rounded-xl p-4 bg-primary text-white shadow-lg shadow-primary/20">
+<p class="text-white/80 text-xs font-medium uppercase tracking-wider">Total Employees</p>
+<p class="text-2xl font-bold">1,250</p>
+<div class="mt-1 h-1 w-12 bg-white/30 rounded-full"></div>
+</div>
+<div class="flex min-w-[140px] flex-col gap-2 rounded-xl p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">Checked In</p>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">940</p>
+<div class="mt-1 h-1 w-12 bg-green-500 rounded-full"></div>
+</div>
+<div class="flex min-w-[140px] flex-col gap-2 rounded-xl p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">At Office</p>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">600</p>
+<div class="mt-1 h-1 w-12 bg-blue-500 rounded-full"></div>
+</div>
+<div class="flex min-w-[140px] flex-col gap-2 rounded-xl p-4 bg-white dark:bg-slate-800 border border-slate-100 dark:border-slate-700 shadow-sm">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider">At Client</p>
+<p class="text-slate-900 dark:text-slate-100 text-2xl font-bold">340</p>
+<div class="mt-1 h-1 w-12 bg-amber-500 rounded-full"></div>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="px-4 py-2">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-4 text-slate-400">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-slate-100 dark:bg-slate-800 border-none rounded-xl focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 transition-all" placeholder="Search staff members..." type="text"/>
+</div>
+</div>
+<!-- Live Staff Board Header -->
+<div class="flex items-center justify-between px-4 pt-6 pb-2">
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight">Live Staff Board</h2>
+<button class="text-primary text-sm font-semibold">View All</button>
+</div>
+<!-- Staff List -->
+<div class="flex flex-col px-4 pb-24 gap-3">
+<!-- Staff Item 1 -->
+<div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="size-12 rounded-full overflow-hidden border-2 border-green-500/20">
+<img alt="Sarah Jenkins" class="size-full object-cover" data-alt="Young professional woman portrait with friendly smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGaEYKMOVjRcPWW_ULPEMvbpoIoUw7XthI20CAgZj9tD60FNCWFioXM4vxSR1XFKJTcOiN5At7wKvTB4BEzxQCvRnxCvbZqsSGGN99bMI7aJTD8DZVOd6UodS17i-daKl1Ly8ZJxHLxF1_JDK4RZ2n06omrFb95AHximkJBxLZNa1xxtp2EGaUyDuf3LJ92dw9YbVEm7LxV5c-EKoh7RFRKJAEGiP2kmKkkAev60DhsrCih3BI1eGOeajRZEb6z3hEsj8OB6B2lvkr"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-slate-100">Sarah Jenkins</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Senior Consultant</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider">Checked In</span>
+</div>
+<div class="flex items-center gap-4 pt-2 border-t border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Google - Mountain View</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">08:45 AM</span>
+</div>
+</div>
+</div>
+<!-- Staff Item 2 -->
+<div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="size-12 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="Michael Chen" class="size-full object-cover" data-alt="Professional asian male portrait with glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4EU2_92FVo3xuJQcy0qabbAgjW9ncaCER-ZOPEylMq5AWm_tFU4XW2w6u1gFjkFlRYf4PHfP5GDIACGDR7JURLYNsyQ_Zcv6pX_WPVGyTl6C1rjNst9Axtt8mlHFVxt8dgg-UoBgO18gPAMXMLBFZpU-4rEi9AJG50pqwfHq2ssb39o8g32lPVP52XWebzpLNAw2q0lLrvX27C4GlNYjrMB7dUOhlxV2QnY3jRCO-FU2O0MOl-gvjSFA-v_YGUWrVVqpDmVzm4EEn"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-slate-100">Michael Chen</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Solutions Architect</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-primary/10 dark:bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider">Travel</span>
+</div>
+<div class="flex items-center gap-4 pt-2 border-t border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">flight_takeoff</span>
+<span class="text-xs">En route to NYC Office</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">ETA 11:30 AM</span>
+</div>
+</div>
+</div>
+<!-- Staff Item 3 -->
+<div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="size-12 rounded-full overflow-hidden border-2 border-green-500/20">
+<img alt="Elena Rodriguez" class="size-full object-cover" data-alt="Latin woman smiling with professional business attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLjqhtaePNtmHLZo0jZnF_wOc62nzN0Gp-MTQ87O366X_VPS8xJpJytEq-IYvBylDLdDOhM8009L0SU2E95BrsLbzYmak4TVkk_nrRtYEpn_2zipi63d5G7Alh5LMdsToJY_vKr_O5s0yT97eqcUR7b5PeWS0BCDyzTenRW71v5cbCVNDjN2HfIyikMouur1OKBl18-r4EOmVjVtBpy2c-9JSkPKvEsoyAMu5g7nBF-e7es1_oeZFYODH4z8Pu8_G_m7rh-ESEaFpq"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-slate-100">Elena Rodriguez</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Project Manager</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider">Checked In</span>
+</div>
+<div class="flex items-center gap-4 pt-2 border-t border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Main Headquarters - Lobby</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">09:12 AM</span>
+</div>
+</div>
+</div>
+<!-- Staff Item 4 -->
+<div class="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="size-12 rounded-full overflow-hidden border-2 border-amber-500/20">
+<img alt="David Wilson" class="size-full object-cover" data-alt="Middle-aged man with beard in office attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1D81lAIkwa1yUfBkwfO6Bubx5wLUDc92UbI83Q7QASdpHCDTU7uw996k3gSkJ91b3dOX8Ai8exVsDsS6HJhhJVNE22toN0Tla5ycp8IicsDh9DSZoyfZqbg2RQ2_u9fA2VetdXfbGZ0VGaTZiLoltFIYCCgtl1trx5h2ZLXfJqfe6bbYJLg5Bz_HVi9EebN3D10nal9V18ir5SvO6KYao1vmeuTOqPcZ6NRIWy3ds1CRQQ6AKbHdv62SxcCy_1Mq9QpRmY2PdWobd"/>
+</div>
+<div>
+<h3 class="font-bold text-slate-900 dark:text-slate-100">David Wilson</h3>
+<p class="text-xs text-slate-500 dark:text-slate-400">Field Technician</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold uppercase tracking-wider">On-Site</span>
+</div>
+<div class="flex items-center gap-4 pt-2 border-t border-slate-50 dark:border-slate-700">
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">apartment</span>
+<span class="text-xs">Verizon Data Center</span>
+</div>
+<div class="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span class="text-xs">08:00 AM</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 pb-6 pt-2 z-20">
+<div class="flex justify-around items-center px-2">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined fill-1">dashboard</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Staff</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">event_busy</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Leave</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="text-[10px] font-medium uppercase tracking-tighter">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-6 size-14 bg-primary text-white rounded-full shadow-xl shadow-primary/30 flex items-center justify-center transition-transform hover:scale-105 active:scale-95 z-30">
+<span class="material-symbols-outlined text-2xl">add</span>
+</button>
+</div>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</body></html>
