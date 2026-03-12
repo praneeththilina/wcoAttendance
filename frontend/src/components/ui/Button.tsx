@@ -27,7 +27,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-50';
     
     const variantStyles = {
-      primary: 'bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20',
+      primary: 'bg-primary hover:bg-opacity-90 text-white shadow-md',
       secondary: 'bg-primary-light hover:bg-primary-light/90 text-white',
       outline: 'border-2 border-primary/20 text-primary hover:bg-primary/5 dark:border-primary/80 dark:text-primary/80',
       ghost: 'text-primary hover:bg-primary/5 dark:text-primary/80',
@@ -37,7 +37,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       sm: 'h-10 px-4 text-sm',
       md: 'h-12 px-6 text-base',
       lg: 'h-14 px-8 text-lg',
-      xl: 'h-20 px-10 text-xl',
+      xl: 'py-4 px-10 text-base',
     };
 
     const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;

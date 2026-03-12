@@ -52,7 +52,7 @@ export function LoginPage() {
 
         navigate(roleRedirects[response.data.user.role] || ROUTES.DASHBOARD);
       }
-    } catch (error: any) {
+    } catch (error) {
       const errorMessage = error?.response?.data?.error?.message || error?.message || 'Login failed. Please try again.';
       setError(errorMessage);
     } finally {
@@ -62,7 +62,7 @@ export function LoginPage() {
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark font-display">
-      <div className="relative flex flex-col h-auto min-h-screen w-full overflow-x-hidden pb-12">
+      <div className="relative flex flex-col h-auto min-h-screen w-full overflow-x-hidden pb-12 group/design-root">
         {/* Top App Bar */}
         <div className="flex items-center p-4 pb-2 justify-between">
           <div className="text-primary dark:text-primary/80 flex size-12 shrink-0 items-center justify-start cursor-pointer">
@@ -152,6 +152,7 @@ export function LoginPage() {
             type="submit"
             variant="primary"
             size="xl"
+            className="mt-2 w-full"
             isLoading={useAuthStore.getState().isLoading}
             rightIcon={<span className="material-symbols-outlined">login</span>}
           >
