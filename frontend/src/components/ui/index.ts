@@ -6,3 +6,6 @@ export type { InputProps } from './Input';
 
 export { Checkbox } from './Checkbox';
 export type { CheckboxProps } from './Checkbox';
+
+export { Card, CardBordered } from './Card';
+export { StatusBadge } from './StatusBadge';

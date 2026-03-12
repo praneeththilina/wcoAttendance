@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>AuditFlow Dashboard</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-primary/10 px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="Professional portrait of a male auditor" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXSMQcL-58UzIhqXnEtWv4UWMbHiZjc3YRidpKJx4Vdo0xFQz81eC-ylhV9Odkf9nxdBqoxj4FHZUYuWbVe99MJH-Kb8tSZWb-PTfFogdIPWv3HPAW_jzPW_cfjTWzlfzhY2Epimfv7V16vjMLzpmL3bRJMPC-e7mQ_ngSpNhnSSFF3VkgzM6mcRNuaQzqbXW2eCvEC4EK18u9ZdyrM3Y0zFk3t_sKX626ehKld_-uWiKIgRvGpdSVTvYjkHGxvp70YG1SuBWuIqLz"/>
+</div>
+<div>
+<h1 class="text-sm font-semibold text-primary dark:text-slate-100">Welcome, Kasun</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400">Senior Auditor • <span class="text-emerald-600 dark:text-emerald-400 font-medium">Active</span></p>
+</div>
+</div>
+<button class="size-10 rounded-full flex items-center justify-center text-slate-600 dark:text-slate-300 hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<main class="flex-1 p-4 space-y-6 max-w-md mx-auto w-full">
+<!-- Current Status Card -->
+<section>
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200/60 dark:border-slate-800 overflow-hidden">
+<div class="p-4 flex items-start justify-between">
+<div class="space-y-1">
+<div class="flex items-center gap-2 mb-1">
+<span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-[10px] font-bold tracking-wider text-emerald-600 dark:text-emerald-400 uppercase">Currently Checked In</span>
+</div>
+<h2 class="text-xl font-bold text-primary dark:text-slate-100">ABC Ltd. Headquarters</h2>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Financial District, Tower B</span>
+</div>
+</div>
+<div class="bg-emerald-50 dark:bg-emerald-900/30 p-2 rounded-lg text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-3xl">check_circle</span>
+</div>
+</div>
+<div class="px-4 pb-4 grid grid-cols-2 gap-4 border-t border-primary/5 pt-4">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-semibold">Arrival Time</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200">08:30 AM</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-semibold">Total Duration</p>
+<p class="text-sm font-medium text-slate-700 dark:text-slate-200">4h 15m</p>
+</div>
+</div>
+<div class="aspect-video w-full bg-slate-200 dark:bg-slate-800">
+<img alt="Location Map" class="w-full h-full object-cover opacity-80" data-alt="Map view showing current office location" data-location="Colombo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPWF-qdg0fmsKlTVU4Wp7O3ho8f6Z2xFaUaeGcx2Ek0GiJceQ_LOLA8PFK8zk93F7gV9E7ev_U52F_BuacK5cNQ3r62MgRxzWnjuD6NQfsFzLlyvAo736xB_ipgaoF41KmRdBRvChYffzZR3YnlnQnZqGEC5rxTeeBcYH3bkJhyBeY3RNh3SjqSpqtB9MtxP4FcuWL3TeawxcE3t21ysEkCAN5nA-p4GUuMXV5HTDmMej7d7TRi7wqWh2sKtpaoDU9crhMTsJNCnDi"/>
+</div>
+</div>
+</section>
+<!-- Action Section -->
+<section class="space-y-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 px-1">Quick Actions</h3>
+<div class="grid grid-cols-1 gap-3">
+<!-- Check In (Prominent) -->
+<button class="flex items-center justify-between w-full p-5 bg-primary text-white rounded-xl shadow-lg shadow-primary/30 hover:opacity-95 active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="bg-white/20 p-2 rounded-lg">
+<span class="material-symbols-outlined">login</span>
+</div>
+<div class="text-left">
+<span class="block font-bold text-lg">Check In</span>
+<span class="text-xs text-white/70">Start session at new location</span>
+</div>
+</div>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="grid grid-cols-2 gap-3">
+<!-- Change Location -->
+<button class="flex flex-col items-center justify-center p-5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-primary/30 hover:bg-primary/5 transition-all">
+<div class="bg-primary/10 text-primary dark:text-slate-100 p-2 rounded-lg mb-2">
+<span class="material-symbols-outlined">sync_alt</span>
+</div>
+<span class="font-bold text-sm">Switch</span>
+<span class="text-[10px] text-slate-500 uppercase">Location</span>
+</button>
+<!-- Check Out -->
+<button class="flex flex-col items-center justify-center p-5 bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900/50 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/30 transition-all">
+<div class="bg-red-500 text-white p-2 rounded-lg mb-2">
+<span class="material-symbols-outlined">logout</span>
+</div>
+<span class="font-bold text-sm text-red-600 dark:text-red-400">Check Out</span>
+<span class="text-[10px] text-red-400 dark:text-red-500 uppercase">End Session</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Recent Logs (Subtle) -->
+<section class="pb-20">
+<div class="flex items-center justify-between mb-3 px-1">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400">Recent Logs</h3>
+<a class="text-xs font-semibold text-primary dark:text-slate-300" href="#">View All</a>
+</div>
+<div class="space-y-2">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/60 dark:border-slate-800 flex items-center gap-4 hover:border-primary/20 transition-colors cursor-pointer">
+<div class="size-2 rounded-full bg-slate-300"></div>
+<div class="flex-1">
+<p class="text-xs font-bold">Zylker Corp Visit</p>
+<p class="text-[10px] text-slate-500">Yesterday • 6h 30m</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 text-sm">chevron_right</span>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200/60 dark:border-slate-800 flex items-center gap-4 hover:border-primary/20 transition-colors cursor-pointer">
+<div class="size-2 rounded-full bg-slate-300"></div>
+<div class="flex-1">
+<p class="text-xs font-bold">Daily Office Standup</p>
+<p class="text-[10px] text-slate-500">2 days ago • 8h 15m</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 text-sm">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-8 py-3 pb-8 flex items-center justify-between z-20">
+<a class="flex flex-col items-center gap-1.5 text-primary dark:text-slate-100" href="#">
+<span class="material-symbols-outlined font-variation-fill">grid_view</span>
+<span class="text-[10px] font-bold">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="text-[10px] font-medium">Schedule</span>
+</a>
+<a class="flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px] font-medium">Logs</span>
+</a>
+<a class="flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-500 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</nav>
+<!-- Decorative Bottom Spacer for safe area -->
+<div class="h-6 bg-white dark:bg-slate-900"></div>
+</body></html>

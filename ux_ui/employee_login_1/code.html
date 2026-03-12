@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#2c1a4c",
+                "background-light": "#f7f6f8",
+                "background-dark": "#18141e",
+              },
+              fontFamily: {
+                "display": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<title>FirmTrack Login</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden">
+<!-- Top App Bar -->
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="text-primary dark:text-primary/80 flex size-12 shrink-0 items-center justify-start cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Attendance Tracker</h2>
+</div>
+<!-- Corporate Hero Image / Logo Container -->
+<div class="@container">
+<div class="@[480px]:px-4 @[480px]:py-3">
+<div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-primary/10 @[480px]:rounded-lg min-h-[180px] relative" data-alt="Modern professional office building interior and glass windows" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-IrZQQqhDSMLzIFlmHwTD02QeQfIi00ym-ECojtDyfbaqLvvqKymOo4zMjTmTLnBKDki4W2C4iPNj_DndW3eFfYnfi0e-QIQThgo_-9rK8dA-BcwQDFB3vK7AD1KWpCSIVEUqWre2T2hUgOHhqVxz8y0Wh-XmKuHQuhTpqs78wEZyE4S2p1-cGCXfXZA82jHwsXgq9JvRTH6l1Zdb31Cl9NO9c50fYKB4Gst9tsMtFqUR8wFH3uidlIK_03qxVkPclYtegbrg1F5p");'>
+<div class="absolute inset-0 bg-primary/40"></div>
+<div class="relative z-10 p-6 flex justify-center">
+<div class="bg-white/90 p-4 rounded-xl shadow-lg">
+<span class="material-symbols-outlined text-primary text-5xl">domain_verification</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Welcome Text -->
+<div class="px-6 py-8">
+<h1 class="text-slate-900 dark:text-slate-100 tracking-tight text-[32px] font-bold leading-tight text-center">Welcome back</h1>
+<p class="text-slate-600 dark:text-slate-400 text-base font-normal leading-normal pt-2 text-center">Professional Audit Firm Attendance Portal</p>
+</div>
+<!-- Login Form -->
+<div class="flex flex-col gap-6 px-6">
+<!-- Email Field -->
+<label class="flex flex-col w-full">
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal pb-2">Employee ID or Email</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">person</span>
+<input class="form-input flex w-full rounded-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-2 focus:ring-primary border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 h-14 pl-12 pr-4 placeholder:text-slate-400 text-base font-normal" placeholder="Ex: AUDIT-1234" type="text"/>
+</div>
+</label>
+<!-- Password Field -->
+<label class="flex flex-col w-full">
+<p class="text-slate-900 dark:text-slate-100 text-sm font-semibold leading-normal pb-2">Password</p>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">lock</span>
+<input class="form-input flex w-full rounded-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-2 focus:ring-primary border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 h-14 pl-12 pr-12 placeholder:text-slate-400 text-base font-normal" placeholder="Enter your password" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer">visibility</span>
+</div>
+</label>
+<!-- Remember & Forgot -->
+<div class="flex items-center justify-between py-1">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="w-5 h-5 rounded border-slate-300 dark:border-slate-700 text-primary focus:ring-primary bg-white dark:bg-slate-900" type="checkbox"/>
+<span class="text-sm text-slate-600 dark:text-slate-400 font-medium">Remember me</span>
+</label>
+<a class="text-sm font-semibold text-primary dark:text-primary/80 hover:underline" href="#">Forgot password?</a>
+</div>
+<!-- Login Button -->
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+<span>Sign In</span>
+<span class="material-symbols-outlined">login</span>
+</button>
+</div>
+<!-- Footer Help -->
+<div class="mt-auto p-8 text-center">
+<p class="text-slate-500 dark:text-slate-500 text-sm">
+                Need help? <a class="text-primary dark:text-primary/80 font-semibold underline" href="#">Contact IT Support</a>
+</p>
+<div class="flex justify-center gap-6 mt-6">
+<div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+<div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+<div class="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+</div>
+</div>
+</div>
+</body></html>

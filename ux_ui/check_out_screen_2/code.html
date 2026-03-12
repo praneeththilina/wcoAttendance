@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-2xl">
+<header class="flex items-center p-4 justify-between bg-white dark:bg-slate-900 border-b border-primary/10">
+<button class="text-primary dark:text-slate-100 flex size-10 items-center justify-center rounded-full hover:bg-primary/5">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-10">Daily Check-out</h1>
+</header>
+<main class="flex-1 overflow-y-auto">
+<div class="p-4 space-y-6">
+<div class="relative overflow-hidden rounded-xl bg-white dark:bg-slate-900 shadow-sm border border-primary/10">
+<div class="h-32 w-full bg-primary/10 bg-cover bg-center" data-alt="Modern professional office building interior workspace" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCZl6C-4T7mYD4ACcTmIjQ39K8067xsPC6baS4W6lm9fp6ezgSWqQXFudz2XR5b_wGQb-AENjywqMSvhdgL2NgZfVipIx_BTZ73Y038c8BrhTeKoaWJeq4SkX0cC9MXJhliIIRlNPp17sHPi2Gk0a8W8H_wqkox5C_HkbVRl2x0FH_DBX_ZMwRGLZ1E1Z7Xchd1oj4SNX_X471-GEqxhsViNXg5H9Ks_VUia5Kyc1RLp67de0Dt8SXuiNFpq60J-9gliXznjLLc2Khz')"></div>
+<div class="p-5">
+<div class="flex items-center justify-between mb-2">
+<span class="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900/30 dark:text-green-400">
+                                Active Session
+                            </span>
+<p class="text-sm text-slate-500 dark:text-slate-400">October 24, 2023</p>
+</div>
+<h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">Audit Attendance Summary</h2>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center gap-3 p-3 rounded-lg bg-background-light dark:bg-slate-800/50">
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-primary/80">
+<span class="material-symbols-outlined">business</span>
+</div>
+<div>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Current Client</p>
+<p class="text-base font-bold text-slate-900 dark:text-slate-100">Acme Global Holdings</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-lg bg-background-light dark:bg-slate-800/50">
+<div class="flex size-10 items-center justify-center rounded-full bg-primary/10 text-primary dark:text-primary/80">
+<span class="material-symbols-outlined">login</span>
+</div>
+<div>
+<p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Check-In Time</p>
+<p class="text-base font-bold text-slate-900 dark:text-slate-100">08:45 AM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-900 border border-primary/10 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Hours</p>
+<span class="material-symbols-outlined text-primary text-xl">schedule</span>
+</div>
+<p class="text-3xl font-black text-primary dark:text-slate-100">9.5h</p>
+<div class="flex items-center gap-1 text-xs font-medium text-green-600">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>Overtime: 1.5h</span>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-5 bg-white dark:bg-slate-900 border border-primary/10 shadow-sm">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Tasks</p>
+<span class="material-symbols-outlined text-primary text-xl">assignment_turned_in</span>
+</div>
+<p class="text-3xl font-black text-primary dark:text-slate-100">12</p>
+<p class="text-xs font-medium text-slate-500 dark:text-slate-400">All audit points cleared</p>
+</div>
+</div>
+<div class="p-5 rounded-xl bg-primary/5 border border-primary/20">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">info</span>
+<div>
+<p class="text-sm font-bold text-primary">Ready to wrap up?</p>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-1">Checking out will finalize your timesheet for today and notify the project manager.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="mt-auto p-4 bg-white dark:bg-slate-900 border-t border-primary/10 space-y-4">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 uppercase tracking-widest text-sm">
+<span class="material-symbols-outlined">logout</span>
+                Check Out Now
+            </button>
+<nav class="flex gap-2 justify-between">
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">History</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">timer</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Active</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-bold uppercase tracking-tighter">Profile</p>
+</a>
+</nav>
+</div>
+</div>
+</body></html>

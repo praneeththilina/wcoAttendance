@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Select Location - Audit Attendance</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex h-screen w-full flex-col overflow-hidden max-w-md mx-auto bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 pb-2 justify-between sticky top-0 z-10 border-b border-primary/5">
+<button aria-label="Go back" class="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-primary dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 ml-2">Select Location</h2>
+</header>
+<!-- Search Bar -->
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-12 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full shadow-sm">
+<div class="text-primary/60 dark:text-slate-400 flex border-none bg-primary/5 dark:bg-primary/20 items-center justify-center pl-4 rounded-l-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-2 focus:ring-primary/20 border-none bg-primary/5 dark:bg-primary/20 placeholder:text-primary/40 dark:placeholder:text-slate-500 px-4 pl-2 text-base font-normal leading-normal" placeholder="Search client or office..." value=""/>
+</div>
+</label>
+</div>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Quick Actions -->
+<section>
+<h3 class="text-primary/80 dark:text-slate-300 text-sm font-bold uppercase tracking-wider px-4 pb-2 pt-4">Quick Actions</h3>
+<div class="grid grid-cols-2 gap-3 px-4 py-2">
+<button class="relative bg-primary text-white flex flex-col gap-2 rounded-lg justify-end p-4 aspect-video overflow-hidden group active:scale-95 transition-transform" data-alt="Office building interior background">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent z-0"></div>
+<div class="relative z-10 flex flex-col items-start">
+<span class="material-symbols-outlined mb-1">corporate_fare</span>
+<p class="text-base font-bold leading-tight">HQ Office</p>
+</div>
+</button>
+<button class="relative bg-white dark:bg-primary/10 border border-primary/10 flex flex-col gap-2 rounded-lg justify-end p-4 aspect-video overflow-hidden active:scale-95 transition-transform shadow-sm">
+<div class="relative z-10 flex flex-col items-start">
+<span class="material-symbols-outlined text-primary dark:text-slate-100 mb-1">commute</span>
+<p class="text-primary dark:text-slate-100 text-base font-bold leading-tight">Travel</p>
+</div>
+</button>
+</div>
+</section>
+<!-- Pre-approved Clients List -->
+<section class="mt-4">
+<div class="flex items-center justify-between px-4 pb-2 pt-4">
+<h3 class="text-primary/80 dark:text-slate-300 text-sm font-bold uppercase tracking-wider">Pre-approved Clients</h3>
+<span class="text-xs text-primary/60 dark:text-slate-500">Nearby first</span>
+</div>
+<div class="flex flex-col gap-3 px-4 pb-4">
+<!-- Client Card 1 -->
+<button class="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 dark:border-primary/20 rounded-lg shadow-sm hover:border-primary/30 active:bg-primary/5 transition-all text-left">
+<div class="size-12 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center text-primary dark:text-slate-200">
+<span class="material-symbols-outlined">factory</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">ABC Ltd</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">London Financial District</p>
+</div>
+<span class="material-symbols-outlined text-primary/30">chevron_right</span>
+</button>
+<!-- Client Card 2 -->
+<button class="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 dark:border-primary/20 rounded-lg shadow-sm hover:border-primary/30 active:bg-primary/5 transition-all text-left">
+<div class="size-12 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center text-primary dark:text-slate-200">
+<span class="material-symbols-outlined">domain</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">XYZ PLC</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Manchester Hub</p>
+</div>
+<span class="material-symbols-outlined text-primary/30">chevron_right</span>
+</button>
+<!-- Client Card 3 -->
+<button class="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 dark:border-primary/20 rounded-lg shadow-sm hover:border-primary/30 active:bg-primary/5 transition-all text-left">
+<div class="size-12 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center text-primary dark:text-slate-200">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Global Exports</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Birmingham Logistics Park</p>
+</div>
+<span class="material-symbols-outlined text-primary/30">chevron_right</span>
+</button>
+<!-- Client Card 4 -->
+<button class="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 dark:border-primary/20 rounded-lg shadow-sm hover:border-primary/30 active:bg-primary/5 transition-all text-left">
+<div class="size-12 rounded-lg bg-primary/10 dark:bg-primary/30 flex items-center justify-center text-primary dark:text-slate-200">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold text-slate-900 dark:text-slate-100">Prime Manufacturing</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Leeds Industrial Zone</p>
+</div>
+<span class="material-symbols-outlined text-primary/30">chevron_right</span>
+</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t border-primary/10 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md px-4 pb-6 pt-2 z-20">
+<div class="flex gap-2">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary/60 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">home</span>
+<p class="text-xs font-medium leading-normal tracking-wide">Home</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary dark:text-white" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">schedule</span>
+<p class="text-xs font-medium leading-normal tracking-wide">Attendance</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary/60 dark:text-slate-400" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-xs font-medium leading-normal tracking-wide">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

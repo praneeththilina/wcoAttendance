@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Firm - Attendance Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header Section -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-primary/10 sticky top-0 z-10">
+<div class="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</div>
+<h1 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight flex-1 ml-2">Attendance Dashboard</h1>
+<div class="flex items-center gap-3">
+<button class="relative flex items-center justify-center p-2 rounded-lg bg-primary/5 dark:bg-primary/20 text-primary dark:text-slate-100">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 flex h-2 w-2 rounded-full bg-red-500"></span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden border border-primary/10">
+<img alt="Admin Profile" class="w-full h-full object-cover" data-alt="Corporate professional headshot for admin profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA46Dx-E8-igslRjAxqcZBjc43xPfSv9HQuM-PY_Cn3r6lJ4Dt93Wtzg3E9s8RFyhNr2wcPLOjM0FvKWtZsLAPfzgmrLmYWvX_5vBPBrsNLWu24k56x4fWwMWAuQrHHf-SbUPlpzUBtINRT0GtWSngcps0NUpkna5xqGihWOvOBLlmW1oyR8JuBG81k8uSZXQMFT44nAQrqVLFsP1lCHvV9KtXrYt3UKxgnuWlfZJ_lMi0POzg9hAGbtu5_myOBZkW2GIUDl8X3EbiH"/>
+</div>
+</div>
+</header>
+<!-- Stats Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Employees</p>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-slate-100 text-3xl font-bold">45</p>
+<span class="material-symbols-outlined text-primary/40">groups</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">Checked In</p>
+<div class="flex items-end justify-between">
+<p class="text-green-600 dark:text-green-400 text-3xl font-bold">32</p>
+<span class="material-symbols-outlined text-green-500/40">check_circle</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">At Office</p>
+<div class="flex items-end justify-between">
+<p class="text-slate-900 dark:text-slate-100 text-3xl font-bold">08</p>
+<span class="material-symbols-outlined text-primary/40">corporate_fare</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-5 bg-white dark:bg-slate-800 shadow-sm border border-primary/5">
+<p class="text-slate-500 dark:text-slate-400 text-xs font-semibold uppercase tracking-wider">At Client Sites</p>
+<div class="flex items-end justify-between">
+<p class="text-amber-600 dark:text-amber-400 text-3xl font-bold">24</p>
+<span class="material-symbols-outlined text-amber-500/40">distance</span>
+</div>
+</div>
+</div>
+<!-- Search and Filters -->
+<div class="px-4 py-2 space-y-4">
+<div class="flex flex-col md:flex-row gap-3">
+<label class="flex flex-1 h-12">
+<div class="flex w-full items-stretch rounded-xl h-full shadow-sm bg-white dark:bg-slate-800 border border-primary/10 overflow-hidden">
+<div class="text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full flex-1 bg-transparent border-none focus:ring-0 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 px-4 text-sm" placeholder="Search staff members by name or site..."/>
+</div>
+</label>
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+<button class="flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white dark:bg-slate-800 border border-primary/10 px-4 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">
+<span class="material-symbols-outlined text-primary">business_center</span>
+                        Client
+                        <span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white dark:bg-slate-800 border border-primary/10 px-4 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">
+<span class="material-symbols-outlined text-primary">person</span>
+                        Role
+                        <span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+</button>
+<button class="flex h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-white dark:bg-slate-800 border border-primary/10 px-4 text-sm font-medium text-slate-700 dark:text-slate-300 shadow-sm">
+<span class="material-symbols-outlined text-primary">calendar_month</span>
+                        Date
+                        <span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Staff List (Card Based) -->
+<main class="flex-1 p-4 pb-24 space-y-3">
+<h3 class="text-slate-900 dark:text-slate-100 font-bold text-lg px-1 flex items-center justify-between">
+                Live Staff Board
+                <span class="text-xs font-normal text-slate-500 uppercase">Live Update • 10:45 AM</span>
+</h3>
+<!-- Staff Row Item -->
+<div class="flex flex-col bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-primary/5 hover:border-primary/20 transition-colors">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden flex items-center justify-center">
+<img alt="Kasun" class="w-full h-full object-cover" data-alt="Headshot portrait of a man named Kasun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGAq7mhfW0tnjw3tTenUvK9nBzJ3To0IU1e5Kx-PoCustxcO-BFdHwwJGiJRD0CMKT5r08xujSm-NPalBihqfbVRpv5URTZ9YvI03V4wamtlGyEjyoRN-SD7lf5uQ91aWMYztp6fCY5V25qeF7L3iUuczfaUbhGjFRAXWbDeIIJRLM3lncxy6gQ0xP67O6Q0I1BtwNTDfiCjeLb2bSX6Mz2NY6OLk5nHxDFYBFg4gLZLGZhNPvzmtizujpP8vZOWJAjLM1hhVEFTpx"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold text-sm">Kasun Perera</p>
+<p class="text-slate-500 text-xs">Senior Auditor</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
+                        Checked In
+                    </span>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-slate-700 pt-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg">location_on</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">ABC Ltd, Colombo</p>
+</div>
+<div class="flex items-center gap-2 justify-end">
+<span class="material-symbols-outlined text-slate-400 text-lg">schedule</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">09:05 AM</p>
+</div>
+</div>
+</div>
+<!-- Staff Row Item -->
+<div class="flex flex-col bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-primary/5 hover:border-primary/20 transition-colors">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden flex items-center justify-center">
+<img alt="Nadeesha" class="w-full h-full object-cover" data-alt="Headshot portrait of a woman named Nadeesha" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6B-RXevRAQq6a0e1ziKELnC83l7zofbqbfFILOR7n3iqiDGJG7Z8Wbn6yauPUlCLaVaQa8T6kAZLc5X-Y8-djfCK6LsejE0pRjarfH5xuhESixmJpGTFJbzxJo2VU9Ho0H_kkcGgpKUYapBS33XBWT5SjWMxwiJdMus98am-r_epOP59hhPc8YUialjcKYzgpw9rEhIJfniC5I6ZRKAPUsz2Tz6w9tfv4KdVOawUgntuzir-snLlfUEZxh4Vy3vHWrObVZPOmHAZf"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold text-sm">Nadeesha Silva</p>
+<p class="text-slate-500 text-xs">Junior Associate</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-400">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-1.5 animate-pulse"></span>
+                        Travel
+                    </span>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-slate-700 pt-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg">commute</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">To XYZ PLC, Galle</p>
+</div>
+<div class="flex items-center gap-2 justify-end">
+<span class="material-symbols-outlined text-slate-400 text-lg">schedule</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">08:50 AM</p>
+</div>
+</div>
+</div>
+<!-- Staff Row Item -->
+<div class="flex flex-col bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-primary/5 hover:border-primary/20 transition-colors">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden flex items-center justify-center">
+<img alt="Ravi" class="w-full h-full object-cover" data-alt="Headshot portrait of a man named Ravi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoZrYz0xnDEZrbU2QE35mCZ5N7ElL5tulne1Qk9ZQunTynRsdhw_Jm_7Kux32bCS_zEWLsLBAq55zHUivxVer7Y8ec1R38i49ym8dYUQy70KeY9mT4U4JINlH7pcYzfxp-3iPNMLdl5_u3J0htlj1oM0VOyITO3wo8JGZ-Pw8SvypRqGmhWOJaWZoiAGn73amoVqbVFNXZNVNVyx4loH3I-OzJA9UM4Q1SjMsxMBlH_tKAChvy7ex1DA3eu4u_Sv7lkWKr7VIC3908"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold text-sm">Ravi Fernando</p>
+<p class="text-slate-500 text-xs">Managing Partner</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-300">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-1.5"></span>
+                        Checked Out
+                    </span>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-slate-700 pt-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg">home</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">Personal Leave</p>
+</div>
+<div class="flex items-center gap-2 justify-end">
+<span class="material-symbols-outlined text-slate-400 text-lg">logout</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">04:30 PM (Prev)</p>
+</div>
+</div>
+</div>
+<!-- Staff Row Item -->
+<div class="flex flex-col bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-primary/5 hover:border-primary/20 transition-colors">
+<div class="flex items-center justify-between mb-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden flex items-center justify-center">
+<img alt="Aruni" class="w-full h-full object-cover" data-alt="Headshot portrait of a woman named Aruni" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxHo1i9LbH2mZ4F6_sFanhAYL_AtWRNS0JxJCqriE1t4PfJaqjzJHsMsB52RTDcxFCQgNrdOqmYeFIYDgRyCt0Y3VReEakWPMedEifxRPkEGyXFw75vM2qAAT0JnVDWACajGX00t5hxYt0fPU6zE0G4zyjZxFeaqnS-nLT0SEpdI5asUKqzPzYTvzAuzI4ATnLm-LXOrRZswJtK2tUpEVmWJYZeeXHEAmSfeve62fDLdctM_mp-LOYNp4Cb6StmH2bjtb4A7Xwe4bo"/>
+</div>
+<div>
+<p class="text-slate-900 dark:text-slate-100 font-semibold text-sm">Aruni Gamage</p>
+<p class="text-slate-500 text-xs">Associate</p>
+</div>
+</div>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">
+<span class="w-1.5 h-1.5 rounded-full bg-green-500 mr-1.5"></span>
+                        Checked In
+                    </span>
+</div>
+<div class="grid grid-cols-2 gap-4 border-t border-slate-100 dark:border-slate-700 pt-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-lg">apartment</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">Main Office, Level 4</p>
+</div>
+<div class="flex items-center gap-2 justify-end">
+<span class="material-symbols-outlined text-slate-400 text-lg">schedule</span>
+<p class="text-slate-600 dark:text-slate-400 text-xs font-medium">08:15 AM</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full flex gap-2 border-t border-primary/10 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md px-4 pb-4 pt-2 shadow-lg z-20">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary dark:text-slate-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Dashboard</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">badge</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Staff</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">handshake</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Clients</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">description</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Reports</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-slate-400 dark:text-slate-500" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-[10px] font-bold uppercase tracking-wider">Settings</p>
+</a>
+</nav>
+</div>
+</body></html>

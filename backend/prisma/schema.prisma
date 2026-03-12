@@ -1,0 +1,146 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  employee
+  admin
+  manager
+  hr
+}
+
+enum LeaveType {
+  sick
+  annual
+  unpaid
+  other
+}
+
+enum LeaveStatus {
+  pending
+  approved
+  rejected
+}
+
+model User {
+  id              String             @id @default(uuid())
+  employeeId      String             @unique
+  email           String             @unique
+  passwordHash    String
+  firstName       String
+  lastName        String
+  role            UserRole           @default(employee)
+  isActive        Boolean            @default(true)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  attendance      AttendanceRecord[]
+  locationChanges LocationChange[]
+  leaveBalances   LeaveBalance[]
+  leaveRequests   LeaveRequest[]
+
+  @@map("users")
+  @@index([email])
+  @@index([employeeId])
+  @@index([role])
+}
+
+model Client {
+  id              String             @id @default(uuid())
+  name            String
+  branch          String?
+  city            String
+  address         String?
+  latitude        Float?
+  longitude       Float?
+  isActive        Boolean            @default(true)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  attendance      AttendanceRecord[]
+
+  @@map("clients")
+  @@index([name])
+  @@index([city])
+  @@index([isActive])
+}
+
+model AttendanceRecord {
+  id               String           @id @default(uuid())
+  userId           String
+  clientId         String
+  checkInTime      DateTime
+  checkOutTime     DateTime?
+  checkInLocation  Json?
+  checkOutLocation Json?
+  totalHours       Float?
+  status           String           @default("checked_in")
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  user             User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  client           Client           @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("attendanceRecords")
+  @@index([userId])
+  @@index([clientId])
+  @@index([checkInTime])
+  @@index([status])
+  @@index([userId, checkInTime])
+}
+
+model LocationChange {
+  id           String   @id @default(uuid())
+  userId       String
+  fromClientId String?
+  toClientId   String
+  location     Json?
+  changedAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("locationChanges")
+  @@index([userId])
+  @@index([changedAt])
+}
+
+model LeaveBalance {
+  id               String   @id @default(uuid())
+  userId           String
+  year             Int
+  sickLeaveTotal   Int      @default(7)
+  sickLeaveUsed    Float    @default(0)
+  annualLeaveTotal Int      @default(15)
+  annualLeaveUsed  Float    @default(0)
+  unpaidLeaveUsed  Float    @default(0)
+  otherLeaveUsed   Float    @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, year])
+  @@map("leaveBalances")
+}
+
+model LeaveRequest {
+  id          String      @id @default(uuid())
+  userId      String
+  type        LeaveType
+  startDate   DateTime
+  endDate     DateTime
+  reason      String?
+  status      LeaveStatus @default(pending)
+  days        Float
+  approvedBy  String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("leaveRequests")
+  @@index([userId])
+  @@index([status])
+}

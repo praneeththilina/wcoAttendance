@@ -4,7 +4,7 @@ This file tracks all major tracks for the project. Each track has its own detail
 
 ---
 
-- [ ] **Track: Build Core Employee Attendance Flow with Authentication and Check-In/Check-Out**
+- [~] **Track: Build Core Employee Attendance Flow with Authentication and Check-In/Check-Out**
   *Link: [./tracks/core-attendance-flow_20260310/](./tracks/core-attendance-flow_20260310/)*
 
 ---

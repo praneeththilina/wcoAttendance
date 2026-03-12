@@ -18,7 +18,6 @@ export function LoginPage() {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -27,8 +26,6 @@ export function LoginPage() {
       rememberMe: false,
     },
   });
-
-  const rememberMe = watch('rememberMe');
 
   const onSubmit = async (data: LoginFormData) => {
     clearError();
@@ -55,8 +52,8 @@ export function LoginPage() {
 
         navigate(roleRedirects[response.data.user.role] || ROUTES.DASHBOARD);
       }
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : 'Login failed. Please try again.';
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.error?.message || error?.message || 'Login failed. Please try again.';
       setError(errorMessage);
     } finally {
       setLoading(false);

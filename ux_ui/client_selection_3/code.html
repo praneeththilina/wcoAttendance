@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Client Selection - Audit Firm</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-xl overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-10 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-sm border-b border-primary/10">
+<div class="flex items-center p-4 justify-between">
+<div class="text-primary dark:text-slate-100 flex size-10 items-center justify-center cursor-pointer hover:bg-primary/5 rounded-full transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h2 class="text-primary dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">Client Selection</h2>
+<div class="size-10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary/40">more_vert</span>
+</div>
+</div>
+<!-- Search Bar Section -->
+<div class="px-4 pb-4">
+<label class="flex flex-col w-full">
+<div class="flex w-full items-stretch rounded-xl h-14 bg-white dark:bg-slate-800 shadow-sm border border-primary/10">
+<div class="text-primary/50 dark:text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full border-none bg-transparent focus:ring-0 text-slate-900 dark:text-white placeholder:text-primary/40 px-3 text-base font-medium" placeholder="Search client name or ID" value=""/>
+</div>
+</label>
+</div>
+</header>
+<!-- Main Content Area Scrollable -->
+<main class="flex-1 overflow-y-auto">
+<!-- Quick Actions Section -->
+<div class="px-4 py-6">
+<h3 class="text-primary/60 dark:text-slate-400 text-xs font-bold uppercase tracking-widest mb-4 px-1">Quick Actions</h3>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex flex-col items-center justify-center gap-2 rounded-xl h-28 bg-primary text-white shadow-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">corporate_fare</span>
+<span class="font-bold text-sm tracking-wide">HQ Office</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 rounded-xl h-28 bg-primary/10 dark:bg-primary/30 text-primary dark:text-slate-100 border-2 border-primary/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-3xl">flight_takeoff</span>
+<span class="font-bold text-sm tracking-wide">Travel</span>
+</button>
+</div>
+</div>
+<!-- Pre-approved Clients List -->
+<div class="px-4 pb-24">
+<div class="flex items-center justify-between mb-4 px-1">
+<h3 class="text-primary/60 dark:text-slate-400 text-xs font-bold uppercase tracking-widest">Pre-approved Clients</h3>
+<span class="text-[10px] bg-primary/5 text-primary px-2 py-0.5 rounded-full font-bold">12 NEARBY</span>
+</div>
+<div class="space-y-3">
+<!-- Client Item 1 -->
+<div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/5 shadow-sm active:bg-primary/5 cursor-pointer">
+<div class="flex size-12 items-center justify-center rounded-lg bg-primary/5 text-primary">
+<span class="material-symbols-outlined text-2xl">domain</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-slate-900 dark:text-white font-bold truncate">ABC Ltd</p>
+<p class="text-primary/60 dark:text-slate-400 text-sm truncate flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">location_on</span>
+                                London Financial District
+                            </p>
+</div>
+<span class="material-symbols-outlined text-primary/20">chevron_right</span>
+</div>
+<!-- Client Item 2 -->
+<div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/5 shadow-sm active:bg-primary/5 cursor-pointer">
+<div class="flex size-12 items-center justify-center rounded-lg bg-primary/5 text-primary">
+<span class="material-symbols-outlined text-2xl">account_balance</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-slate-900 dark:text-white font-bold truncate">XYZ PLC</p>
+<p class="text-primary/60 dark:text-slate-400 text-sm truncate flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">location_on</span>
+                                Canary Wharf Hub
+                            </p>
+</div>
+<span class="material-symbols-outlined text-primary/20">chevron_right</span>
+</div>
+<!-- Client Item 3 -->
+<div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/5 shadow-sm active:bg-primary/5 cursor-pointer">
+<div class="flex size-12 items-center justify-center rounded-lg bg-primary/5 text-primary">
+<span class="material-symbols-outlined text-2xl">factory</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-slate-900 dark:text-white font-bold truncate">Global Manufacturing Co.</p>
+<p class="text-primary/60 dark:text-slate-400 text-sm truncate flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">location_on</span>
+                                Manchester Industrial Park
+                            </p>
+</div>
+<span class="material-symbols-outlined text-primary/20">chevron_right</span>
+</div>
+<!-- Client Item 4 -->
+<div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/5 shadow-sm active:bg-primary/5 cursor-pointer">
+<div class="flex size-12 items-center justify-center rounded-lg bg-primary/5 text-primary">
+<span class="material-symbols-outlined text-2xl">medical_services</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-slate-900 dark:text-white font-bold truncate">HealthTrust Group</p>
+<p class="text-primary/60 dark:text-slate-400 text-sm truncate flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">location_on</span>
+                                West End Medical Plaza
+                            </p>
+</div>
+<span class="material-symbols-outlined text-primary/20">chevron_right</span>
+</div>
+<!-- Client Item 5 -->
+<div class="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/5 shadow-sm active:bg-primary/5 cursor-pointer">
+<div class="flex size-12 items-center justify-center rounded-lg bg-primary/5 text-primary">
+<span class="material-symbols-outlined text-2xl">store</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-slate-900 dark:text-white font-bold truncate">Retail Ventures Inc.</p>
+<p class="text-primary/60 dark:text-slate-400 text-sm truncate flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">location_on</span>
+                                Oxford Street Flagship
+                            </p>
+</div>
+<span class="material-symbols-outlined text-primary/20">chevron_right</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/90 dark:bg-background-dark/95 backdrop-blur-md border-t border-primary/10 px-4 pb-6 pt-2">
+<div class="flex items-center justify-between">
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary/60 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<p class="text-[10px] font-bold uppercase tracking-wider">Attendance</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary dark:text-white" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined fill-1">work</span>
+</div>
+<p class="text-[10px] font-bold uppercase tracking-wider">Clients</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary/60 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">history</span>
+</div>
+<p class="text-[10px] font-bold uppercase tracking-wider">History</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-center gap-1 text-primary/60 dark:text-slate-400" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined">person</span>
+</div>
+<p class="text-[10px] font-bold uppercase tracking-wider">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

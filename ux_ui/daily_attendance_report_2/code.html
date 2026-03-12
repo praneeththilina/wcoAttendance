@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Daily Attendance Report - Audit Firm</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+                },
+            },
+        }</script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-white dark:bg-background-dark shadow-xl overflow-x-hidden">
+<!-- Header -->
+<div class="flex items-center bg-white dark:bg-background-dark p-4 border-b border-primary/10 justify-between sticky top-0 z-10">
+<div class="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-lg hover:bg-primary/5 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+</div>
+<h1 class="text-primary dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Daily Attendance</h1>
+<div class="flex w-10 items-center justify-end">
+<button class="flex size-10 cursor-pointer items-center justify-center rounded-lg bg-transparent text-primary dark:text-slate-100 hover:bg-primary/5">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Date Selector -->
+<div class="p-4 bg-white dark:bg-background-dark border-b border-primary/5">
+<div class="flex items-center justify-between mb-4">
+<button class="p-2 text-primary hover:bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<div class="flex flex-col items-center">
+<span class="text-xs font-semibold uppercase tracking-wider text-primary/60">October 2023</span>
+<span class="text-base font-bold text-primary">Thursday, 12th</span>
+</div>
+<button class="p-2 text-primary hover:bg-primary/10 rounded-full">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+<div class="flex justify-between gap-1 overflow-x-auto pb-2 scrollbar-hide">
+<div class="flex flex-col items-center min-w-[45px] p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-[10px] font-bold text-slate-400">MON</span>
+<span class="text-sm font-bold text-slate-600">09</span>
+</div>
+<div class="flex flex-col items-center min-w-[45px] p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-[10px] font-bold text-slate-400">TUE</span>
+<span class="text-sm font-bold text-slate-600">10</span>
+</div>
+<div class="flex flex-col items-center min-w-[45px] p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-[10px] font-bold text-slate-400">WED</span>
+<span class="text-sm font-bold text-slate-600">11</span>
+</div>
+<div class="flex flex-col items-center min-w-[45px] p-2 rounded-lg bg-primary text-white shadow-md shadow-primary/20">
+<span class="text-[10px] font-bold opacity-70">THU</span>
+<span class="text-sm font-bold">12</span>
+</div>
+<div class="flex flex-col items-center min-w-[45px] p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-[10px] font-bold text-slate-400">FRI</span>
+<span class="text-sm font-bold text-slate-600">13</span>
+</div>
+<div class="flex flex-col items-center min-w-[45px] p-2 rounded-lg bg-slate-50 border border-slate-100">
+<span class="text-[10px] font-bold text-slate-400">SAT</span>
+<span class="text-sm font-bold text-slate-600">14</span>
+</div>
+</div>
+</div>
+<!-- Summary Stats -->
+<div class="grid grid-cols-2 gap-3 p-4">
+<div class="flex flex-col gap-1 p-4 bg-primary/5 border border-primary/10 rounded-lg">
+<p class="text-primary/60 text-xs font-semibold">Field Auditors</p>
+<div class="flex items-baseline gap-2">
+<p class="text-primary text-2xl font-bold">28/32</p>
+<span class="text-[10px] text-green-600 font-bold">Active</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 p-4 bg-primary/5 border border-primary/10 rounded-lg">
+<p class="text-primary/60 text-xs font-semibold">Avg. Hours</p>
+<div class="flex items-baseline gap-2">
+<p class="text-primary text-2xl font-bold">7.4h</p>
+<span class="text-[10px] text-primary/40 font-bold">Today</span>
+</div>
+</div>
+</div>
+<!-- Attendance List -->
+<div class="flex-1 flex flex-col px-4 pb-24">
+<div class="flex items-center justify-between py-2">
+<h3 class="text-primary text-sm font-bold uppercase tracking-widest">Employee Records</h3>
+<span class="text-[10px] font-medium text-primary/40">Last updated 09:42 AM</span>
+</div>
+<div class="space-y-3 mt-2">
+<!-- Employee Card 1 -->
+<div class="flex flex-col border border-primary/10 bg-white p-4 shadow-sm rounded-lg">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3 items-center">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="" class="object-cover size-full" data-alt="Professional portrait of a male employee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKw2wJKNlBvO1tk9xGuh5UCrTsarMbn4eULZu850yL5cTRFuyiqmAZ8HjHdmFezTJtB0f2SORKK87jUf_mXFcMUVABR1G9NnJGqjsc2BQOzS9AQEy8etjH2W0rpm-xnvLFrqJ7CtW_aUZ-y6mzaejJBmmjVHnyfB7H3Q4GItTJRp9PhXRbdoeDHj13jVsRN2ZoZ0_vgaoRjKu0SDbFT_XcM8OsA1APClG3wUBQ7j1hurps1TMkmM4OJex3reTujgJl9T1OooOR2HY9"/>
+</div>
+<div>
+<h4 class="text-sm font-bold text-primary leading-none mb-1">Marcus Thorne</h4>
+<p class="text-[11px] text-primary/60 font-medium">Senior Auditor</p>
+</div>
+</div>
+<div class="bg-green-100 text-green-700 text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-tighter">On-Site</div>
+</div>
+<div class="grid grid-cols-3 gap-2 border-t border-primary/5 pt-3">
+<div class="flex flex-col">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Check-In</span>
+<span class="text-xs font-semibold text-primary">08:30 AM</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Check-Out</span>
+<span class="text-xs font-semibold text-primary/40">--:--</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Total</span>
+<span class="text-xs font-bold text-primary">1.2h</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-3 pt-3 border-t border-primary/5">
+<span class="material-symbols-outlined text-sm text-primary/40">location_on</span>
+<p class="text-[11px] font-medium text-primary/60">Vertex Financial Services, London</p>
+</div>
+</div>
+<!-- Employee Card 2 -->
+<div class="flex flex-col border border-primary/10 bg-white p-4 shadow-sm opacity-80 rounded-lg">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3 items-center">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="" class="object-cover size-full" data-alt="Professional portrait of a female employee" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGI3KlE7ZFXltQkkm7WiEpkRYLogGWpGLzmoFP1aEtREARIewyUY0M-bXJjN6ByLGkOyq9Nft9y-qZI-NIC-D22MIfotXqPtr8SHOJ4-hkYo-lKktdhGRZDlmLYW5Pql_IJk2ONg2wkMLMMh-O4zF4-uoHIWWt3-TWp7iJUcJ1p_cqSybhhEuDMo2deFW5KG9zOAr0YSddm8_88BVnwHCa1itt3VKWCLB1OAthcti51qwpOCdQvhlrCBtFDPV9PGdWBNzAcCvyhLkD"/>
+</div>
+<div>
+<h4 class="text-sm font-bold text-primary leading-none mb-1">Elena Rodriguez</h4>
+<p class="text-[11px] text-primary/60 font-medium">Tax Associate</p>
+</div>
+</div>
+<div class="bg-primary/10 text-primary/60 text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-tighter">Completed</div>
+</div>
+<div class="grid grid-cols-3 gap-2 border-t border-primary/5 pt-3">
+<div class="flex flex-col">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Check-In</span>
+<span class="text-xs font-semibold text-primary">09:00 AM</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Check-Out</span>
+<span class="text-xs font-semibold text-primary">05:30 PM</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Total</span>
+<span class="text-xs font-bold text-primary">8.5h</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-3 pt-3 border-t border-primary/5">
+<span class="material-symbols-outlined text-sm text-primary/40">location_on</span>
+<p class="text-[11px] font-medium text-primary/60">Cloud9 Tech Hub, Reading</p>
+</div>
+</div>
+<!-- Employee Card 3 -->
+<div class="flex flex-col border border-primary/10 bg-white p-4 shadow-sm rounded-lg">
+<div class="flex justify-between items-start mb-3">
+<div class="flex gap-3 items-center">
+<div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h4 class="text-sm font-bold text-primary leading-none mb-1">David Chen</h4>
+<p class="text-[11px] text-primary/60 font-medium">Junior Auditor</p>
+</div>
+</div>
+<div class="bg-blue-100 text-blue-700 text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-tighter">Travel</div>
+</div>
+<div class="grid grid-cols-3 gap-2 border-t border-primary/5 pt-3">
+<div class="flex flex-col">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Check-In</span>
+<span class="text-xs font-semibold text-primary">08:15 AM</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Check-Out</span>
+<span class="text-xs font-semibold text-primary/40">--:--</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-[10px] text-primary/40 font-bold uppercase">Total</span>
+<span class="text-xs font-bold text-primary">1.4h</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 mt-3 pt-3 border-t border-primary/5">
+<span class="material-symbols-outlined text-sm text-primary/40">location_on</span>
+<p class="text-[11px] font-medium text-primary/60">In Transit to Meridian Corp</p>
+</div>
+</div>
+</div>
+<!-- Export Buttons Section -->
+<div class="mt-8 flex gap-3">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border-2 border-primary/20 text-primary font-bold text-sm hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-lg">description</span>
+                    Excel
+                </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border-2 border-primary/20 text-primary font-bold text-sm hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                    PDF
+                </button>
+</div>
+</div>
+<!-- Bottom Navigation -->
+<div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/90 backdrop-blur-md border-t border-slate-200 flex justify-around items-center py-2 px-4 z-20">
+<a class="flex flex-col items-center gap-1 text-primary/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined text-[24px] font-variation-fill">calendar_month</span>
+<span class="text-[10px] font-bold">Attendance</span>
+</a>
+<div class="relative -top-6 flex items-center justify-center">
+<button class="size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/40 flex items-center justify-center transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-primary/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">business_center</span>
+<span class="text-[10px] font-bold">Clients</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary/40 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<span class="text-[10px] font-bold">Settings</span>
+</a>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,20 @@
+﻿src/pages/AdminDashboard.tsx(4,24): error TS2440: Import declaration conflicts with local declaration of 'DashboardStats'.
+src/pages/AdminDashboard.tsx(51,14): error TS2339: Property 'firstName' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(52,14): error TS2339: Property 'lastName' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(53,14): error TS2339: Property 'clientName' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(165,31): error TS2339: Property 'firstName' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(165,50): error TS2339: Property 'lastName' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(170,30): error TS2322: Type '"active" | "inactive"' is not assignable to type '"checked_in" | "checked_out" | "incomplete" | "travel" | "not_checked_in"'.
+  Type '"active"' is not assignable to type '"checked_in" | "checked_out" | "incomplete" | "travel" | "not_checked_in"'.
+src/pages/AdminDashboard.tsx(175,22): error TS2367: This comparison appears to be unintentional because the types '"active" | "inactive"' and '"travel"' have no overlap.
+src/pages/AdminDashboard.tsx(175,63): error TS2367: This comparison appears to be unintentional because the types '"active" | "inactive"' and '"checked_out"' have no overlap.
+src/pages/AdminDashboard.tsx(178,29): error TS2339: Property 'clientName' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(179,35): error TS2339: Property 'clientName' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(179,55): error TS2339: Property 'clientCity' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(179,80): error TS2339: Property 'clientCity' does not exist on type 'StaffMember'.
+src/pages/AdminDashboard.tsx(180,25): error TS2367: This comparison appears to be unintentional because the types '"active" | "inactive"' and '"checked_out"' have no overlap.
+src/pages/AdminDashboard.tsx(188,29): error TS2339: Property 'checkInTime' does not exist on type 'StaffMember'.
+src/pages/AdminLeaves.tsx(8,9): error TS6133: 'navigate' is declared but its value is never read.
+src/pages/Clients.tsx(4,1): error TS6133: 'ROUTES' is declared but its value is never read.
+src/pages/Clients.tsx(5,1): error TS6133: 'apiClient' is declared but its value is never read.
+src/pages/Leaves.tsx(10,9): error TS6133: 'user' is declared but its value is never read.

@@ -1,18 +1,29 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
+import { useOfflineSync } from '@/hooks/useOfflineSync';
 import { ROUTES, ROLES } from '@/constants';
 
 // Lazy load pages
-import { LoginPage } from '@/pages/LoginPage';
-
-// Placeholder components for routes not yet implemented
-const Dashboard = () => <div className="p-4">Dashboard - Coming Soon</div>;
-const AdminDashboard = () => <div className="p-4">Admin Dashboard - Coming Soon</div>;
-const ManagerDashboard = () => <div className="p-4">Manager Dashboard - Coming Soon</div>;
-const HRDashboard = () => <div className="p-4">HR Dashboard - Coming Soon</div>;
-const AttendanceHistory = () => <div className="p-4">Attendance History - Coming Soon</div>;
-const Clients = () => <div className="p-4">Clients - Coming Soon</div>;
-const Profile = () => <div className="p-4">Profile - Coming Soon</div>;
+import { 
+  LoginPage, 
+  EmployeeDashboard, 
+  ClientSelection, 
+  CheckinConfirmation,
+  CheckOutScreen,
+  ChangeClientLocation,
+  AdminDashboard,
+  DailyAttendanceReport,
+  StaffDashboard,
+  AttendanceHistory,
+  Profile,
+  AdminClients,
+  AdminLeaves,
+  Settings,
+  ManagerDashboard,
+  HRDashboard,
+  Clients,
+  Leaves
+} from '@/pages';
 
 // Protected Route Component
 interface ProtectedRouteProps {
@@ -28,7 +39,6 @@ function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) {
   }
 
   if (allowedRoles && user && !allowedRoles.includes(user.role)) {
-    // Redirect to appropriate dashboard based on role
     switch (user.role) {
       case ROLES.ADMIN:
         return <Navigate to={ROUTES.ADMIN_DASHBOARD} replace />;
@@ -45,6 +55,7 @@ function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) {
 }
 
 export function App() {
+  useOfflineSync();
   return (
     <BrowserRouter>
       <Routes>
@@ -56,7 +67,7 @@ export function App() {
           path={ROUTES.DASHBOARD}
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <EmployeeDashboard />
             </ProtectedRoute>
           }
         />
@@ -84,6 +95,48 @@ export function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path={ROUTES.LEAVES}
+          element={
+            <ProtectedRoute>
+              <Leaves />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* Client Selection & Attendance */}
+        <Route
+          path={ROUTES.CLIENT_SELECTION}
+          element={
+            <ProtectedRoute>
+              <ClientSelection />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.CHECKIN_CONFIRMATION}
+          element={
+            <ProtectedRoute>
+              <CheckinConfirmation />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.CHECKOUT}
+          element={
+            <ProtectedRoute>
+              <CheckOutScreen />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.CHANGE_CLIENT}
+          element={
+            <ProtectedRoute>
+              <ChangeClientLocation />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Admin Routes */}
         <Route
@@ -91,6 +144,46 @@ export function App() {
           element={
             <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.ADMIN_STAFF}
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>
+              <StaffDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.ADMIN_CLIENTS}
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>
+              <AdminClients />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.ADMIN_LEAVES}
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.ADMIN, ROLES.HR, ROLES.MANAGER]}>
+              <AdminLeaves />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.ADMIN_REPORTS}
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>
+              <DailyAttendanceReport />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path={ROUTES.ADMIN_SETTINGS}
+          element={
+            <ProtectedRoute allowedRoles={[ROLES.ADMIN]}>
+              <Settings />
             </ProtectedRoute>
           }
         />
@@ -119,7 +212,14 @@ export function App() {
         <Route path="/" element={<Navigate to={ROUTES.LOGIN} replace />} />
         
         {/* 404 - Catch all */}
-        <Route path="*" element={<div className="p-4">404 - Page Not Found</div>} />
+        <Route path="*" element={
+          <div className="min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold text-primary mb-2">404</h1>
+              <p className="text-slate-500">Page not found</p>
+            </div>
+          </div>
+        } />
       </Routes>
     </BrowserRouter>
   );

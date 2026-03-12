@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }</script>
+<title>Staff Audit Dashboard</title>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="relative flex h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center bg-background-light dark:bg-background-dark p-4 justify-between border-b border-primary/10">
+<div class="flex items-center gap-3">
+<div class="size-10 shrink-0 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div class="flex flex-col">
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight">Welcome, Kasun</h2>
+<p class="text-xs text-primary/70 dark:text-primary/40 font-medium">Senior Auditor</p>
+</div>
+</div>
+<div class="flex items-center">
+<button class="flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-primary dark:text-slate-100">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content Scrollable Area -->
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Status Card -->
+<section class="p-4">
+<h3 class="text-slate-900 dark:text-slate-100 text-sm font-semibold uppercase tracking-wider mb-3">Current Status</h3>
+<div class="flex flex-col gap-4 rounded-lg bg-white dark:bg-slate-900 p-5 shadow-sm border border-slate-200 dark:border-slate-800">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<span class="text-primary/60 dark:text-slate-400 text-xs font-medium uppercase">Active Location</span>
+<p class="text-slate-900 dark:text-white text-xl font-bold">ABC Ltd. Headquarters</p>
+<div class="flex items-center gap-1.5 mt-1 text-emerald-600 dark:text-emerald-400">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span class="text-sm font-semibold">Checked In</span>
+</div>
+</div>
+<div class="size-14 rounded-lg bg-primary/5 dark:bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary dark:text-slate-100 text-3xl">location_on</span>
+</div>
+</div>
+<div class="h-px bg-primary/10 w-full"></div>
+<div class="flex justify-between items-center">
+<div class="flex flex-col">
+<span class="text-primary/60 dark:text-slate-400 text-xs font-medium">ARRIVAL TIME</span>
+<p class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">08:45 AM</p>
+</div>
+<div class="flex flex-col text-right">
+<span class="text-primary/60 dark:text-slate-400 text-xs font-medium">DURATION</span>
+<p class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">4h 12m</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Map/Context Section -->
+<section class="px-4 pb-4">
+<div class="w-full h-32 rounded-xl overflow-hidden relative border border-primary/5">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A clean map showing a city grid layout" data-location="Colombo, Sri Lanka" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAp3rk2A7BmCbJYUeYkX6b568hvw2uGHzYAqcj-HJYWQobMaiFo2KlUoeEpktUeokJFifl7JRdWYFkmqFJ8keidGW66TEsL9N17IVhHI0qw2bNbC2c8LG0-DDvwCmgYa0SXz-Vj3QCXDFRIqIU0UYaPz3pA6so0BFX28vSg6olBr04KV4eMVnnfJ3rtGgN1yaGmEoUsKqWKON36dgH22QhcgM4alr3Oit_a-toUHbZ1JxQI6zxlHmWXySZV0EnPRKsAS44kwACIVSt3");'></div>
+<div class="absolute inset-0 bg-primary/10"></div>
+</div>
+</section>
+<!-- Primary Actions -->
+<section class="p-4 flex flex-col gap-3">
+<h3 class="text-slate-900 dark:text-slate-100 text-sm font-semibold uppercase tracking-wider mb-1">Actions</h3>
+<button class="flex w-full items-center justify-between gap-4 rounded-lg bg-primary p-5 text-white shadow-md active:scale-[0.98] transition-all">
+<div class="flex items-center gap-4">
+<div class="size-10 rounded-full bg-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined">login</span>
+</div>
+<div class="text-left">
+<p class="text-lg font-bold">Check In</p>
+<p class="text-xs text-white/70 font-medium leading-tight">Record your arrival at a client site</p>
+</div>
+</div>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-start gap-3 rounded-lg bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 shadow-sm active:scale-[0.98] transition-all">
+<div class="size-10 rounded-full bg-primary/10 dark:bg-primary/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary dark:text-slate-100">sync_alt</span>
+</div>
+<div class="text-left">
+<p class="font-bold text-slate-900 dark:text-white">Change</p>
+<p class="text-xs text-primary/60 dark:text-slate-400">Switch location</p>
+</div>
+</button>
+<button class="flex flex-col items-start gap-3 rounded-lg bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 shadow-sm active:scale-[0.98] transition-all">
+<div class="size-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-red-600 dark:text-red-400">logout</span>
+</div>
+<div class="text-left">
+<p class="font-bold text-slate-900 dark:text-white">Check Out</p>
+<p class="text-xs text-primary/60 dark:text-slate-400">End your session</p>
+</div>
+</button>
+</div>
+</section>
+<!-- Recent Activity -->
+<section class="p-4">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-slate-900 dark:text-slate-100 text-sm font-semibold uppercase tracking-wider">Today's Logs</h3>
+<button class="text-primary dark:text-slate-400 text-xs font-bold uppercase">View All</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-3 bg-white dark:bg-slate-900 rounded-lg border rounded-lg border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="size-2 rounded-full bg-primary"></div>
+<div class="flex-1">
+<p class="text-sm font-bold">Checked In: ABC Ltd</p>
+<p class="text-[10px] text-primary/60 dark:text-slate-400">08:45 AM • Colombo 03</p>
+</div>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white/50 dark:bg-slate-900/50 rounded-lg border rounded-lg border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="size-2 rounded-full bg-slate-300 dark:bg-slate-700"></div>
+<div class="flex-1">
+<p class="text-sm font-bold text-slate-400">Firm Arrival</p>
+<p class="text-[10px] text-slate-400">08:00 AM • Main Office</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md px-4 pb-6 pt-2">
+<div class="flex gap-2 justify-around items-center">
+<a class="flex flex-col items-center gap-1 text-primary dark:text-slate-100 text-primary dark:text-slate-100" href="#"><span class="material-symbols-outlined fill-1">grid_view</span>
+<p class="text-[10px] font-bold">Dashboard</p></a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<p class="text-[10px] font-medium">Schedule</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">history</span>
+<p class="text-[10px] font-medium">Logs</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 dark:text-slate-600" href="#">
+<span class="material-symbols-outlined">person</span>
+<p class="text-[10px] font-medium">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

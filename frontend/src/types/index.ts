@@ -83,3 +83,37 @@ export interface Location {
   longitude: number;
   accuracy?: number;
 }
+
+export interface LeaveBalance {
+  id: string;
+  userId: string;
+  year: number;
+  sickLeaveTotal: number;
+  sickLeaveUsed: number;
+  annualLeaveTotal: number;
+  annualLeaveUsed: number;
+  unpaidLeaveUsed: number;
+  otherLeaveUsed: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface LeaveRequest {
+  id: string;
+  userId: string;
+  type: 'sick' | 'annual' | 'unpaid' | 'other';
+  startDate: string;
+  endDate: string;
+  reason: string | null;
+  status: 'pending' | 'approved' | 'rejected';
+  days: number;
+  approvedBy: string | null;
+  createdAt: string;
+  updatedAt: string;
+  user?: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    employeeId: string;
+  };
+}

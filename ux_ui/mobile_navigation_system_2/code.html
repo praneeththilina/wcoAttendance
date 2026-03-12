@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Firm Attendance System</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2c1a4c",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#18141e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-2xl overflow-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between p-4 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-10 border-b border-primary/10">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<h1 class="text-sm font-bold leading-none">AuditForce</h1>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Field Auditor</p>
+</div>
+</div>
+<button class="relative p-2 text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-background-light"></span>
+</button>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 overflow-y-auto pb-24">
+<!-- Greeting -->
+<section class="px-4 pt-6 pb-2">
+<h2 class="text-2xl font-bold tracking-tight">Good morning, Alex</h2>
+<p class="text-slate-500 text-sm">Wednesday, Oct 24th • On-site</p>
+</section>
+<!-- Summary Cards -->
+<section class="grid grid-cols-2 gap-3 p-4">
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-primary/5 shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-xl">login</span>
+<span class="text-xs font-medium text-slate-500 uppercase">Check-in</span>
+</div>
+<p class="text-xl font-bold">08:45 AM</p>
+<p class="text-[10px] text-green-600 font-bold mt-1 uppercase">On Time</p>
+</div>
+<div class="bg-white dark:bg-slate-800 p-4 rounded-xl border border-primary/5 shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-xl">schedule</span>
+<span class="text-xs font-medium text-slate-500 uppercase">Shift Hours</span>
+</div>
+<p class="text-xl font-bold">6.5 <span class="text-sm font-normal text-slate-400">hrs</span></p>
+<p class="text-[10px] text-slate-400 font-bold mt-1 uppercase">Remaining: 1.5h</p>
+</div>
+</section>
+<!-- Current Location / Active Audit -->
+<section class="px-4 py-2">
+<div class="bg-primary text-white rounded-xl overflow-hidden shadow-lg">
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="bg-white/20 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-widest">Active Audit</span>
+<h3 class="text-lg font-bold mt-2">Vanguard Financial Group</h3>
+<div class="flex items-center gap-1 mt-1 text-white/70">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="text-xs">Financial District, Tower B</span>
+</div>
+</div>
+<div class="size-12 rounded-lg bg-white/10 flex items-center justify-center backdrop-blur-sm">
+<span class="material-symbols-outlined text-3xl">corporate_fare</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-white text-primary text-xs font-bold py-2.5 rounded-lg">View Checklist</button>
+<button class="flex-1 bg-white/10 text-white text-xs font-bold py-2.5 rounded-lg border border-white/20">Log Entry</button>
+</div>
+</div>
+<div class="h-24 w-full bg-slate-200 relative grayscale opacity-40">
+<img alt="Map view of current audit location" class="w-full h-full object-cover" data-alt="Stylized city map with location pins" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZE9tKrf_mOomMcyE2Q4nYo60KdIrvvO4YmxwxYf0JEzQwEwbFhzs4oVpzR1RdYzSI9NwOSfeBrO05dy9KcDhurzVWpexmD_HOB2O2OtnW2jHhw5bPxVSa915mpkyZFuUAikC2fZlRZti5xgt_0I4rHHdqZY28jgGPxiE8wv5x2AS2sLuuC-cHEqyGypVbFjndSZ3Ei1KXWddveHp3KoNgkn5zW-IKP5Ze2ZXlYTKg0jD0aZy55foTb6zSzRpKp2iHv_nAGXPD4Dgl"/>
+</div>
+</div>
+</section>
+<!-- Recent Activity -->
+<section class="p-4">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold">Recent Logs</h3>
+<button class="text-xs font-bold text-primary">See All</button>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-lg border border-primary/5">
+<div class="size-8 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">description</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Inventory Verification</p>
+<p class="text-[10px] text-slate-500">Completed at 11:30 AM</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white dark:bg-slate-800 rounded-lg border border-primary/5">
+<div class="size-8 rounded bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-lg">distance</span>
+</div>
+<div class="flex-1">
+<p class="text-sm font-semibold">Mileage Log</p>
+<p class="text-[10px] text-slate-500">12.5 miles recorded</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Pinned Bottom Navigation -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 px-6 py-3 pb-6">
+<div class="flex items-center justify-between">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="text-primary flex h-8 items-center justify-center">
+<span class="material-symbols-outlined active-icon text-2xl">grid_view</span>
+</div>
+<p class="text-primary text-[10px] font-bold leading-normal uppercase tracking-wider">Dashboard</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 group" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-2xl">history</span>
+</div>
+<p class="text-[10px] font-bold leading-normal uppercase tracking-wider">History</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 group" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-2xl">groups</span>
+</div>
+<p class="text-[10px] font-bold leading-normal uppercase tracking-wider">Clients</p>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400 group" href="#">
+<div class="flex h-8 items-center justify-center">
+<span class="material-symbols-outlined text-2xl">account_circle</span>
+</div>
+<p class="text-[10px] font-bold leading-normal uppercase tracking-wider">Profile</p>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

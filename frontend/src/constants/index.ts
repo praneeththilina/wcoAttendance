@@ -4,9 +4,19 @@ export const ROUTES = {
   ATTENDANCE_HISTORY: '/attendance',
   CLIENTS: '/clients',
   PROFILE: '/profile',
+  CLIENT_SELECTION: '/clients/select',
+  CHECKIN_CONFIRMATION: '/checkin/confirmation',
+  CHECKOUT: '/checkout',
+  CHANGE_CLIENT: '/client/change',
   ADMIN_DASHBOARD: '/admin/dashboard',
+  ADMIN_STAFF: '/admin/staff',
+  ADMIN_CLIENTS: '/admin/clients',
+  ADMIN_REPORTS: '/admin/reports',
+  ADMIN_LEAVES: '/admin/leaves',
+  ADMIN_SETTINGS: '/admin/settings',
   MANAGER_DASHBOARD: '/manager/dashboard',
   HR_DASHBOARD: '/hr/dashboard',
+  LEAVES: '/leaves',
 } as const;
 
 export const ROLES = {
