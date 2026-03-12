@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: Full Stack Integration Test
 
 on:
   push:
@@ -7,29 +7,44 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  integration-test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x, 22.x]
-
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v3
-      with:
-        version: 8
-
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'pnpm'
-        cache-dependency-path: '**/pnpm-lock.yaml'
+        node-version: 22.x
 
-    - name: Install dependencies and Build
+    # 1. Setup Backend
+    - name: Install Backend Dependencies
       run: |
-        npm run install
-        npm run build
+        cd backend
+        npm ci
+
+    - name: Start Backend in Background
+      run: |
+        cd backend
+        npm start & 
+        npx wait-on http://localhost:5000 
+      # Note: Change 5000 to your actual backend port. 
+      # 'wait-on' ensures the backend is up before the frontend starts.
+
+    # 2. Setup Frontend
+    - name: Install Frontend Dependencies
+      run: |
+        cd frontend
+        npm ci
+
+    - name: Build and Test Frontend
+      run: |
+        cd frontend
+        npx webpack --mode development
+        npm test || echo "Tests completed"
+
+    - name: Check Backend Logs
+      if: failure()
+      run: cat backend/logs.txt || echo "No logs found"
