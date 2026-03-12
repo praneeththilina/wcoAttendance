@@ -14,6 +14,27 @@ export function EmployeeDashboard() {
   const { todayStatus: status, fetchTodayStatus, isSyncing, isOnline } = useAttendanceStore();
   const [isCheckingIn, setIsCheckingIn] = useState(false);
   const [showVariantToggle, setShowVariantToggle] = useState(false);
+  const [liveDuration, setLiveDuration] = useState<string | null>(null);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (status?.status === 'checked_in' && status.checkInTime) {
+      const updateDuration = () => {
+        const checkInDate = new Date(status.checkInTime as string);
+        const now = new Date();
+        const diffInMs = Math.abs(now.getTime() - checkInDate.getTime());
+        const diffInHrs = diffInMs / (1000 * 60 * 60);
+        setLiveDuration(`${diffInHrs.toFixed(1)}h`);
+      };
+      updateDuration(); // initial call
+      interval = setInterval(updateDuration, 60000); // update every minute
+    } else {
+      setLiveDuration(status?.totalHours ? `${status.totalHours.toFixed(1)}h` : '---');
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [status]);
 
   const today = new Date().toLocaleDateString('en-US', {
     weekday: 'long',
@@ -31,7 +52,7 @@ export function EmployeeDashboard() {
     setIsCheckingIn(true);
     try {
       navigate(ROUTES.CLIENT_SELECTION);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Check-in failed:', error);
     } finally {
       setIsCheckingIn(false);
@@ -41,7 +62,7 @@ export function EmployeeDashboard() {
   const handleCheckOut = async () => {
     try {
       navigate(ROUTES.CHECKOUT);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Check-out failed:', error);
     }
   };
@@ -145,7 +166,7 @@ export function EmployeeDashboard() {
             >
               <span className="material-symbols-outlined mr-3 text-3xl">location_on</span>
               <div className="flex flex-col items-start">
-                <span className="text-lg font-bold">Check In</span>
+                <span className="text-lg font-bold">{isCheckedIn ? "Update Location" : "Check In"}</span>
                 <span className="text-xs opacity-80">Capture current GPS location</span>
               </div>
             </button>
@@ -225,7 +246,7 @@ export function EmployeeDashboard() {
                   <span className="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Hours</span>
                 </div>
                 <span className="text-slate-900 dark:text-slate-100 font-semibold">
-                  {status?.totalHours ? `${status.totalHours.toFixed(1)}h` : '---'}
+                  {liveDuration}
                 </span>
               </div>
             </div>

@@ -1,0 +1,202 @@
+
+> aa-attendance-frontend@1.0.0 lint /app/frontend
+> eslint src --ext ts,tsx
+
+
+/app/frontend/src/App.tsx
+  34:1  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  57:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/components/layout/AdminBottomNav.tsx
+  12:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/components/layout/BottomNav.tsx
+  5:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/components/ui/Card.tsx
+   8:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  16:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/components/ui/StatusBadge.tsx
+  33:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/hooks/useGeolocation.ts
+   9:8   warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  14:33  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/hooks/useOfflineSync.ts
+   4:8   warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+   8:29  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  14:30  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  25:15  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/hooks/useTheme.ts
+   3:8   warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  26:26  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/main.tsx
+  8:1  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/AdminClients.tsx
+   6:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  32:32  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  37:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  44:40  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/AdminDashboard.tsx
+  24:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  39:15  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  42:34  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  53:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/AdminLeaves.tsx
+   6:8   warning  Missing return type on function                                                                                  @typescript-eslint/explicit-function-return-type
+  20:6   warning  React Hook useEffect has a missing dependency: 'loadRequests'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  22:33  warning  Missing return type on function                                                                                  @typescript-eslint/explicit-function-return-type
+  27:21  error    Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+  34:85  warning  Missing return type on function                                                                                  @typescript-eslint/explicit-function-return-type
+  38:21  error    Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+  43:58  warning  Missing return type on function                                                                                  @typescript-eslint/explicit-function-return-type
+  58:21  error    Unexpected any. Specify a different type                                                                         @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/AttendanceHistory.tsx
+    7:8   warning  Missing return type on function                                                                                 @typescript-eslint/explicit-function-return-type
+   19:6   warning  React Hook useEffect has a missing dependency: 'loadHistory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+   21:32  warning  Missing return type on function                                                                                 @typescript-eslint/explicit-function-return-type
+   27:21  error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+   34:27  warning  Missing return type on function                                                                                 @typescript-eslint/explicit-function-return-type
+   41:40  warning  Missing return type on function                                                                                 @typescript-eslint/explicit-function-return-type
+   49:47  warning  Missing return type on function                                                                                 @typescript-eslint/explicit-function-return-type
+  122:74  error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+  123:75  error    Unexpected any. Specify a different type                                                                        @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/ChangeClientLocation.tsx
+   8:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  35:32  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  40:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:53  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  53:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  82:40  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/CheckOutScreen.tsx
+   8:8   warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  18:33  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  30:15  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  45:6   warning  React Hook useEffect has a missing dependency: 'fetchTodayStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  47:35  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  73:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/CheckinConfirmation.tsx
+  12:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/ClientSelection.tsx
+    9:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   39:32  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   44:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   51:47  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   56:35  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   94:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  125:40  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/Clients.tsx
+   7:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  18:32  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  23:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/DailyAttendanceReport.tsx
+   5:8   warning  Missing return type on function                                                                                @typescript-eslint/explicit-function-return-type
+  12:6   warning  React Hook useEffect has a missing dependency: 'loadReport'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  14:31  warning  Missing return type on function                                                                                @typescript-eslint/explicit-function-return-type
+  19:21  error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+  32:43  warning  Missing return type on function                                                                                @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/EmployeeDashboard.tsx
+  10:8   warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  22:33  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  34:15  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  49:6   warning  React Hook useEffect has a missing dependency: 'fetchTodayStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  51:34  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  55:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  62:35  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  65:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/HRDashboard.tsx
+  11:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  14:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  24:29  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  29:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/Leaves.tsx
+   7:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  25:35  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  35:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  42:58  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  62:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/LoginPage.tsx
+  12:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  30:48  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  55:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/ManagerDashboard.tsx
+   9:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  12:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  22:29  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  27:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/pages/Profile.tsx
+   6:8   warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  10:27  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  15:41  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/Settings.tsx
+   7:8   warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  14:27  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/pages/StaffDashboard.tsx
+   5:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  23:30  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  28:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  35:53  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  42:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  53:47  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  64:42  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/services/adminService.ts
+   8:14  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:3   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  47:29  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  52:3   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  52:41  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/services/auth.ts
+  22:98  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/stores/attendanceStore.ts
+   9:9   error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  37:7   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  39:7   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  50:7   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  56:7   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  58:7   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  65:7   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  82:27  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  94:7   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+  98:25  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/frontend/src/stores/authStore.ts
+  36:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  39:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  41:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  47:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  49:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  51:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/app/frontend/src/stores/uiSettings.ts
+  19:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  20:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  21:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+✖ 130 problems (33 errors, 97 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.

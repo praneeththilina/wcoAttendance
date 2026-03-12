@@ -24,7 +24,7 @@ export function AttendanceHistory() {
       const data = await attendanceService.getHistory(page, limit, startDate || undefined, endDate || undefined);
       setRecords(data.records);
       setTotal(data.total);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to load history:', error);
     } finally {
       setIsLoading(false);
