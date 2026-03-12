@@ -1,0 +1,3 @@
+## 2024-03-12 - ARIA Labels for Icon-Only Buttons
+**Learning:** Found several icon-only navigation buttons (e.g., arrow_back) lacking `aria-label`s, which causes screen readers to just announce "button" and provides no context. Care must be taken not to apply these globally (e.g. using a global replace) because different buttons need different labels even if they look similar structurally, to avoid mislabeling pagination or filter buttons with "Go back".
+**Action:** Always add descriptive `aria-label` attributes to icon-only interactive elements and target them carefully, double-checking the element's actual function.
