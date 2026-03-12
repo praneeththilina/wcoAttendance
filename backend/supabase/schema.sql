@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     "firstName" VARCHAR(100) NOT NULL,
     "lastName" VARCHAR(100) NOT NULL,
     role VARCHAR(20) DEFAULT 'employee',
+    "profilePicture" TEXT,
     "isActive" BOOLEAN DEFAULT true,
     "createdAt" TIMESTAMPTZ DEFAULT NOW(),
     "updatedAt" TIMESTAMPTZ DEFAULT NOW()

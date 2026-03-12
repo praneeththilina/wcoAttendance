@@ -279,5 +279,69 @@ export const adminController = {
       }
       next(error);
     }
+  },
+
+  // Settings
+  getSettings: async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      let settings = await prisma.settings.findFirst();
+      
+      if (!settings) {
+        settings = await prisma.settings.create({
+          data: {
+            checkInDeadlineHour: 8,
+            checkInDeadlineMinute: 30,
+            maxDistanceMeters: 500,
+            autoLocationCaptureHour: 9,
+            autoLocationCaptureMinute: 30,
+          }
+        });
+      }
+
+      res.status(200).json({ success: true, data: settings });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  updateSettings: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { 
+        checkInDeadlineHour, 
+        checkInDeadlineMinute, 
+        maxDistanceMeters,
+        autoLocationCaptureHour,
+        autoLocationCaptureMinute 
+      } = req.body;
+
+      let settings = await prisma.settings.findFirst();
+
+      if (!settings) {
+        settings = await prisma.settings.create({
+          data: {
+            checkInDeadlineHour: checkInDeadlineHour ?? 8,
+            checkInDeadlineMinute: checkInDeadlineMinute ?? 30,
+            maxDistanceMeters: maxDistanceMeters ?? 500,
+            autoLocationCaptureHour: autoLocationCaptureHour ?? 9,
+            autoLocationCaptureMinute: autoLocationCaptureMinute ?? 30,
+          }
+        });
+      } else {
+        settings = await prisma.settings.update({
+          where: { id: settings.id },
+          data: {
+            ...(checkInDeadlineHour !== undefined && { checkInDeadlineHour }),
+            ...(checkInDeadlineMinute !== undefined && { checkInDeadlineMinute }),
+            ...(maxDistanceMeters !== undefined && { maxDistanceMeters }),
+            ...(autoLocationCaptureHour !== undefined && { autoLocationCaptureHour }),
+            ...(autoLocationCaptureMinute !== undefined && { autoLocationCaptureMinute }),
+          }
+        });
+      }
+
+      res.status(200).json({ success: true, data: settings });
+    } catch (error) {
+      next(error);
+    }
   }
 };

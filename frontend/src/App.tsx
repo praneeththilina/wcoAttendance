@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
 import { useOfflineSync } from '@/hooks/useOfflineSync';
+import { useTheme } from '@/hooks/useTheme';
 import { ROUTES, ROLES } from '@/constants';
 
 // Lazy load pages
@@ -56,6 +57,7 @@ function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) {
 
 export function App() {
   useOfflineSync();
+  useTheme();
   return (
     <BrowserRouter>
       <Routes>

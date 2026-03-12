@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clientService } from '@/services/auth';
 import { useAttendanceStore } from '@/stores/attendanceStore';
+import { useLocationValidation } from '@/hooks/useLocationValidation';
 import { BottomNav } from '@/components/layout';
 import { ROUTES } from '@/constants';
 import type { Client } from '@/types';
@@ -9,12 +10,14 @@ import type { Client } from '@/types';
 export function ClientSelection() {
   const navigate = useNavigate();
   const { addToQueue, isOnline, setTodayStatus } = useAttendanceStore();
+  const { fetchAndValidate, isLoading: isValidatingLocation } = useLocationValidation();
   const [searchQuery, setSearchQuery] = useState('');
   const [clients, setClients] = useState<Client[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isCheckingIn, setIsCheckingIn] = useState(false);
   const [selectedClient, setSelectedClient] = useState<Client | null>(null);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [locationError, setLocationError] = useState<string | null>(null);
 
   useEffect(() => {
     loadClients();
@@ -53,21 +56,42 @@ export function ClientSelection() {
     const client = selectedClient;
     setIsCheckingIn(true);
     setShowConfirmModal(false);
+    setLocationError(null);
+
     try {
-      const location = await getCurrentLocation();
-      
+      const clientLocation = client.latitude && client.longitude
+        ? { latitude: client.latitude, longitude: client.longitude, radius: 500 }
+        : undefined;
+
+      const validation = await fetchAndValidate(clientLocation);
+
+      if (!validation || !validation.location) {
+        setLocationError('Failed to get location. Please enable GPS and try again.');
+        setIsCheckingIn(false);
+        return;
+      }
+
+      if (!validation.isValid) {
+        setLocationError(validation.errors.join('. '));
+        setIsCheckingIn(false);
+        return;
+      }
+
+      const location = {
+        latitude: validation.location.latitude,
+        longitude: validation.location.longitude,
+        accuracy: validation.location.accuracy,
+      };
+
       if (isOnline) {
-        // Import attendanceService dynamically or use from auth service if available
         const { attendanceService } = await import('@/services/auth');
         await attendanceService.checkIn(client.id, location);
       } else {
-        // Queue for later
         addToQueue({
           type: 'check-in',
           data: { clientId: client.id, location },
         });
         
-        // Optimistically update status
         setTodayStatus({
           status: 'checked_in',
           checkInTime: new Date().toISOString(),
@@ -88,33 +112,11 @@ export function ClientSelection() {
       });
     } catch (error: any) {
       const message = error?.response?.data?.error?.message || error?.message || 'Check-in failed';
-      alert(message);
+      setLocationError(message);
       console.error('Check-in failed:', message);
     } finally {
       setIsCheckingIn(false);
     }
-  };
-
-  const getCurrentLocation = (): Promise<{ latitude: number; longitude: number; accuracy?: number }> => {
-    return new Promise((resolve) => {
-      if (!navigator.geolocation) {
-        resolve({ latitude: 0, longitude: 0 });
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          resolve({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude,
-            accuracy: position.coords.accuracy,
-          });
-        },
-        () => {
-          resolve({ latitude: 0, longitude: 0 });
-        },
-        { enableHighAccuracy: true }
-      );
-    });
   };
 
   const getClientIcon = (city: string) => {
@@ -236,21 +238,30 @@ export function ClientSelection() {
                 <span className="material-symbols-outlined text-primary text-3xl">location_on</span>
               </div>
               <h3 className="text-xl font-bold mb-2">Confirm Check-In</h3>
-              <p className="text-slate-500 dark:text-slate-400 mb-6">
+              <p className="text-slate-500 dark:text-slate-400 mb-4">
                 Are you sure you want to check in to <span className="font-semibold text-slate-900 dark:text-slate-100">{selectedClient.name}</span>?
               </p>
+              {locationError && (
+                <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-left">
+                  <p className="text-red-600 dark:text-red-400 text-sm">{locationError}</p>
+                </div>
+              )}
               <div className="flex gap-3">
                 <button
-                  onClick={() => setShowConfirmModal(false)}
+                  onClick={() => {
+                    setShowConfirmModal(false);
+                    setLocationError(null);
+                  }}
                   className="flex-1 py-3 rounded-lg font-semibold border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmCheckIn}
-                  className="flex-1 py-3 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90"
+                  disabled={isCheckingIn || isValidatingLocation}
+                  className="flex-1 py-3 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 disabled:opacity-50"
                 >
-                  Confirm
+                  {isCheckingIn || isValidatingLocation ? 'Validating...' : 'Confirm'}
                 </button>
               </div>
             </div>

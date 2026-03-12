@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "installCommand": "pnpm install",
+  "buildCommand": "pnpm prisma generate && pnpm build",
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/src/vercel.ts"
+    },
+    {
+      "src": "/health",
+      "dest": "/src/vercel.ts"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

@@ -32,6 +32,16 @@ export function Clients() {
     c.city.toLowerCase().includes(search.toLowerCase())
   );
 
+  const openDirections = (client: Client) => {
+    const { latitude, longitude, address, city } = client;
+    if (latitude && longitude) {
+      window.open(`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`, '_blank');
+    } else if (address || city) {
+      const query = encodeURIComponent(`${address || ''} ${city}`.trim());
+      window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 pb-20">
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 sticky top-0 z-10 flex justify-between items-center">
@@ -39,7 +49,7 @@ export function Clients() {
           <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
-          <h1 className="text-xl font-bold">Manage Clients</h1>
+          <h1 className="text-xl font-bold">{user?.role === 'employee' ? 'Clients' : 'Manage Clients'}</h1>
         </div>
         {(user?.role === 'admin' || user?.role === 'manager') && (
           <button className="bg-primary text-white py-2 px-4 rounded-lg flex items-center gap-2 hover:bg-primary/90 transition-colors text-sm font-bold">
@@ -72,9 +82,11 @@ export function Clients() {
                   <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center text-primary shrink-0">
                     <span className="material-symbols-outlined">domain</span>
                   </div>
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="text-slate-400 hover:text-primary"><span className="material-symbols-outlined text-sm">edit</span></button>
-                  </div>
+                  {(user?.role === 'admin' || user?.role === 'manager') && (
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                      <button className="text-slate-400 hover:text-primary"><span className="material-symbols-outlined text-sm">edit</span></button>
+                    </div>
+                  )}
                 </div>
                 <h3 className="font-bold text-lg truncate mb-1" title={client.name}>{client.name}</h3>
                 <p className="text-sm text-slate-500 mb-4 truncate">{client.branch || 'Main Branch'}</p>
@@ -83,6 +95,14 @@ export function Clients() {
                   <span className="material-symbols-outlined text-base shrink-0 mt-0.5">location_on</span>
                   <p className="line-clamp-2">{client.address || client.city}</p>
                 </div>
+
+                <button
+                  onClick={() => openDirections(client)}
+                  className="mt-3 w-full py-2 px-3 bg-primary/10 text-primary rounded-lg text-sm font-medium flex items-center justify-center gap-2 hover:bg-primary/20 transition-colors"
+                >
+                  <span className="material-symbols-outlined text-lg">directions</span>
+                  Get Directions
+                </button>
               </div>
             ))
           )}

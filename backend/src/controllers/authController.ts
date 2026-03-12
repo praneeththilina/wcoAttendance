@@ -86,3 +86,19 @@ export async function register(req: Request, res: Response, next: NextFunction) 
     next(error);
   }
 }
+
+export async function updateProfile(req: Request, res: Response, next: NextFunction) {
+  try {
+    const userId = (req as AuthRequest).user?.userId;
+    const { firstName, lastName, profilePicture } = req.body;
+
+    const result = await authService.updateProfile(userId!, { firstName, lastName, profilePicture });
+
+    res.status(200).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+}

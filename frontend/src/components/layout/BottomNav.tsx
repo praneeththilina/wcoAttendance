@@ -1,11 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { ROUTES } from '@/constants';
-import { useUISettings } from '@/stores/uiSettings';
 
 export function BottomNav() {
-  const { dashboardVariant } = useUISettings();
-  const isVariant1 = dashboardVariant === 1;
-
   const navItems = [
     { path: ROUTES.DASHBOARD, icon: 'home', label: 'Home' },
     { path: ROUTES.CLIENTS, icon: 'business', label: 'Clients' },
@@ -15,11 +11,7 @@ export function BottomNav() {
   ];
 
   return (
-    <nav className={`fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 z-20 ${
-      isVariant1 
-        ? 'border-primary/10 pb-4 pt-2' 
-        : 'border-slate-200 dark:border-slate-800 pb-6 pt-3'
-    }`}>
+    <nav className="fixed bottom-0 left-0 right-0 max-w-md mx-auto border-t bg-white/80 dark:bg-background-dark/80 backdrop-blur-md px-4 z-20 border-primary/10 pb-4 pt-2">
       <div className="flex gap-2">
         {navItems.map((item) => (
           <NavLink

@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
-import { useUISettings } from '@/stores/uiSettings';
 import { useAttendanceStore } from '@/stores/attendanceStore';
 import { BottomNav } from '@/components/layout';
 import { StatusBadge } from '@/components/ui';
@@ -10,11 +9,11 @@ import { ROUTES } from '@/constants';
 export function EmployeeDashboard() {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
-  const { dashboardVariant, setDashboardVariant } = useUISettings();
   const { todayStatus: status, fetchTodayStatus, isSyncing, isOnline } = useAttendanceStore();
   const [isCheckingIn, setIsCheckingIn] = useState(false);
-  const [showVariantToggle, setShowVariantToggle] = useState(false);
   const [liveDuration, setLiveDuration] = useState<string | null>(null);
+
+  const dashboardVariant = 1;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -92,12 +91,6 @@ export function EmployeeDashboard() {
           )}
 
           <button
-            onClick={() => setShowVariantToggle(!showVariantToggle)}
-            className="flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-transparent mr-2"
-          >
-            <span className="material-symbols-outlined text-slate-400">tune</span>
-          </button>
-          <button
             onClick={() => {
               logout();
               navigate(ROUTES.LOGIN);
@@ -107,30 +100,6 @@ export function EmployeeDashboard() {
             <span className="material-symbols-outlined">notifications</span>
           </button>
         </header>
-
-        {showVariantToggle && (
-          <div className="px-4 py-2 bg-primary/5 border-b border-primary/10">
-            <p className="text-xs text-slate-500 mb-2">UI Variant (Demo)</p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setDashboardVariant(1)}
-                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium ${
-                  isVariant1 ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 text-slate-600'
-                }`}
-              >
-                Variant 1
-              </button>
-              <button
-                onClick={() => setDashboardVariant(2)}
-                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium ${
-                  !isVariant1 ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 text-slate-600'
-                }`}
-              >
-                Variant 2
-              </button>
-            </div>
-          </div>
-        )}
 
         {/* Welcome Section */}
         <div className={`flex ${isVariant1 ? 'p-4 @container' : 'px-6 py-8 @container bg-white dark:bg-background-dark/30'} ${!isVariant1 ? 'border-b border-slate-100 dark:border-slate-800' : ''}`}>

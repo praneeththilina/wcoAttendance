@@ -2,11 +2,21 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
+import fs from 'fs';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    {
+      name: 'copy-version-json',
+      closeBundle() {
+        fs.copyFileSync(
+          path.resolve(__dirname, 'version.json'),
+          path.resolve(__dirname, 'dist/version.json')
+        );
+      }
+    },
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],

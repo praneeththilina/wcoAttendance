@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "name": "AA Attendance",
+  "description": "Attendance tracking system for audit firms",
+  "buildNumber": "1",
+  "releaseDate": "2026-03-12",
+  "minAppVersion": "1.0.0"
+}

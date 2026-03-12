@@ -1,0 +1,195 @@
+name: Build Mobile Apps
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      build-number: ${{ steps.version.outputs.buildNumber }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(cat frontend/version.json | jq -r '.version')
+          BUILD_NUMBER=$(cat frontend/version.json | jq -r '.buildNumber')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "build-number=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+          echo "Building version $VERSION (build $BUILD_NUMBER)"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Cache pnpm
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: |
+          npm install -g pnpm
+          cd frontend && pnpm install --frozen-lockfile
+          cd ../backend && pnpm install --frozen-lockfile
+
+      - name: Build frontend
+        run: |
+          cd frontend && pnpm build
+
+      - name: Upload frontend build
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: frontend/dist
+          retention-days: 7
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Android SDK
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.android/sdk
+            ~/.gradle/caches
+          key: ${{ runner.os }}-android-sdk-${{ hashFiles('**/build.gradle*') }}
+          restore-keys: |
+            ${{ runner.os }}-android-sdk-
+
+      - name: Build Android Debug APK
+        uses: react-native-community/github-actions-build-android@v1.0.0
+        with:
+          keystore_file: ''
+          keystore_password: ''
+          key_alias: ''
+          key_password: ''
+          build_type: 'Debug'
+          react_native_directory: './frontend'
+
+  ios-build:
+    needs: setup
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Read version
+        run: |
+          VERSION=$(cat frontend/version.json | jq -r '.version')
+          BUILD_NUMBER=$(cat frontend/version.json | jq -r '.buildNumber')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "build-number=$BUILD_NUMBER" >> $GITHUB_OUTPUT
+        id: version
+        shell: bash
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Cache pnpm
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: |
+          npm install -g pnpm
+          cd frontend && pnpm install --frozen-lockfile
+
+      - name: Build frontend
+        run: |
+          cd frontend && pnpm build
+
+      - name: Upload frontend build
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build-ios
+          path: frontend/dist
+          retention-days: 7
+
+      - name: Setup Xcode
+        uses: actions/setup-xcode@v5
+        with:
+          xcode-version: '15.0'
+
+      - name: Setup CocoaPods
+        run: sudo gem install cocoapods
+
+      - name: Cache iOS pods
+        uses: actions/cache@v4
+        with:
+          path: ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Install iOS dependencies
+        run: cd ios && pod install
+
+      - name: Build iOS
+        run: |
+          xcodebuild -workspace ios/AAAttendance.xcworkspace \
+            -scheme AAAttendance \
+            -configuration Debug \
+            -destination 'platform=iOS Simulator,name=iPhone 15' \
+            build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+        working-directory: ./frontend
+
+      - name: Upload iOS build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build-artifact
+          path: |
+            ios/build/Build/Products/Debug-iphonesimulator/*.app
+          retention-days: 7
+
+  release:
+    needs: [setup, ios-build]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R artifacts
+
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ needs.setup.outputs.version }}
+          release_name: AA Attendance v${{ needs.setup.outputs.version }}
+          draft: true
+          prerelease: false

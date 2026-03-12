@@ -61,6 +61,7 @@ export async function login(input: LoginInput) {
       firstName: user.firstName,
       lastName: user.lastName,
       role: user.role,
+      profilePicture: user.profilePicture,
     },
   };
 }
@@ -126,4 +127,29 @@ export async function register(input: { email: string; password: string; firstNa
     lastName: user.lastName,
     role: user.role,
   };
+}
+
+export async function updateProfile(userId: string, input: { firstName?: string; lastName?: string; profilePicture?: string }) {
+  const { firstName, lastName, profilePicture } = input;
+
+  const updateData: Record<string, unknown> = {};
+  if (firstName !== undefined) updateData.firstName = firstName;
+  if (lastName !== undefined) updateData.lastName = lastName;
+  if (profilePicture !== undefined) updateData.profilePicture = profilePicture;
+
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: updateData,
+    select: {
+      id: true,
+      employeeId: true,
+      email: true,
+      firstName: true,
+      lastName: true,
+      role: true,
+      profilePicture: true,
+    },
+  });
+
+  return user;
 }

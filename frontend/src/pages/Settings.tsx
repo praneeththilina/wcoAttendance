@@ -1,15 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
+import { useTheme } from '@/hooks/useTheme';
 import { AdminBottomNav } from '@/components/layout';
 import { ROUTES } from '@/constants';
+
+interface AppVersion {
+  version: string;
+  buildNumber: string;
+}
 
 export function Settings() {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
-  const [darkMode, setDarkMode] = useState(false);
+  const { isDark, toggleTheme } = useTheme();
   const [notifications, setNotifications] = useState(true);
   const [locationTracking, setLocationTracking] = useState(true);
+  const [appVersion, setAppVersion] = useState<AppVersion>({ version: '1.0.0', buildNumber: '1' });
+
+  useEffect(() => {
+    fetch('/version.json')
+      .then(res => res.json())
+      .then(data => setAppVersion({ version: data.version, buildNumber: data.buildNumber || '1' }))
+      .catch(() => {});
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -55,14 +69,14 @@ export function Settings() {
                 <span className="text-sm">Dark Mode</span>
               </div>
               <button
-                onClick={() => setDarkMode(!darkMode)}
+                onClick={toggleTheme}
                 className={`w-12 h-6 rounded-full transition-colors ${
-                  darkMode ? 'bg-primary' : 'bg-slate-300'
+                  isDark ? 'bg-primary' : 'bg-slate-300'
                 }`}
               >
                 <span
                   className={`block w-6 h-6 bg-white rounded-full shadow transition-transform ${
-                    darkMode ? 'translate-x-6' : 'translate-x-0'
+                    isDark ? 'translate-x-6' : 'translate-x-0'
                   }`}
                 />
               </button>
@@ -140,7 +154,7 @@ export function Settings() {
         {/* App Info */}
         <div className="text-center py-4">
           <p className="text-sm text-slate-500">AA Attendance</p>
-          <p className="text-xs text-slate-400">Version 1.0.0</p>
+          <p className="text-xs text-slate-400">Version {appVersion.version} (Build {appVersion.buildNumber})</p>
         </div>
 
         {/* Logout */}

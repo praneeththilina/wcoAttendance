@@ -23,3 +23,7 @@ adminRoutes.get('/clients', adminController.getAllClients);
 adminRoutes.post('/clients', adminController.createClient);
 adminRoutes.put('/clients/:id', adminController.updateClient);
 adminRoutes.delete('/clients/:id', adminController.deleteClient);
+
+// Settings endpoints
+adminRoutes.get('/settings', adminController.getSettings);
+adminRoutes.put('/settings', adminController.updateSettings);

@@ -38,6 +38,7 @@ model User {
   firstName       String
   lastName        String
   role            UserRole           @default(employee)
+  profilePicture  String?
   isActive        Boolean            @default(true)
   createdAt       DateTime           @default(now())
   updatedAt       DateTime           @updatedAt
@@ -143,4 +144,15 @@ model LeaveRequest {
   @@map("leaveRequests")
   @@index([userId])
   @@index([status])
+}
+
+model Settings {
+  id                      Int     @id @default(1)
+  checkInDeadlineHour     Int     @default(8)
+  checkInDeadlineMinute   Int     @default(30)
+  maxDistanceMeters       Int     @default(500)
+  autoLocationCaptureHour Int     @default(9)
+  autoLocationCaptureMinute Int   @default(30)
+
+  @@map("settings")
 }

@@ -1,5 +1,5 @@
 import apiClient from './api';
-import type { LoginRequest, LoginResponse, Client, AttendanceRecord, AttendanceStatus } from '@/types';
+import type { LoginRequest, LoginResponse, Client, AttendanceRecord, AttendanceStatus, User } from '@/types';
 
 export const authService = {
   async login(data: LoginRequest): Promise<LoginResponse> {
@@ -14,6 +14,11 @@ export const authService = {
   async refreshToken(refreshToken: string): Promise<LoginResponse> {
     const response = await apiClient.post<LoginResponse>('/auth/refresh', { refreshToken });
     return response.data;
+  },
+
+  async updateProfile(data: { firstName?: string; lastName?: string; profilePicture?: string }): Promise<User> {
+    const response = await apiClient.put<{ success: boolean; data: User }>('/auth/profile', data);
+    return response.data.data;
   },
 };
 

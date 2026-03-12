@@ -9,5 +9,6 @@ router.post('/register', authController.register);
 router.post('/refresh-token', authController.refreshToken);
 router.post('/logout', authenticate, authController.logout);
 router.get('/me', authenticate, authController.me);
+router.put('/profile', authenticate, authController.updateProfile);
 
 export const authRoutes: RouterType = router;

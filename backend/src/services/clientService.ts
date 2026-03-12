@@ -1,9 +1,26 @@
 import prisma from '../config/database.js';
+import { getCached, setCache, invalidateCacheByPrefix } from '../config/cache.js';
 import type { GetClientsInput } from '../validators/client.validator.js';
 
-export async function getClients(_userId: string, input: GetClientsInput) {
+const CACHE_TTL = 300;
+
+interface ClientsResult {
+  data: any[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+export async function getClients(_userId: string, input: GetClientsInput): Promise<ClientsResult> {
   const { search, page = 1, limit = 20 } = input;
   const skip = (parseInt(page as string) - 1) * parseInt(limit as string);
+
+  const cacheKey = `clients:list:${search || 'all'}:${page}:${limit}`;
+  const cached = getCached<ClientsResult>(cacheKey);
+  if (cached) return cached;
 
   const where: any = { isActive: true };
 
@@ -25,7 +42,7 @@ export async function getClients(_userId: string, input: GetClientsInput) {
     prisma.client.count({ where }),
   ]);
 
-  return {
+  const result: ClientsResult = {
     data: clients,
     pagination: {
       page: parseInt(page as string),
@@ -34,9 +51,16 @@ export async function getClients(_userId: string, input: GetClientsInput) {
       totalPages: Math.ceil(total / parseInt(limit as string)),
     },
   };
+
+  setCache(cacheKey, result, CACHE_TTL);
+  return result;
 }
 
 export async function getRecentClients(userId: string) {
+  const cacheKey = `clients:recent:${userId}`;
+  const cached = getCached(cacheKey);
+  if (cached) return cached;
+
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
@@ -66,6 +90,7 @@ export async function getRecentClients(userId: string) {
     .map((record) => record.client)
     .slice(0, 5);
 
+  setCache(cacheKey, recentClients, 60);
   return recentClients;
 }
 
@@ -73,6 +98,10 @@ export async function searchClients(_userId: string, query: string) {
   if (!query || query.trim() === '') {
     return [];
   }
+
+  const cacheKey = `clients:search:${query.toLowerCase()}`;
+  const cached = getCached(cacheKey);
+  if (cached) return cached;
 
   const clients = await prisma.client.findMany({
     where: {
@@ -88,5 +117,10 @@ export async function searchClients(_userId: string, query: string) {
     take: 20,
   });
 
+  setCache(cacheKey, clients, 120);
   return clients;
+}
+
+export async function invalidateClientCache() {
+  invalidateCacheByPrefix('clients:');
 }
