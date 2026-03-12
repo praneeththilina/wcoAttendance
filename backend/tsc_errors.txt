@@ -1,20 +1,3 @@
-﻿src/controllers/adminController.ts(21,29): error TS6133: 'req' is declared but its value is never read.
-src/controllers/adminController.ts(133,23): error TS6133: 'req' is declared but its value is never read.
-src/controllers/adminController.ts(226,25): error TS6133: 'req' is declared but its value is never read.
-src/controllers/attendanceController.ts(55,32): error TS2339: Property 'page' does not exist on type '{ query: { page: string; limit: string; startDate?: string | undefined; endDate?: string | undefined; }; }'.
-src/controllers/attendanceController.ts(56,33): error TS2339: Property 'limit' does not exist on type '{ query: { page: string; limit: string; startDate?: string | undefined; endDate?: string | undefined; }; }'.
-src/controllers/attendanceController.ts(57,28): error TS2339: Property 'startDate' does not exist on type '{ query: { page: string; limit: string; startDate?: string | undefined; endDate?: string | undefined; }; }'.
-src/controllers/attendanceController.ts(58,26): error TS2339: Property 'endDate' does not exist on type '{ query: { page: string; limit: string; startDate?: string | undefined; endDate?: string | undefined; }; }'.
-src/controllers/hrController.ts(3,1): error TS6133: 'AppError' is declared but its value is never read.
-src/controllers/hrController.ts(8,29): error TS6133: 'req' is declared but its value is never read.
-src/controllers/leaveController.ts(10,1): error TS6133: 'AppError' is declared but its value is never read.
-src/controllers/leaveController.ts(10,10): error TS2459: Module '"../middleware/errorHandler.js"' declares 'AppError' locally, but it is not exported.
-src/controllers/managerController.ts(3,1): error TS6133: 'AppError' is declared but its value is never read.
-src/controllers/managerController.ts(8,29): error TS6133: 'req' is declared but its value is never read.
-src/middleware/auth.ts(65,25): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
-  Type 'undefined' is not assignable to type 'string'.
-src/routes/admin.ts(14,44): error TS2559: Type 'ZodObject<{ query: ZodObject<{ date: ZodString; }, "strip", ZodTypeAny, { date: string; }, { date: string; }>; }, "strip", ZodTypeAny, { query: { ...; }; }, { ...; }>' has no properties in common with type 'ValidationSchema'.
-src/routes/admin.ts(18,37): error TS2559: Type 'ZodObject<{ body: ZodObject<{ employeeId: ZodString; email: ZodString; password: ZodString; firstName: ZodString; lastName: ZodString; role: ZodDefault<ZodEnum<...>>; isActive: ZodDefault<...>; }, "strip", ZodTypeAny, { ...; }, { ...; }>; }, "strip", ZodTypeAny, { ...; }, { ...; }>' has no properties in common with type 'ValidationSchema'.
-src/routes/admin.ts(19,40): error TS2559: Type 'ZodObject<{ body: ZodObject<{ email: ZodOptional<ZodString>; firstName: ZodOptional<ZodString>; lastName: ZodOptional<ZodString>; role: ZodOptional<...>; isActive: ZodOptional<...>; }, "strip", ZodTypeAny, { ...; }, { ...; }>; }, "strip", ZodTypeAny, { ...; }, { ...; }>' has no properties in common with type 'ValidationSchema'.
-src/services/clientService.ts(72,37): error TS6133: 'userId' is declared but its value is never read.
-src/services/leaveService.ts(2,10): error TS2459: Module '"../middleware/errorHandler.js"' declares 'AppError' locally, but it is not exported.
+
+> aa-attendance-backend@1.0.0 type-check /app/backend
+> tsc --noEmit
