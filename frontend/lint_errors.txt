@@ -80,20 +80,23 @@
 
 /app/frontend/src/pages/CheckOutScreen.tsx
    8:8   warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
-  24:6   warning  React Hook useEffect has a missing dependency: 'fetchTodayStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-  26:35  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
-  52:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  18:33  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  30:15  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  45:6   warning  React Hook useEffect has a missing dependency: 'fetchTodayStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  47:35  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  73:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
 
 /app/frontend/src/pages/CheckinConfirmation.tsx
   12:8  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
 
 /app/frontend/src/pages/ClientSelection.tsx
     9:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
-   37:32  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
-   42:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-   49:53  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
-   84:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
-  115:40  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   39:32  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   44:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   51:47  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   56:35  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
+   94:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  125:40  warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
 
 /app/frontend/src/pages/Clients.tsx
    7:8   warning  Missing return type on function           @typescript-eslint/explicit-function-return-type
@@ -109,11 +112,13 @@
 
 /app/frontend/src/pages/EmployeeDashboard.tsx
   10:8   warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
-  28:6   warning  React Hook useEffect has a missing dependency: 'fetchTodayStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
-  30:34  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
-  34:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
-  41:35  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
-  44:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  22:33  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  34:15  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  49:6   warning  React Hook useEffect has a missing dependency: 'fetchTodayStatus'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  51:34  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  55:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+  62:35  warning  Missing return type on function                                                                                      @typescript-eslint/explicit-function-return-type
+  65:21  error    Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
 
 /app/frontend/src/pages/HRDashboard.tsx
   11:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
@@ -192,6 +197,6 @@
   20:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
   21:7  warning  Missing return type on function  @typescript-eslint/explicit-function-return-type
 
-✖ 125 problems (33 errors, 92 warnings)
+✖ 130 problems (33 errors, 97 warnings)
 
  ELIFECYCLE  Command failed with exit code 1.

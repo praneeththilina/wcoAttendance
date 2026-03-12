@@ -10,6 +10,27 @@ export function CheckOutScreen() {
   const { checkOutVariant, setCheckOutVariant } = useUISettings();
   const { todayStatus: status, fetchTodayStatus, addToQueue, isOnline, setTodayStatus } = useAttendanceStore();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [liveDuration, setLiveDuration] = useState<string | null>(null);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (status?.status === 'checked_in' && status.checkInTime) {
+      const updateDuration = () => {
+        const checkInDate = new Date(status.checkInTime as string);
+        const now = new Date();
+        const diffInMs = Math.abs(now.getTime() - checkInDate.getTime());
+        const diffInHrs = diffInMs / (1000 * 60 * 60);
+        setLiveDuration(`${diffInHrs.toFixed(1)}h`);
+      };
+      updateDuration(); // initial call
+      interval = setInterval(updateDuration, 60000); // update every minute
+    } else {
+      setLiveDuration(status?.totalHours ? `${status.totalHours.toFixed(1)}h` : '---');
+    }
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [status]);
 
   const isVariant1 = checkOutVariant === 1;
 
@@ -79,7 +100,7 @@ export function CheckOutScreen() {
   };
 
   const checkInTime = status?.checkInTime ? new Date(status.checkInTime) : null;
-  const hoursWorked = status?.totalHours || 0;
+  const hoursWorked = liveDuration ? parseFloat(liveDuration) : (status?.totalHours || 0);
   const overtime = Math.max(0, hoursWorked - 8);
 
   return (
