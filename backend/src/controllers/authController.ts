@@ -1,6 +1,6 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as authService from '../services/authService.js';
-import { loginSchema } from '../validators/auth.validator.js';
+import { loginSchema, registerSchema } from '../validators/auth.validator.js';
 import type { AuthRequest } from '../middleware/auth.js';
 
 export async function login(req: Request, res: Response, next: NextFunction) {
@@ -71,8 +71,12 @@ export async function me(req: Request, res: Response, next: NextFunction) {
 
 export async function register(req: Request, res: Response, next: NextFunction) {
   try {
-    const { email, password, firstName, lastName, employeeId, role } = req.body;
-    const result = await authService.register({ email, password, firstName, lastName, employeeId, role });
+    const validated = registerSchema.shape.body.parse(req.body);
+    const { email, password, firstName, lastName, employeeId } = validated;
+
+    // Explicitly omit role to prevent privilege escalation via mass assignment.
+    // The role will default to 'employee' in the service layer.
+    const result = await authService.register({ email, password, firstName, lastName, employeeId });
 
     res.status(201).json({
       success: true,
