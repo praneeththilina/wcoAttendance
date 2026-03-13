@@ -126,12 +126,15 @@ export function LoginPage() {
             error={errors.password?.message}
             leftIcon={<span className="material-symbols-outlined">lock</span>}
             rightIcon={
-              <span
-                className="material-symbols-outlined cursor-pointer"
+              <button
+                type="button"
+                className="material-symbols-outlined cursor-pointer hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full p-1 -m-1 transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                title={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? 'visibility_off' : 'visibility'}
-              </span>
+              </button>
             }
             {...register('password')}
           />
