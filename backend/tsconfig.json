@@ -22,7 +22,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./node_modules/.prisma/client"]
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": ["src/**/*", "node_modules/.prisma/client/**/*"],
   "exclude": ["node_modules", "dist", "tests"]

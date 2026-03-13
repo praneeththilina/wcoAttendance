@@ -11,7 +11,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/src/vercel.ts"
+      "dest": "/vercel.js"
     }
   ],
   "env": {
