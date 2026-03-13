@@ -2,12 +2,12 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/dist/vercel.js",
+      "src": "backend/src/vercel.ts",
       "use": "@vercel/node"
     },
     {
-      "src": "frontend/dist",
-      "use": "@vercel/static"
+      "src": "frontend/dist/**",
+      "use": "static"
     }
   ],
   "installCommand": "cd backend && pnpm install --legacy-peer-deps && cd ../frontend && pnpm install",
