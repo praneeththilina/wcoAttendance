@@ -61,10 +61,13 @@ export function createApp(): Application {
     app.use(morgan('combined', { stream: { write: (message) => logger.info(message.trim()) } }));
   }
 
-  // Health check endpoint
-  app.get('/health', (_req, res) => {
+  // Health check endpoints
+  const healthHandler = (_req: express.Request, res: express.Response) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
-  });
+  };
+
+  app.get('/health', healthHandler);
+  app.get('/api/health', healthHandler);
 
   // API routes
   app.use('/api/v1/auth', authRoutes);

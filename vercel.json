@@ -17,8 +17,15 @@
   "buildCommand": "pnpm --dir backend prisma generate && pnpm --dir backend exec tsc --project tsconfig.json && pnpm --dir frontend build",
   "routes": [
     {
+      "src": "/api/health",
+      "dest": "/backend/dist/vercel.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/backend/dist/vercel.js"
+    },
+    {
+      "handle": "filesystem"
     },
     {
       "src": "/(.*)",
