@@ -2,16 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "backend/src/vercel.ts",
+      "src": "backend/dist/vercel.js",
       "use": "@vercel/node"
     },
     {
-      "src": "frontend/dist/**",
-      "use": "static"
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
     }
   ],
-  "installCommand": "cd backend && pnpm install --legacy-peer-deps --ignore-scripts && pnpm prisma generate && cd ../frontend && pnpm install",
-  "buildCommand": "cd backend && npx tsc --skipLibCheck && cd ../frontend && pnpm build",
+  "installCommand": "pnpm --dir backend install --frozen-lockfile --lockfile-dir=backend && pnpm --dir frontend install --frozen-lockfile --lockfile-dir=frontend",
+  "buildCommand": "pnpm --dir backend prisma generate && pnpm --dir backend exec tsc --project tsconfig.json && pnpm --dir frontend build",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -19,7 +22,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/dist/index.html"
+      "dest": "/index.html"
     }
   ]
 }
