@@ -20,7 +20,8 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@prisma/client": ["./node_modules/@prisma/client"]
     },
     "typeRoots": ["./node_modules/@types"],
     "types": ["express", "cors", "compression", "morgan", "node", "jsonwebtoken", "bcryptjs", "supertest"]
