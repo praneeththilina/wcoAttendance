@@ -89,7 +89,7 @@ export async function getLeaveRequests(params: {
   page: number;
   limit: number;
 }) {
-  const where: Prisma.LeaveRequestWhereInput = {
+  const where: any = {
     ...(params.userId && { userId: params.userId }),
     ...(params.status && { status: params.status }),
   };
