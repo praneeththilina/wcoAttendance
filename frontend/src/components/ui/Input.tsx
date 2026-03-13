@@ -12,8 +12,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, leftIcon, rightIcon, helperText, className = '', id, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
 
-    const baseStyles = 'flex w-full rounded-lg border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 h-14 text-base font-normal';
-    
+    const baseStyles =
+      'flex w-full rounded-lg border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 h-14 text-base font-normal';
+
     const stateStyles = error
       ? 'border-error focus:ring-error'
       : 'border-slate-200 dark:border-slate-800 focus:border-primary focus:ring-primary';
@@ -48,9 +49,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </span>
           )}
         </div>
-        {error && (
-          <p className="text-sm text-error mt-1">{error}</p>
-        )}
+        {error && <p className="text-sm text-error mt-1">{error}</p>}
         {helperText && !error && (
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{helperText}</p>
         )}

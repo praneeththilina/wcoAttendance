@@ -29,9 +29,10 @@ export const errorHandler = (
   }
 
   // Prisma errors
-  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+  if (err.name === 'PrismaClientKnownRequestError') {
+    const prismaErr = err as any;
     // Unique constraint failed
-    if (err.code === 'P2002') {
+    if (prismaErr.code === 'P2002') {
       return _res.status(409).json({
         success: false,
         error: {
@@ -42,7 +43,7 @@ export const errorHandler = (
     }
 
     // Record not found
-    if (err.code === 'P2025') {
+    if (prismaErr.code === 'P2025') {
       return _res.status(404).json({
         success: false,
         error: {

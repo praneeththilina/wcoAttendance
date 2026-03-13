@@ -24,9 +24,9 @@ export function DailyAttendanceReport() {
   };
 
   const stats = {
-    present: records.filter(r => r.status === 'present').length,
-    absent: records.filter(r => r.status === 'absent').length,
-    late: records.filter(r => r.status === 'late').length,
+    present: records.filter((r) => r.status === 'present').length,
+    absent: records.filter((r) => r.status === 'absent').length,
+    late: records.filter((r) => r.status === 'late').length,
   };
 
   const getStatusBadge = (status: string) => {
@@ -67,9 +67,7 @@ export function DailyAttendanceReport() {
         <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
           <span className="material-symbols-outlined text-3xl">menu</span>
         </button>
-        <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">
-          Daily Report
-        </h1>
+        <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">Daily Report</h1>
         <button className="flex items-center justify-center p-2 rounded-lg bg-primary/5 text-primary">
           <span className="material-symbols-outlined">download</span>
         </button>

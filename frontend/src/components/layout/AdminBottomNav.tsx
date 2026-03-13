@@ -33,7 +33,10 @@ export function AdminBottomNav() {
         >
           {({ isActive }) => (
             <>
-              <span className="material-symbols-outlined" style={isActive ? { fontVariationSettings: "'FILL' 1" } : undefined}>
+              <span
+                className="material-symbols-outlined"
+                style={isActive ? { fontVariationSettings: "'FILL' 1" } : undefined}
+              >
                 {item.icon}
               </span>
               <p className="text-[10px] font-bold uppercase tracking-wider">{item.label}</p>

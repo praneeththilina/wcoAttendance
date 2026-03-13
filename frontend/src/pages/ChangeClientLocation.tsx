@@ -23,8 +23,7 @@ export function ChangeClientLocation() {
     const query = searchQuery.toLowerCase();
     return clients.filter(
       (client) =>
-        client.name.toLowerCase().includes(query) ||
-        client.city.toLowerCase().includes(query)
+        client.name.toLowerCase().includes(query) || client.city.toLowerCase().includes(query)
     );
   }, [searchQuery, clients]);
 
@@ -46,7 +45,8 @@ export function ChangeClientLocation() {
       await attendanceService.changeLocation(client.id, location);
       navigate(ROUTES.DASHBOARD);
     } catch (error: any) {
-      const message = error?.response?.data?.error?.message || error?.message || 'Failed to change location';
+      const message =
+        error?.response?.data?.error?.message || error?.message || 'Failed to change location';
       alert(message);
       console.error('Change location failed:', message);
     } finally {
@@ -54,7 +54,11 @@ export function ChangeClientLocation() {
     }
   };
 
-  const getCurrentLocation = (): Promise<{ latitude: number; longitude: number; accuracy?: number }> => {
+  const getCurrentLocation = (): Promise<{
+    latitude: number;
+    longitude: number;
+    accuracy?: number;
+  }> => {
     return new Promise((resolve) => {
       if (!navigator.geolocation) {
         resolve({ latitude: 0, longitude: 0 });
@@ -154,14 +158,17 @@ export function ChangeClientLocation() {
                     className="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 hover:border-primary/30 transition-all text-left rounded-lg disabled:opacity-50"
                   >
                     <div className="size-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary">
-                      <span className="material-symbols-outlined">{getClientIcon(client.city)}</span>
+                      <span className="material-symbols-outlined">
+                        {getClientIcon(client.city)}
+                      </span>
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-slate-900 dark:text-slate-100">
                         {client.name}
                       </p>
                       <p className="text-xs text-slate-500">
-                        {client.branch ? `${client.branch}, ` : ''}{client.city}
+                        {client.branch ? `${client.branch}, ` : ''}
+                        {client.city}
                       </p>
                     </div>
                     <span className="material-symbols-outlined text-slate-400 text-sm">

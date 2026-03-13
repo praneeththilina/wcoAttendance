@@ -15,7 +15,7 @@ interface AttendanceState {
   offlineQueue: OfflineAction[];
   isOnline: boolean;
   isSyncing: boolean;
-  
+
   // Actions
   setTodayStatus: (status: AttendanceStatus | null) => void;
   addToQueue: (action: Omit<OfflineAction, 'id' | 'timestamp'>) => void;
@@ -67,7 +67,7 @@ export const useAttendanceStore = create<AttendanceState>()(
         if (isSyncing || !isOnline || offlineQueue.length === 0) return;
 
         set({ isSyncing: true });
-        
+
         const queue = [...offlineQueue];
         for (const action of queue) {
           try {

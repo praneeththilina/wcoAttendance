@@ -9,7 +9,7 @@ interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
-  
+
   // Actions
   setTokens: (accessToken: string, refreshToken: string) => void;
   setUser: (user: User) => void;
