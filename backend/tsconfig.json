@@ -22,7 +22,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["express", "cors", "compression", "morgan", "node", "jsonwebtoken", "bcryptjs", "supertest"]
   },
   "include": ["src/**/*", "node_modules/.prisma/client/**/*"],
   "exclude": ["node_modules", "dist", "tests"]
