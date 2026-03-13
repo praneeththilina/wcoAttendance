@@ -21,8 +21,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "typeRoots": ["./node_modules/@types", "./node_modules/.prisma/client"]
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "node_modules/.prisma/client/**/*"],
   "exclude": ["node_modules", "dist", "tests"]
 }

@@ -14,7 +14,9 @@ const clientSchema = z.object({
   latitude: z.number().optional(),
   longitude: z.number().optional(),
   isActive: z.boolean().default(true)
-});
+}).required();
+
+type ClientCreateInput = z.infer<typeof clientSchema>;
 
 export const adminController = {
   // Dashboard and Reports
@@ -236,7 +238,7 @@ export const adminController = {
 
   createClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = clientSchema.parse(req.body);
+      const validatedData = clientSchema.parse(req.body) as any;
       const newClient = await prisma.client.create({
         data: validatedData
       });
