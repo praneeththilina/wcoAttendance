@@ -1,165 +1,254 @@
-05:49:32.360 src/vercel.ts(18,3): error TS2349: This expression is not callable.
-05:49:32.418 src/config/app.ts(65,23): error TS7006: Parameter '_req' implicitly has an 'any' type.
-05:49:32.419 src/config/app.ts(65,29): error TS7006: Parameter 'res' implicitly has an 'any' type.
-05:49:32.419 src/config/app.ts(79,12): error TS7006: Parameter 'req' implicitly has an 'any' type.
-05:49:32.420 src/config/app.ts(79,17): error TS7006: Parameter 'res' implicitly has an 'any' type.
-05:49:32.463 src/middleware/errorHandler.ts(4,10): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
-05:49:32.463 src/middleware/errorHandler.ts(16,15): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:32.463 src/middleware/errorHandler.ts(17,17): error TS2339: Property 'method' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:32.463 src/middleware/errorHandler.ts(22,17): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:32.463 src/middleware/errorHandler.ts(34,13): error TS2339: Property 'code' does not exist on type 'Error'.
-05:49:32.464 src/middleware/errorHandler.ts(35,19): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:32.464 src/middleware/errorHandler.ts(45,13): error TS2339: Property 'code' does not exist on type 'Error'.
-05:49:32.464 src/middleware/errorHandler.ts(46,19): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:32.464 src/middleware/errorHandler.ts(57,15): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:32.481 src/utils/logger.ts(15,7): error TS2353: Object literal may only specify known properties, and 'format' does not exist in type 'ConsoleTransportOptions'.
-05:49:32.482 src/utils/logger.ts(19,7): error TS2353: Object literal may only specify known properties, and 'level' does not exist in type 'FileTransportOptions'.
-05:49:32.514 src/routes/hr.ts(8,10): error TS2339: Property 'use' does not exist on type 'Router'.
-05:49:32.515 src/routes/hr.ts(10,10): error TS2339: Property 'get' does not exist on type 'Router'.
-05:49:32.519 src/routes/manager.ts(8,15): error TS2339: Property 'use' does not exist on type 'Router'.
-05:49:32.519 src/routes/manager.ts(10,15): error TS2339: Property 'get' does not exist on type 'Router'.
-05:49:33.016 src/routes/admin.ts(10,13): error TS2339: Property 'use' does not exist on type 'Router'.
-05:49:33.017 src/routes/admin.ts(13,13): error TS2339: Property 'get' does not exist on type 'Router'.
-05:49:33.018 src/routes/admin.ts(14,13): error TS2339: Property 'get' does not exist on type 'Router'.
-05:49:33.020 src/routes/admin.ts(17,13): error TS2339: Property 'get' does not exist on type 'Router'.
-05:49:33.021 src/routes/admin.ts(18,13): error TS2339: Property 'post' does not exist on type 'Router'.
-05:49:33.021 src/routes/admin.ts(19,13): error TS2339: Property 'put' does not exist on type 'Router'.
-05:49:33.022 src/routes/admin.ts(22,13): error TS2339: Property 'get' does not exist on type 'Router'.
-05:49:33.022 src/routes/admin.ts(23,13): error TS2339: Property 'post' does not exist on type 'Router'.
-05:49:33.022 src/routes/admin.ts(24,13): error TS2339: Property 'put' does not exist on type 'Router'.
-05:49:33.022 src/routes/admin.ts(25,13): error TS2339: Property 'delete' does not exist on type 'Router'.
-05:49:33.023 src/routes/admin.ts(28,13): error TS2339: Property 'get' does not exist on type 'Router'.
-05:49:33.023 src/routes/admin.ts(29,13): error TS2339: Property 'put' does not exist on type 'Router'.
-05:49:33.296 src/middleware/auth.ts(14,28): error TS2339: Property 'headers' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.297 src/middleware/auth.ts(26,5): error TS2349: This expression is not callable.
-05:49:33.297 src/middleware/auth.ts(29,7): error TS2349: This expression is not callable.
-05:49:33.298 src/middleware/auth.ts(31,7): error TS2349: This expression is not callable.
-05:49:33.298 src/middleware/auth.ts(33,7): error TS2349: This expression is not callable.
-05:49:33.299 src/middleware/auth.ts(40,28): error TS2339: Property 'headers' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.299 src/middleware/auth.ts(43,14): error TS2349: This expression is not callable.
-05:49:33.300 src/middleware/auth.ts(54,3): error TS2349: This expression is not callable.
-05:49:33.300 src/middleware/auth.ts(62,14): error TS2349: This expression is not callable.
-05:49:33.301 src/middleware/auth.ts(66,14): error TS2349: This expression is not callable.
-05:49:33.301 src/middleware/auth.ts(69,5): error TS2349: This expression is not callable.
-05:49:33.328 src/controllers/hrController.ts(2,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
-05:49:33.329 src/controllers/hrController.ts(36,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.329 src/controllers/hrController.ts(46,7): error TS2349: This expression is not callable.
-05:49:33.344 src/controllers/managerController.ts(2,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
-05:49:33.345 src/controllers/managerController.ts(39,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.345 src/controllers/managerController.ts(47,7): error TS2349: This expression is not callable.
-05:49:33.373 src/controllers/clientController.ts(8,50): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.374 src/controllers/clientController.ts(12,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.374 src/controllers/clientController.ts(18,5): error TS2349: This expression is not callable.
-05:49:33.375 src/controllers/clientController.ts(27,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.375 src/controllers/clientController.ts(32,5): error TS2349: This expression is not callable.
-05:49:33.376 src/controllers/clientController.ts(38,23): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.376 src/controllers/clientController.ts(42,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.376 src/controllers/clientController.ts(47,5): error TS2349: This expression is not callable.
-05:49:33.492 src/controllers/attendanceController.ts(8,58): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.493 src/controllers/attendanceController.ts(12,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.494 src/controllers/attendanceController.ts(17,5): error TS2349: This expression is not callable.
-05:49:33.495 src/controllers/attendanceController.ts(23,59): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.495 src/controllers/attendanceController.ts(27,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.495 src/controllers/attendanceController.ts(32,5): error TS2349: This expression is not callable.
-05:49:33.496 src/controllers/attendanceController.ts(41,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.496 src/controllers/attendanceController.ts(46,5): error TS2349: This expression is not callable.
-05:49:33.497 src/controllers/attendanceController.ts(52,62): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.497 src/controllers/attendanceController.ts(61,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.498 src/controllers/attendanceController.ts(67,5): error TS2349: This expression is not callable.
-05:49:33.498 src/controllers/attendanceController.ts(73,40): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.499 src/controllers/attendanceController.ts(77,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.499 src/controllers/attendanceController.ts(82,5): error TS2349: This expression is not callable.
-05:49:33.596 src/controllers/authController.ts(8,56): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.597 src/controllers/authController.ts(15,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.598 src/controllers/authController.ts(20,5): error TS2349: This expression is not callable.
-05:49:33.601 src/controllers/authController.ts(26,34): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.601 src/controllers/authController.ts(29,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(38,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(43,5): error TS2349: This expression is not callable.
-05:49:33.602 src/controllers/authController.ts(52,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(57,5): error TS2349: This expression is not callable.
-05:49:33.602 src/controllers/authController.ts(63,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(68,5): error TS2349: This expression is not callable.
-05:49:33.602 src/controllers/authController.ts(74,59): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(81,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(86,5): error TS2349: This expression is not callable.
-05:49:33.602 src/controllers/authController.ts(93,57): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(97,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.602 src/controllers/authController.ts(102,5): error TS2349: This expression is not callable.
-05:49:33.728 src/controllers/leaveController.ts(14,31): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.728 src/controllers/leaveController.ts(17,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.728 src/controllers/leaveController.ts(22,5): error TS2349: This expression is not callable.
-05:49:33.729 src/controllers/leaveController.ts(28,69): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.729 src/controllers/leaveController.ts(40,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.729 src/controllers/leaveController.ts(45,5): error TS2349: This expression is not callable.
-05:49:33.729 src/controllers/leaveController.ts(52,68): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.729 src/controllers/leaveController.ts(62,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.729 src/controllers/leaveController.ts(68,5): error TS2349: This expression is not callable.
-05:49:33.729 src/controllers/leaveController.ts(76,68): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.729 src/controllers/leaveController.ts(85,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.730 src/controllers/leaveController.ts(91,5): error TS2349: This expression is not callable.
-05:49:33.730 src/controllers/leaveController.ts(97,24): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.730 src/controllers/leaveController.ts(98,68): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.730 src/controllers/leaveController.ts(107,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.730 src/controllers/leaveController.ts(112,5): error TS2349: This expression is not callable.
-05:49:33.731 src/controllers/leaveController.ts(118,28): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.731 src/controllers/leaveController.ts(119,69): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.731 src/controllers/leaveController.ts(128,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.731 src/controllers/leaveController.ts(133,5): error TS2349: This expression is not callable.
-05:49:33.806 src/controllers/adminController.ts(2,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
-05:49:33.806 src/controllers/adminController.ts(54,47): error TS7006: Parameter 'record' implicitly has an 'any' type.
-05:49:33.807 src/controllers/adminController.ts(73,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.807 src/controllers/adminController.ts(84,7): error TS2349: This expression is not callable.
-05:49:33.807 src/controllers/adminController.ts(90,27): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.807 src/controllers/adminController.ts(91,28): error TS2349: This expression is not callable.
-05:49:33.807 src/controllers/adminController.ts(115,44): error TS7006: Parameter 'r' implicitly has an 'any' type.
-05:49:33.807 src/controllers/adminController.ts(126,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.808 src/controllers/adminController.ts(128,7): error TS2349: This expression is not callable.
-05:49:33.808 src/controllers/adminController.ts(158,23): error TS7006: Parameter 'r' implicitly has an 'any' type.
-05:49:33.808 src/controllers/adminController.ts(162,30): error TS7006: Parameter 'user' implicitly has an 'any' type.
-05:49:33.808 src/controllers/adminController.ts(171,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.809 src/controllers/adminController.ts(173,7): error TS2349: This expression is not callable.
-05:49:33.809 src/controllers/adminController.ts(179,88): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.809 src/controllers/adminController.ts(184,32): error TS2349: This expression is not callable.
-05:49:33.810 src/controllers/adminController.ts(199,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.810 src/controllers/adminController.ts(201,7): error TS2349: This expression is not callable.
-05:49:33.811 src/controllers/adminController.ts(207,28): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.811 src/controllers/adminController.ts(208,32): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.811 src/controllers/adminController.ts(218,13): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.811 src/controllers/adminController.ts(220,53): error TS2349: This expression is not callable.
-05:49:33.812 src/controllers/adminController.ts(221,9): error TS2349: This expression is not callable.
-05:49:33.812 src/controllers/adminController.ts(231,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.812 src/controllers/adminController.ts(233,7): error TS2349: This expression is not callable.
-05:49:33.813 src/controllers/adminController.ts(239,52): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.813 src/controllers/adminController.ts(243,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.813 src/controllers/adminController.ts(245,7): error TS2349: This expression is not callable.
-05:49:33.814 src/controllers/adminController.ts(251,26): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.814 src/controllers/adminController.ts(252,62): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.814 src/controllers/adminController.ts(258,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.814 src/controllers/adminController.ts(262,16): error TS2349: This expression is not callable.
-05:49:33.815 src/controllers/adminController.ts(264,7): error TS2349: This expression is not callable.
-05:49:33.815 src/controllers/adminController.ts(270,26): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.816 src/controllers/adminController.ts(274,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.816 src/controllers/adminController.ts(278,16): error TS2349: This expression is not callable.
-05:49:33.818 src/controllers/adminController.ts(280,7): error TS2349: This expression is not callable.
-05:49:33.818 src/controllers/adminController.ts(301,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.819 src/controllers/adminController.ts(303,7): error TS2349: This expression is not callable.
-05:49:33.819 src/controllers/adminController.ts(315,15): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.820 src/controllers/adminController.ts(342,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
-05:49:33.821 src/controllers/adminController.ts(344,7): error TS2349: This expression is not callable.
-05:49:33.922 src/validators/index.ts(15,13): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.923 src/validators/index.ts(15,42): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.923 src/validators/index.ts(18,13): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.923 src/validators/index.ts(18,44): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.924 src/validators/index.ts(21,13): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.924 src/validators/index.ts(21,46): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
-05:49:33.924 src/validators/index.ts(23,7): error TS2349: This expression is not callable.
-05:49:33.925 src/validators/index.ts(27,9): error TS2349: This expression is not callable.
-05:49:33.926 src/validators/index.ts(29,9): error TS2349: This expression is not callable.
-05:49:34.154 src/services/clientService.ts(85,14): error TS7006: Parameter 'record' implicitly has an 'any' type.
-05:49:34.155 src/services/clientService.ts(90,11): error TS7006: Parameter 'record' implicitly has an 'any' type.
-05:49:34.233 src/services/authService.ts(6,10): error TS2305: Module '"@prisma/client"' has no exported member 'UserRole'.
-05:49:34.317 src/services/leaveService.ts(1,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
-05:49:34.317 src/services/leaveService.ts(1,24): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
-05:49:34.317 src/services/leaveService.ts(141,59): error TS7006: Parameter 'tx' implicitly has an 'any' type.
-05:49:34.629 src/config/database.ts(1,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+05:58:45.852 Running build in Washington, D.C., USA (East) – iad1
+05:58:45.853 Build machine configuration: 2 cores, 8 GB
+05:58:46.051 Cloning github.com/praneeththilina/wcoAttendance (Branch: master, Commit: 17e3096)
+05:58:46.872 Cloning completed: 820.000ms
+05:58:47.052 Restored build cache from previous deployment (6vJkCbhir7Jde26rKQH6z2xRWcq8)
+05:58:47.332 Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+05:58:47.333 Running "vercel build"
+05:58:48.194 Vercel CLI 50.32.4
+05:58:48.345 WARNING! Due to `builds` existing in your configuration file, the Build and Development Settings defined in your Project Settings will not apply. Learn More: https://vercel.link/unused-build-settings
+05:58:48.782 Warning: Detected "engines": { "node": ">=20.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: https://vercel.link/node-version
+05:58:48.788 Detected `pnpm-lock.yaml` 9 which may be generated by pnpm@9.x or pnpm@10.x
+05:58:48.789 Using pnpm@9.x based on project creation date
+05:58:48.789 To use pnpm@10.x, manually opt in using corepack (https://vercel.com/docs/deployments/configure-a-build#corepack)
+05:58:48.791 Installing dependencies...
+05:58:49.727 Progress: resolved 0, reused 0, downloaded 1, added 0
+05:58:49.910  WARN  deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+05:58:49.919  WARN  deprecated supertest@6.3.4: Please upgrade to supertest v7.1.3+, see release notes at https://github.com/forwardemail/supertest/releases/tag/v7.1.3 - maintenance is supported by Forward Email @ https://forwardemail.net
+05:58:50.729 Progress: resolved 60, reused 0, downloaded 59, added 0
+05:58:51.731 Progress: resolved 170, reused 0, downloaded 169, added 0
+05:58:52.732 Progress: resolved 384, reused 0, downloaded 358, added 0
+05:58:53.648  WARN  10 deprecated subdependencies found: @humanwhocodes/config-array@0.13.0, @humanwhocodes/object-schema@2.0.3, are-we-there-yet@2.0.0, gauge@3.0.2, glob@7.2.3, inflight@1.0.6, npmlog@5.0.1, rimraf@3.0.2, superagent@8.1.2, tar@6.2.1
+05:58:53.726 Already up to date
+05:58:53.733 Progress: resolved 572, reused 0, downloaded 482, added 0
+05:58:53.743 Progress: resolved 572, reused 0, downloaded 482, added 0, done
+05:58:53.936 
+05:58:53.941 Done in 5s using pnpm v9.15.9
+05:58:54.227 Using TypeScript 5.9.3 (local user-provided)
+05:58:55.850 src/vercel.ts(18,3): error TS2349: This expression is not callable.
+05:58:55.850   Type 'Application' has no call signatures.
+05:58:55.851 
+05:58:55.949 src/middleware/errorHandler.ts(4,10): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
+05:58:55.950 src/middleware/errorHandler.ts(16,15): error TS2339: Property 'path' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:55.950 src/middleware/errorHandler.ts(17,17): error TS2339: Property 'method' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:55.950 src/middleware/errorHandler.ts(22,17): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:55.951 src/middleware/errorHandler.ts(34,13): error TS2339: Property 'code' does not exist on type 'Error'.
+05:58:55.951 src/middleware/errorHandler.ts(35,19): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:55.951 src/middleware/errorHandler.ts(45,13): error TS2339: Property 'code' does not exist on type 'Error'.
+05:58:55.951 src/middleware/errorHandler.ts(46,19): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:55.952 src/middleware/errorHandler.ts(57,15): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:55.952 
+05:58:55.967 src/utils/logger.ts(15,7): error TS2353: Object literal may only specify known properties, and 'format' does not exist in type 'ConsoleTransportOptions'.
+05:58:55.968 src/utils/logger.ts(19,7): error TS2353: Object literal may only specify known properties, and 'level' does not exist in type 'FileTransportOptions'.
+05:58:55.968 
+05:58:56.002 src/routes/hr.ts(8,10): error TS2339: Property 'use' does not exist on type 'Router'.
+05:58:56.002 src/routes/hr.ts(10,10): error TS2339: Property 'get' does not exist on type 'Router'.
+05:58:56.002 
+05:58:56.007 src/routes/manager.ts(8,15): error TS2339: Property 'use' does not exist on type 'Router'.
+05:58:56.008 src/routes/manager.ts(10,15): error TS2339: Property 'get' does not exist on type 'Router'.
+05:58:56.008 
+05:58:56.506 src/routes/admin.ts(10,13): error TS2339: Property 'use' does not exist on type 'Router'.
+05:58:56.507 src/routes/admin.ts(13,13): error TS2339: Property 'get' does not exist on type 'Router'.
+05:58:56.508 src/routes/admin.ts(14,13): error TS2339: Property 'get' does not exist on type 'Router'.
+05:58:56.508 src/routes/admin.ts(17,13): error TS2339: Property 'get' does not exist on type 'Router'.
+05:58:56.508 src/routes/admin.ts(18,13): error TS2339: Property 'post' does not exist on type 'Router'.
+05:58:56.509 src/routes/admin.ts(19,13): error TS2339: Property 'put' does not exist on type 'Router'.
+05:58:56.509 src/routes/admin.ts(22,13): error TS2339: Property 'get' does not exist on type 'Router'.
+05:58:56.509 src/routes/admin.ts(23,13): error TS2339: Property 'post' does not exist on type 'Router'.
+05:58:56.510 src/routes/admin.ts(24,13): error TS2339: Property 'put' does not exist on type 'Router'.
+05:58:56.510 src/routes/admin.ts(25,13): error TS2339: Property 'delete' does not exist on type 'Router'.
+05:58:56.510 src/routes/admin.ts(28,13): error TS2339: Property 'get' does not exist on type 'Router'.
+05:58:56.511 src/routes/admin.ts(29,13): error TS2339: Property 'put' does not exist on type 'Router'.
+05:58:56.511 
+05:58:56.749 src/middleware/auth.ts(14,28): error TS2339: Property 'headers' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.750 src/middleware/auth.ts(26,5): error TS2349: This expression is not callable.
+05:58:56.751   Type 'NextFunction' has no call signatures.
+05:58:56.751 src/middleware/auth.ts(29,7): error TS2349: This expression is not callable.
+05:58:56.751   Type 'NextFunction' has no call signatures.
+05:58:56.751 src/middleware/auth.ts(31,7): error TS2349: This expression is not callable.
+05:58:56.752   Type 'NextFunction' has no call signatures.
+05:58:56.752 src/middleware/auth.ts(33,7): error TS2349: This expression is not callable.
+05:58:56.752   Type 'NextFunction' has no call signatures.
+05:58:56.752 src/middleware/auth.ts(40,28): error TS2339: Property 'headers' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.753 src/middleware/auth.ts(43,14): error TS2349: This expression is not callable.
+05:58:56.753   Type 'NextFunction' has no call signatures.
+05:58:56.753 src/middleware/auth.ts(54,3): error TS2349: This expression is not callable.
+05:58:56.753   Type 'NextFunction' has no call signatures.
+05:58:56.754 src/middleware/auth.ts(62,14): error TS2349: This expression is not callable.
+05:58:56.754   Type 'NextFunction' has no call signatures.
+05:58:56.754 src/middleware/auth.ts(66,14): error TS2349: This expression is not callable.
+05:58:56.754   Type 'NextFunction' has no call signatures.
+05:58:56.755 src/middleware/auth.ts(69,5): error TS2349: This expression is not callable.
+05:58:56.755   Type 'NextFunction' has no call signatures.
+05:58:56.755 
+05:58:56.769 src/controllers/hrController.ts(2,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+05:58:56.770 src/controllers/hrController.ts(36,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.773 src/controllers/hrController.ts(46,7): error TS2349: This expression is not callable.
+05:58:56.774   Type 'NextFunction' has no call signatures.
+05:58:56.774 
+05:58:56.777 src/controllers/managerController.ts(2,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+05:58:56.777 src/controllers/managerController.ts(39,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.778 src/controllers/managerController.ts(47,7): error TS2349: This expression is not callable.
+05:58:56.778   Type 'NextFunction' has no call signatures.
+05:58:56.778 
+05:58:56.809 src/controllers/clientController.ts(8,50): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.809 src/controllers/clientController.ts(12,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.810 src/controllers/clientController.ts(18,5): error TS2349: This expression is not callable.
+05:58:56.810   Type 'NextFunction' has no call signatures.
+05:58:56.810 src/controllers/clientController.ts(27,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.810 src/controllers/clientController.ts(32,5): error TS2349: This expression is not callable.
+05:58:56.811   Type 'NextFunction' has no call signatures.
+05:58:56.811 src/controllers/clientController.ts(38,23): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.811 src/controllers/clientController.ts(42,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.811 src/controllers/clientController.ts(47,5): error TS2349: This expression is not callable.
+05:58:56.812   Type 'NextFunction' has no call signatures.
+05:58:56.812 
+05:58:56.906 src/controllers/attendanceController.ts(8,58): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.907 src/controllers/attendanceController.ts(12,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.907 src/controllers/attendanceController.ts(17,5): error TS2349: This expression is not callable.
+05:58:56.907   Type 'NextFunction' has no call signatures.
+05:58:56.908 src/controllers/attendanceController.ts(23,59): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.908 src/controllers/attendanceController.ts(27,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.908 src/controllers/attendanceController.ts(32,5): error TS2349: This expression is not callable.
+05:58:56.908   Type 'NextFunction' has no call signatures.
+05:58:56.909 src/controllers/attendanceController.ts(41,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.909 src/controllers/attendanceController.ts(46,5): error TS2349: This expression is not callable.
+05:58:56.909   Type 'NextFunction' has no call signatures.
+05:58:56.909 src/controllers/attendanceController.ts(52,62): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.909 src/controllers/attendanceController.ts(61,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.910 src/controllers/attendanceController.ts(67,5): error TS2349: This expression is not callable.
+05:58:56.910   Type 'NextFunction' has no call signatures.
+05:58:56.910 src/controllers/attendanceController.ts(73,40): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.910 src/controllers/attendanceController.ts(77,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.910 src/controllers/attendanceController.ts(82,5): error TS2349: This expression is not callable.
+05:58:56.911   Type 'NextFunction' has no call signatures.
+05:58:56.911 
+05:58:56.994 src/controllers/authController.ts(8,56): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.994 src/controllers/authController.ts(15,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.994 src/controllers/authController.ts(20,5): error TS2349: This expression is not callable.
+05:58:56.994   Type 'NextFunction' has no call signatures.
+05:58:56.995 src/controllers/authController.ts(26,34): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.995 src/controllers/authController.ts(29,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.995 src/controllers/authController.ts(38,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.995 src/controllers/authController.ts(43,5): error TS2349: This expression is not callable.
+05:58:56.996   Type 'NextFunction' has no call signatures.
+05:58:56.996 src/controllers/authController.ts(52,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.996 src/controllers/authController.ts(57,5): error TS2349: This expression is not callable.
+05:58:56.996   Type 'NextFunction' has no call signatures.
+05:58:56.996 src/controllers/authController.ts(63,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.996 src/controllers/authController.ts(68,5): error TS2349: This expression is not callable.
+05:58:56.996   Type 'NextFunction' has no call signatures.
+05:58:56.996 src/controllers/authController.ts(74,59): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.997 src/controllers/authController.ts(81,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.997 src/controllers/authController.ts(86,5): error TS2349: This expression is not callable.
+05:58:56.997   Type 'NextFunction' has no call signatures.
+05:58:56.997 src/controllers/authController.ts(93,57): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:56.997 src/controllers/authController.ts(97,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:56.997 src/controllers/authController.ts(102,5): error TS2349: This expression is not callable.
+05:58:56.997   Type 'NextFunction' has no call signatures.
+05:58:56.998 
+05:58:57.153 src/controllers/leaveController.ts(14,31): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.154 src/controllers/leaveController.ts(17,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.154 src/controllers/leaveController.ts(22,5): error TS2349: This expression is not callable.
+05:58:57.154   Type 'NextFunction' has no call signatures.
+05:58:57.154 src/controllers/leaveController.ts(28,69): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.154 src/controllers/leaveController.ts(40,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.155 src/controllers/leaveController.ts(45,5): error TS2349: This expression is not callable.
+05:58:57.155   Type 'NextFunction' has no call signatures.
+05:58:57.155 src/controllers/leaveController.ts(52,68): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.155 src/controllers/leaveController.ts(62,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.155 src/controllers/leaveController.ts(68,5): error TS2349: This expression is not callable.
+05:58:57.156   Type 'NextFunction' has no call signatures.
+05:58:57.156 src/controllers/leaveController.ts(76,68): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.156 src/controllers/leaveController.ts(85,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.156 src/controllers/leaveController.ts(91,5): error TS2349: This expression is not callable.
+05:58:57.156   Type 'NextFunction' has no call signatures.
+05:58:57.156 src/controllers/leaveController.ts(97,24): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.156 src/controllers/leaveController.ts(98,68): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.157 src/controllers/leaveController.ts(107,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.157 src/controllers/leaveController.ts(112,5): error TS2349: This expression is not callable.
+05:58:57.157   Type 'NextFunction' has no call signatures.
+05:58:57.157 src/controllers/leaveController.ts(118,28): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.157 src/controllers/leaveController.ts(119,69): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.158 src/controllers/leaveController.ts(128,9): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.158 src/controllers/leaveController.ts(133,5): error TS2349: This expression is not callable.
+05:58:57.158   Type 'NextFunction' has no call signatures.
+05:58:57.158 
+05:58:57.230 src/controllers/adminController.ts(2,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+05:58:57.230 src/controllers/adminController.ts(75,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.231 src/controllers/adminController.ts(86,7): error TS2349: This expression is not callable.
+05:58:57.231   Type 'NextFunction' has no call signatures.
+05:58:57.231 src/controllers/adminController.ts(92,27): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.231 src/controllers/adminController.ts(93,28): error TS2349: This expression is not callable.
+05:58:57.231   Type 'NextFunction' has no call signatures.
+05:58:57.231 src/controllers/adminController.ts(128,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.232 src/controllers/adminController.ts(130,7): error TS2349: This expression is not callable.
+05:58:57.232   Type 'NextFunction' has no call signatures.
+05:58:57.232 src/controllers/adminController.ts(173,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.232 src/controllers/adminController.ts(175,7): error TS2349: This expression is not callable.
+05:58:57.232   Type 'NextFunction' has no call signatures.
+05:58:57.232 src/controllers/adminController.ts(181,88): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.232 src/controllers/adminController.ts(186,32): error TS2349: This expression is not callable.
+05:58:57.232   Type 'NextFunction' has no call signatures.
+05:58:57.232 src/controllers/adminController.ts(201,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.233 src/controllers/adminController.ts(203,7): error TS2349: This expression is not callable.
+05:58:57.233   Type 'NextFunction' has no call signatures.
+05:58:57.233 src/controllers/adminController.ts(209,28): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.233 src/controllers/adminController.ts(210,32): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.233 src/controllers/adminController.ts(220,13): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.233 src/controllers/adminController.ts(222,53): error TS2349: This expression is not callable.
+05:58:57.233   Type 'NextFunction' has no call signatures.
+05:58:57.233 src/controllers/adminController.ts(223,9): error TS2349: This expression is not callable.
+05:58:57.233   Type 'NextFunction' has no call signatures.
+05:58:57.234 src/controllers/adminController.ts(233,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.234 src/controllers/adminController.ts(235,7): error TS2349: This expression is not callable.
+05:58:57.234   Type 'NextFunction' has no call signatures.
+05:58:57.234 src/controllers/adminController.ts(241,52): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.234 src/controllers/adminController.ts(245,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.234 src/controllers/adminController.ts(247,7): error TS2349: This expression is not callable.
+05:58:57.234   Type 'NextFunction' has no call signatures.
+05:58:57.234 src/controllers/adminController.ts(253,26): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.235 src/controllers/adminController.ts(254,62): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.235 src/controllers/adminController.ts(260,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.235 src/controllers/adminController.ts(264,16): error TS2349: This expression is not callable.
+05:58:57.235   Type 'NextFunction' has no call signatures.
+05:58:57.235 src/controllers/adminController.ts(266,7): error TS2349: This expression is not callable.
+05:58:57.235   Type 'NextFunction' has no call signatures.
+05:58:57.235 src/controllers/adminController.ts(272,26): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.235 src/controllers/adminController.ts(276,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.235 src/controllers/adminController.ts(280,16): error TS2349: This expression is not callable.
+05:58:57.236   Type 'NextFunction' has no call signatures.
+05:58:57.236 src/controllers/adminController.ts(282,7): error TS2349: This expression is not callable.
+05:58:57.236   Type 'NextFunction' has no call signatures.
+05:58:57.236 src/controllers/adminController.ts(303,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.236 src/controllers/adminController.ts(305,7): error TS2349: This expression is not callable.
+05:58:57.236   Type 'NextFunction' has no call signatures.
+05:58:57.236 src/controllers/adminController.ts(317,15): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.236 src/controllers/adminController.ts(344,11): error TS2339: Property 'status' does not exist on type 'Response<any, Record<string, any>>'.
+05:58:57.236 src/controllers/adminController.ts(346,7): error TS2349: This expression is not callable.
+05:58:57.236   Type 'NextFunction' has no call signatures.
+05:58:57.237 
+05:58:57.271 src/validators/index.ts(15,13): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.271 src/validators/index.ts(15,42): error TS2339: Property 'body' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.271 src/validators/index.ts(18,13): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.271 src/validators/index.ts(18,44): error TS2339: Property 'query' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.271 src/validators/index.ts(21,13): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.271 src/validators/index.ts(21,46): error TS2339: Property 'params' does not exist on type 'Request<core.ParamsDictionary, any, any, core.Query, Record<string, any>>'.
+05:58:57.271 src/validators/index.ts(23,7): error TS2349: This expression is not callable.
+05:58:57.276   Type 'NextFunction' has no call signatures.
+05:58:57.276 src/validators/index.ts(27,9): error TS2349: This expression is not callable.
+05:58:57.276   Type 'NextFunction' has no call signatures.
+05:58:57.276 src/validators/index.ts(29,9): error TS2349: This expression is not callable.
+05:58:57.276   Type 'NextFunction' has no call signatures.
+05:58:57.276 
+05:58:57.668 src/services/authService.ts(6,10): error TS2305: Module '"@prisma/client"' has no exported member 'UserRole'.
+05:58:57.669 
+05:58:57.680 src/services/leaveService.ts(1,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+05:58:57.680 src/services/leaveService.ts(1,24): error TS2305: Module '"@prisma/client"' has no exported member 'Prisma'.
+05:58:57.680 
+05:58:57.979 src/config/database.ts(1,10): error TS2305: Module '"@prisma/client"' has no exported member 'PrismaClient'.
+05:58:57.979 
+05:58:59.546 Build Completed in /vercel/output [11s]
+05:58:59.767 Deploying outputs...
+05:59:05.291 Deployment completed
+05:59:06.313 Creating build cache...
