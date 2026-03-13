@@ -74,7 +74,9 @@ export function validateLocation(
   };
 
   if (location.accuracy > MIN_ACCURACY_METERS) {
-    warnings.push(`Low accuracy: ${location.accuracy.toFixed(0)}m (recommended: <${MIN_ACCURACY_METERS}m)`);
+    warnings.push(
+      `Low accuracy: ${location.accuracy.toFixed(0)}m (recommended: <${MIN_ACCURACY_METERS}m)`
+    );
     metadata.lowAccuracy = true;
   }
 
@@ -83,7 +85,11 @@ export function validateLocation(
     warnings.push('Suspiciously high accuracy - possible mock location');
   }
 
-  if (location.speed !== null && location.speed !== undefined && location.speed > IMPOSSIBLE_SPEED_KMH / 3.6) {
+  if (
+    location.speed !== null &&
+    location.speed !== undefined &&
+    location.speed > IMPOSSIBLE_SPEED_KMH / 3.6
+  ) {
     errors.push('Impossible travel speed detected');
   }
 
@@ -96,7 +102,9 @@ export function validateLocation(
     );
 
     if (distance > clientLocation.radius) {
-      errors.push(`You are ${Math.round(distance)}m away from the allowed location (${clientLocation.radius}m radius)`);
+      errors.push(
+        `You are ${Math.round(distance)}m away from the allowed location (${clientLocation.radius}m radius)`
+      );
     }
   }
 
@@ -109,12 +117,7 @@ export function validateLocation(
   };
 }
 
-export function calculateDistance(
-  lat1: number,
-  lon1: number,
-  lat2: number,
-  lon2: number
-): number {
+export function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
   const R = 6371000;
   const φ1 = (lat1 * Math.PI) / 180;
   const φ2 = (lat2 * Math.PI) / 180;

@@ -1,5 +1,12 @@
 import apiClient from './api';
-import type { LoginRequest, LoginResponse, Client, AttendanceRecord, AttendanceStatus, User } from '@/types';
+import type {
+  LoginRequest,
+  LoginResponse,
+  Client,
+  AttendanceRecord,
+  AttendanceStatus,
+  User,
+} from '@/types';
 
 export const authService = {
   async login(data: LoginRequest): Promise<LoginResponse> {
@@ -16,7 +23,11 @@ export const authService = {
     return response.data;
   },
 
-  async updateProfile(data: { firstName?: string; lastName?: string; profilePicture?: string }): Promise<User> {
+  async updateProfile(data: {
+    firstName?: string;
+    lastName?: string;
+    profilePicture?: string;
+  }): Promise<User> {
     const response = await apiClient.put<{ success: boolean; data: User }>('/auth/profile', data);
     return response.data.data;
   },
@@ -24,7 +35,10 @@ export const authService = {
 
 export const attendanceService = {
   async getTodayStatus(): Promise<AttendanceStatus> {
-    const response = await apiClient.get<{ success: boolean; data: { status: string; attendance: any } }>('/attendance/today');
+    const response = await apiClient.get<{
+      success: boolean;
+      data: { status: string; attendance: any };
+    }>('/attendance/today');
     const { status: attendanceStatus, attendance } = response.data.data;
     return {
       status: attendanceStatus as 'checked_in' | 'checked_out' | 'incomplete',
@@ -36,39 +50,67 @@ export const attendanceService = {
     };
   },
 
-  async checkIn(clientId: string, location: { latitude: number; longitude: number; accuracy?: number }): Promise<AttendanceRecord> {
-    const response = await apiClient.post<{ success: boolean; data: AttendanceRecord }>('/attendance/check-in', {
-      clientId,
-      location,
-    });
+  async checkIn(
+    clientId: string,
+    location: { latitude: number; longitude: number; accuracy?: number }
+  ): Promise<AttendanceRecord> {
+    const response = await apiClient.post<{ success: boolean; data: AttendanceRecord }>(
+      '/attendance/check-in',
+      {
+        clientId,
+        location,
+      }
+    );
     return response.data.data;
   },
 
-  async checkOut(location?: { latitude: number; longitude: number; accuracy?: number }): Promise<AttendanceRecord> {
-    const response = await apiClient.post<{ success: boolean; data: AttendanceRecord }>('/attendance/check-out', {
-      location,
-    });
+  async checkOut(location?: {
+    latitude: number;
+    longitude: number;
+    accuracy?: number;
+  }): Promise<AttendanceRecord> {
+    const response = await apiClient.post<{ success: boolean; data: AttendanceRecord }>(
+      '/attendance/check-out',
+      {
+        location,
+      }
+    );
     return response.data.data;
   },
 
-  async changeLocation(clientId: string, location: { latitude: number; longitude: number; accuracy?: number }): Promise<AttendanceRecord> {
-    const response = await apiClient.post<{ success: boolean; data: AttendanceRecord }>('/attendance/change-location', {
-      clientId,
-      location,
-    });
+  async changeLocation(
+    clientId: string,
+    location: { latitude: number; longitude: number; accuracy?: number }
+  ): Promise<AttendanceRecord> {
+    const response = await apiClient.post<{ success: boolean; data: AttendanceRecord }>(
+      '/attendance/change-location',
+      {
+        clientId,
+        location,
+      }
+    );
     return response.data.data;
   },
 
-  async getHistory(page = 1, limit = 20, startDate?: string, endDate?: string): Promise<{ records: AttendanceRecord[]; total: number }> {
+  async getHistory(
+    page = 1,
+    limit = 20,
+    startDate?: string,
+    endDate?: string
+  ): Promise<{ records: AttendanceRecord[]; total: number }> {
     const params = new URLSearchParams({
       page: page.toString(),
       limit: limit.toString(),
     });
-    
+
     if (startDate) params.append('startDate', startDate);
     if (endDate) params.append('endDate', endDate);
 
-    const response = await apiClient.get<{ success: boolean; data: AttendanceRecord[]; pagination: { total: number } }>(`/attendance/history?${params}`);
+    const response = await apiClient.get<{
+      success: boolean;
+      data: AttendanceRecord[];
+      pagination: { total: number };
+    }>(`/attendance/history?${params}`);
     return { records: response.data.data, total: response.data.pagination?.total || 0 };
   },
 };
@@ -80,12 +122,16 @@ export const clientService = {
   },
 
   async getRecent(limit = 5): Promise<Client[]> {
-    const response = await apiClient.get<{ success: boolean; data: Client[] }>(`/clients/recent?limit=${limit}`);
+    const response = await apiClient.get<{ success: boolean; data: Client[] }>(
+      `/clients/recent?limit=${limit}`
+    );
     return response.data.data;
   },
 
   async search(query: string): Promise<Client[]> {
-    const response = await apiClient.get<{ success: boolean; data: Client[] }>(`/clients/search?q=${encodeURIComponent(query)}`);
+    const response = await apiClient.get<{ success: boolean; data: Client[] }>(
+      `/clients/search?q=${encodeURIComponent(query)}`
+    );
     return response.data.data;
   },
 };

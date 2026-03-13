@@ -30,8 +30,7 @@ export function ClientSelection() {
     const query = searchQuery.toLowerCase();
     return clients.filter(
       (client) =>
-        client.name.toLowerCase().includes(query) ||
-        client.city.toLowerCase().includes(query)
+        client.name.toLowerCase().includes(query) || client.city.toLowerCase().includes(query)
     );
   }, [searchQuery, clients]);
 
@@ -59,9 +58,10 @@ export function ClientSelection() {
     setLocationError(null);
 
     try {
-      const clientLocation = client.latitude && client.longitude
-        ? { latitude: client.latitude, longitude: client.longitude, radius: 500 }
-        : undefined;
+      const clientLocation =
+        client.latitude && client.longitude
+          ? { latitude: client.latitude, longitude: client.longitude, radius: 500 }
+          : undefined;
 
       const validation = await fetchAndValidate(clientLocation);
 
@@ -91,7 +91,7 @@ export function ClientSelection() {
           type: 'check-in',
           data: { clientId: client.id, location },
         });
-        
+
         setTodayStatus({
           status: 'checked_in',
           checkInTime: new Date().toISOString(),
@@ -178,13 +178,17 @@ export function ClientSelection() {
                 <div className="bg-primary/10 dark:bg-primary/20 p-3 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-2xl">corporate_fare</span>
                 </div>
-                <span className="text-slate-900 dark:text-slate-100 text-sm font-semibold">HQ Office</span>
+                <span className="text-slate-900 dark:text-slate-100 text-sm font-semibold">
+                  HQ Office
+                </span>
               </button>
               <button className="flex flex-col gap-2 border border-primary/10 bg-white dark:bg-primary/10 p-4 items-center justify-center text-center hover:border-primary transition-all group rounded-lg shadow-sm">
                 <div className="bg-primary/10 dark:bg-primary/20 p-3 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-2xl">commute</span>
                 </div>
-                <span className="text-slate-900 dark:text-slate-100 text-sm font-semibold">Travel</span>
+                <span className="text-slate-900 dark:text-slate-100 text-sm font-semibold">
+                  Travel
+                </span>
               </button>
             </div>
           </section>
@@ -208,12 +212,17 @@ export function ClientSelection() {
                     className="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 hover:border-primary/30 transition-all text-left rounded-lg disabled:opacity-50"
                   >
                     <div className="size-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary">
-                      <span className="material-symbols-outlined">{getClientIcon(client.city)}</span>
+                      <span className="material-symbols-outlined">
+                        {getClientIcon(client.city)}
+                      </span>
                     </div>
                     <div className="flex-1">
-                      <p className="font-semibold text-slate-900 dark:text-slate-100">{client.name}</p>
+                      <p className="font-semibold text-slate-900 dark:text-slate-100">
+                        {client.name}
+                      </p>
                       <p className="text-xs text-slate-500">
-                        {client.branch ? `${client.branch}, ` : ''}{client.city}
+                        {client.branch ? `${client.branch}, ` : ''}
+                        {client.city}
                       </p>
                     </div>
                     <span className="material-symbols-outlined text-slate-400 text-sm">
@@ -229,46 +238,51 @@ export function ClientSelection() {
         <div className="h-20" />
         <BottomNav />
 
-      {/* Confirmation Modal */}
-      {showConfirmModal && selectedClient && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-background-dark rounded-xl w-full max-w-sm overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
-            <div className="p-6 text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="material-symbols-outlined text-primary text-3xl">location_on</span>
-              </div>
-              <h3 className="text-xl font-bold mb-2">Confirm Check-In</h3>
-              <p className="text-slate-500 dark:text-slate-400 mb-4">
-                Are you sure you want to check in to <span className="font-semibold text-slate-900 dark:text-slate-100">{selectedClient.name}</span>?
-              </p>
-              {locationError && (
-                <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-left">
-                  <p className="text-red-600 dark:text-red-400 text-sm">{locationError}</p>
+        {/* Confirmation Modal */}
+        {showConfirmModal && selectedClient && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+            <div className="bg-white dark:bg-background-dark rounded-xl w-full max-w-sm overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800">
+              <div className="p-6 text-center">
+                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="material-symbols-outlined text-primary text-3xl">
+                    location_on
+                  </span>
                 </div>
-              )}
-              <div className="flex gap-3">
-                <button
-                  onClick={() => {
-                    setShowConfirmModal(false);
-                    setLocationError(null);
-                  }}
-                  className="flex-1 py-3 rounded-lg font-semibold border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={confirmCheckIn}
-                  disabled={isCheckingIn || isValidatingLocation}
-                  className="flex-1 py-3 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 disabled:opacity-50"
-                >
-                  {isCheckingIn || isValidatingLocation ? 'Validating...' : 'Confirm'}
-                </button>
+                <h3 className="text-xl font-bold mb-2">Confirm Check-In</h3>
+                <p className="text-slate-500 dark:text-slate-400 mb-4">
+                  Are you sure you want to check in to{' '}
+                  <span className="font-semibold text-slate-900 dark:text-slate-100">
+                    {selectedClient.name}
+                  </span>
+                  ?
+                </p>
+                {locationError && (
+                  <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-left">
+                    <p className="text-red-600 dark:text-red-400 text-sm">{locationError}</p>
+                  </div>
+                )}
+                <div className="flex gap-3">
+                  <button
+                    onClick={() => {
+                      setShowConfirmModal(false);
+                      setLocationError(null);
+                    }}
+                    className="flex-1 py-3 rounded-lg font-semibold border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={confirmCheckIn}
+                    disabled={isCheckingIn || isValidatingLocation}
+                    className="flex-1 py-3 rounded-lg font-semibold bg-primary text-white hover:bg-primary/90 disabled:opacity-50"
+                  >
+                    {isCheckingIn || isValidatingLocation ? 'Validating...' : 'Confirm'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      )}
-
+        )}
       </div>
     </div>
   );

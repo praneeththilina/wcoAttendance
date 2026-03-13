@@ -81,7 +81,7 @@ export function Profile() {
           {/* Profile Card */}
           <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
             <div className="flex flex-col items-center mb-6">
-              <div 
+              <div
                 className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mb-4 overflow-hidden cursor-pointer"
                 onClick={() => fileInputRef.current?.click()}
               >
@@ -91,7 +91,9 @@ export function Profile() {
                   <span className="material-symbols-outlined text-primary text-4xl">person</span>
                 )}
               </div>
-              <h2 className="text-xl font-bold">{user?.firstName} {user?.lastName}</h2>
+              <h2 className="text-xl font-bold">
+                {user?.firstName} {user?.lastName}
+              </h2>
               <p className="text-slate-500">{user?.email}</p>
               <span className="mt-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
                 {getRoleDisplay(user?.role || 'employee')}
@@ -135,7 +137,7 @@ export function Profile() {
 
           {/* Actions */}
           <div className="mt-4 space-y-3">
-            <button 
+            <button
               onClick={() => {
                 setFirstName(user?.firstName || '');
                 setLastName(user?.lastName || '');
@@ -155,7 +157,9 @@ export function Profile() {
               onClick={toggleTheme}
               className="w-full py-3 px-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 font-medium text-sm flex items-center justify-center gap-2"
             >
-              <span className="material-symbols-outlined">{isDark ? 'light_mode' : 'dark_mode'}</span>
+              <span className="material-symbols-outlined">
+                {isDark ? 'light_mode' : 'dark_mode'}
+              </span>
               {isDark ? 'Light Mode' : 'Dark Mode'}
             </button>
             <button
@@ -175,15 +179,19 @@ export function Profile() {
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
             <div className="bg-white dark:bg-slate-900 rounded-xl w-full max-w-md p-6 shadow-xl">
               <h3 className="text-lg font-bold mb-4">Edit Profile</h3>
-              
+
               {/* Profile Picture */}
               <div className="flex flex-col items-center mb-6">
-                <div 
+                <div
                   className="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mb-3 overflow-hidden cursor-pointer border-2 border-primary/20"
                   onClick={() => fileInputRef.current?.click()}
                 >
                   {profilePicture ? (
-                    <img src={profilePicture} alt="Profile" className="w-full h-full object-cover" />
+                    <img
+                      src={profilePicture}
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
                   ) : (
                     <span className="material-symbols-outlined text-primary text-5xl">person</span>
                   )}
@@ -195,7 +203,7 @@ export function Profile() {
                   onChange={handleImageUpload}
                   className="hidden"
                 />
-                <button 
+                <button
                   onClick={() => fileInputRef.current?.click()}
                   className="text-sm text-primary font-medium"
                 >
@@ -205,7 +213,9 @@ export function Profile() {
 
               {/* First Name */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">First Name</label>
+                <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  First Name
+                </label>
                 <input
                   type="text"
                   value={firstName}
@@ -216,7 +226,9 @@ export function Profile() {
 
               {/* Last Name */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">Last Name</label>
+                <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+                  Last Name
+                </label>
                 <input
                   type="text"
                   value={lastName}

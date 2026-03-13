@@ -8,7 +8,13 @@ import { ROUTES } from '@/constants';
 export function CheckOutScreen() {
   const navigate = useNavigate();
   const { checkOutVariant, setCheckOutVariant } = useUISettings();
-  const { todayStatus: status, fetchTodayStatus, addToQueue, isOnline, setTodayStatus } = useAttendanceStore();
+  const {
+    todayStatus: status,
+    fetchTodayStatus,
+    addToQueue,
+    isOnline,
+    setTodayStatus,
+  } = useAttendanceStore();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [liveDuration, setLiveDuration] = useState<string | null>(null);
 
@@ -48,7 +54,7 @@ export function CheckOutScreen() {
     setIsCheckingOut(true);
     try {
       const location = await getCurrentLocation();
-      
+
       if (isOnline) {
         const { attendanceService } = await import('@/services/auth');
         await attendanceService.checkOut(location);
@@ -79,7 +85,11 @@ export function CheckOutScreen() {
     }
   };
 
-  const getCurrentLocation = (): Promise<{ latitude: number; longitude: number; accuracy?: number }> => {
+  const getCurrentLocation = (): Promise<{
+    latitude: number;
+    longitude: number;
+    accuracy?: number;
+  }> => {
     return new Promise((resolve) => {
       if (!navigator.geolocation) {
         resolve({ latitude: 0, longitude: 0 });
@@ -100,16 +110,20 @@ export function CheckOutScreen() {
   };
 
   const checkInTime = status?.checkInTime ? new Date(status.checkInTime) : null;
-  const hoursWorked = liveDuration ? parseFloat(liveDuration) : (status?.totalHours || 0);
+  const hoursWorked = liveDuration ? parseFloat(liveDuration) : status?.totalHours || 0;
   const overtime = Math.max(0, hoursWorked - 8);
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
       <div className="max-w-md mx-auto bg-background-light dark:bg-background-dark shadow-2xl overflow-x-hidden min-h-screen flex flex-col">
         {/* Header */}
-        <header className={`flex items-center p-4 justify-between bg-white dark:bg-slate-900 sticky top-0 z-10 ${
-          isVariant1 ? 'border-b border-slate-100 dark:border-slate-800' : 'border-b border-primary/10'
-        }`}>
+        <header
+          className={`flex items-center p-4 justify-between bg-white dark:bg-slate-900 sticky top-0 z-10 ${
+            isVariant1
+              ? 'border-b border-slate-100 dark:border-slate-800'
+              : 'border-b border-primary/10'
+          }`}
+        >
           <button
             onClick={() => navigate(-1)}
             className="text-primary dark:text-slate-100 flex size-10 items-center justify-center rounded-full hover:bg-primary/5"
@@ -130,11 +144,13 @@ export function CheckOutScreen() {
         <main className="flex-1 overflow-y-auto">
           <div className="p-4 space-y-6">
             {/* Summary Card */}
-            <div className={`relative overflow-hidden bg-white dark:bg-slate-900 shadow-sm ${
-              isVariant1 
-                ? 'rounded-lg border border-slate-100 dark:border-slate-800' 
-                : 'rounded-xl border border-primary/10'
-            }`}>
+            <div
+              className={`relative overflow-hidden bg-white dark:bg-slate-900 shadow-sm ${
+                isVariant1
+                  ? 'rounded-lg border border-slate-100 dark:border-slate-800'
+                  : 'rounded-xl border border-primary/10'
+              }`}
+            >
               <div className="h-32 w-full bg-primary/10 bg-cover bg-center flex items-center justify-center">
                 <span className="material-symbols-outlined text-primary/30 text-5xl">work</span>
               </div>
@@ -188,13 +204,17 @@ export function CheckOutScreen() {
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              <div className={`flex flex-col gap-2 p-5 bg-white dark:bg-slate-900 shadow-sm ${
-                isVariant1 
-                  ? 'rounded-lg border border-slate-100 dark:border-slate-800' 
-                  : 'rounded-xl border border-primary/10'
-              }`}>
+              <div
+                className={`flex flex-col gap-2 p-5 bg-white dark:bg-slate-900 shadow-sm ${
+                  isVariant1
+                    ? 'rounded-lg border border-slate-100 dark:border-slate-800'
+                    : 'rounded-xl border border-primary/10'
+                }`}
+              >
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Hours</p>
+                  <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                    Total Hours
+                  </p>
                   <span className="material-symbols-outlined text-primary text-xl">schedule</span>
                 </div>
                 <p className="text-3xl font-black text-primary dark:text-slate-100">
@@ -207,11 +227,13 @@ export function CheckOutScreen() {
                   </div>
                 )}
               </div>
-              <div className={`flex flex-col gap-2 p-5 bg-white dark:bg-slate-900 shadow-sm ${
-                isVariant1 
-                  ? 'rounded-lg border border-slate-100 dark:border-slate-800' 
-                  : 'rounded-xl border border-primary/10'
-              }`}>
+              <div
+                className={`flex flex-col gap-2 p-5 bg-white dark:bg-slate-900 shadow-sm ${
+                  isVariant1
+                    ? 'rounded-lg border border-slate-100 dark:border-slate-800'
+                    : 'rounded-xl border border-primary/10'
+                }`}
+              >
                 <div className="flex items-center justify-between">
                   <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Tasks</p>
                   <span className="material-symbols-outlined text-primary text-xl">
@@ -226,11 +248,13 @@ export function CheckOutScreen() {
             </div>
 
             {/* Info Box */}
-            <div className={`${
-              isVariant1 
-                ? 'relative overflow-hidden rounded-lg bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800' 
-                : 'p-5 rounded-xl bg-primary/5 border border-primary/20'
-            }`}>
+            <div
+              className={`${
+                isVariant1
+                  ? 'relative overflow-hidden rounded-lg bg-white dark:bg-slate-900 shadow-sm border border-slate-100 dark:border-slate-800'
+                  : 'p-5 rounded-xl bg-primary/5 border border-primary/20'
+              }`}
+            >
               <div className={`flex items-start gap-3 ${isVariant1 ? 'p-4' : ''}`}>
                 <span className="material-symbols-outlined text-primary mt-0.5">info</span>
                 <div>
@@ -252,9 +276,7 @@ export function CheckOutScreen() {
               onClick={handleCheckOut}
               disabled={isCheckingOut}
               className={`w-full bg-primary hover:bg-[#3d2469] text-white font-bold py-4 transition-all flex items-center justify-center gap-2 uppercase tracking-widest text-sm disabled:opacity-50 ${
-                isVariant1 
-                  ? 'rounded-lg shadow-md' 
-                  : 'rounded-xl shadow-lg shadow-primary/20'
+                isVariant1 ? 'rounded-lg shadow-md' : 'rounded-xl shadow-lg shadow-primary/20'
               }`}
             >
               <span className="material-symbols-outlined">logout</span>
@@ -265,7 +287,7 @@ export function CheckOutScreen() {
               <p className="text-amber-700 dark:text-amber-400 font-bold text-sm">
                 You are not currently checked in.
               </p>
-              <button 
+              <button
                 onClick={() => navigate(ROUTES.CLIENT_SELECTION)}
                 className="mt-2 text-primary dark:text-primary-light font-bold text-xs uppercase tracking-wider underline"
               >

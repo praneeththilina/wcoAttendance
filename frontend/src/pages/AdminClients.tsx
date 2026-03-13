@@ -11,7 +11,7 @@ export function AdminClients() {
   const [editingClient, setEditingClient] = useState<Client | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
-  
+
   const [formData, setFormData] = useState<ClientFormData>({
     name: '',
     branch: '',
@@ -131,10 +131,8 @@ export function AdminClients() {
         <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
           <span className="material-symbols-outlined text-3xl">menu</span>
         </button>
-        <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">
-          Clients
-        </h1>
-        <button 
+        <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">Clients</h1>
+        <button
           onClick={openCreateModal}
           className="flex items-center justify-center p-2 rounded-lg bg-primary text-white hover:bg-primary/90"
         >
@@ -165,11 +163,15 @@ export function AdminClients() {
             <p className="text-xs text-slate-500">Total</p>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-            <p className="text-2xl font-bold text-green-600">{clients.filter((c) => c.isActive).length}</p>
+            <p className="text-2xl font-bold text-green-600">
+              {clients.filter((c) => c.isActive).length}
+            </p>
             <p className="text-xs text-slate-500">Active</p>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-            <p className="text-2xl font-bold text-slate-400">{clients.filter((c) => !c.isActive).length}</p>
+            <p className="text-2xl font-bold text-slate-400">
+              {clients.filter((c) => !c.isActive).length}
+            </p>
             <p className="text-xs text-slate-500">Inactive</p>
           </div>
         </div>
@@ -188,30 +190,31 @@ export function AdminClients() {
               className="flex items-center gap-4 p-4 bg-white dark:bg-slate-800 rounded-xl border border-primary/5 shadow-sm hover:border-primary/20 transition-colors"
             >
               <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <span className="material-symbols-outlined text-primary">{getClientIcon(client.city)}</span>
+                <span className="material-symbols-outlined text-primary">
+                  {getClientIcon(client.city)}
+                </span>
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
                   <p className="font-semibold text-slate-900 dark:text-slate-100 truncate">
                     {client.name}
                   </p>
-                  {!client.isActive && (
-                    <span className="text-xs text-red-500">(Inactive)</span>
-                  )}
+                  {!client.isActive && <span className="text-xs text-red-500">(Inactive)</span>}
                 </div>
                 <p className="text-sm text-slate-500 truncate">
-                  {client.branch ? `${client.branch}, ` : ''}{client.city}
+                  {client.branch ? `${client.branch}, ` : ''}
+                  {client.city}
                 </p>
                 <p className="text-xs text-slate-400 truncate">{client.address}</p>
               </div>
               <div className="flex items-center gap-1">
-                <button 
+                <button
                   onClick={() => openEditModal(client)}
                   className="p-2 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-lg"
                 >
                   <span className="material-symbols-outlined text-sm">edit</span>
                 </button>
-                <button 
+                <button
                   onClick={() => setDeleteConfirm(client.id)}
                   className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
                 >
@@ -232,7 +235,7 @@ export function AdminClients() {
             <h3 className="text-lg font-bold mb-4">
               {editingClient ? 'Edit Client' : 'New Client'}
             </h3>
-            
+
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
@@ -295,7 +298,12 @@ export function AdminClients() {
                     type="number"
                     step="any"
                     value={formData.latitude || ''}
-                    onChange={(e) => setFormData({ ...formData, latitude: e.target.value ? parseFloat(e.target.value) : undefined })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        latitude: e.target.value ? parseFloat(e.target.value) : undefined,
+                      })
+                    }
                     className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="0.0"
                   />
@@ -308,7 +316,12 @@ export function AdminClients() {
                     type="number"
                     step="any"
                     value={formData.longitude || ''}
-                    onChange={(e) => setFormData({ ...formData, longitude: e.target.value ? parseFloat(e.target.value) : undefined })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        longitude: e.target.value ? parseFloat(e.target.value) : undefined,
+                      })
+                    }
                     className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                     placeholder="0.0"
                   />

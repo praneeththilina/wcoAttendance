@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
 import { clientService } from '@/services/auth';
@@ -27,15 +27,23 @@ export function Clients() {
     }
   };
 
-  const filteredClients = clients.filter(c => 
-    c.name.toLowerCase().includes(search.toLowerCase()) || 
-    c.city.toLowerCase().includes(search.toLowerCase())
-  );
+  // ⚡ Bolt: Memoized client filtering to prevent O(N) recalculations on unrelated renders.
+  // Extracted search.toLowerCase() outside the loop to avoid redundant string allocations.
+  // Impact: Reduces CPU cycles during typing and component updates.
+  const filteredClients = useMemo(() => {
+    const query = search.toLowerCase();
+    return clients.filter(
+      (c) => c.name.toLowerCase().includes(query) || c.city.toLowerCase().includes(query)
+    );
+  }, [clients, search]);
 
   const openDirections = (client: Client) => {
     const { latitude, longitude, address, city } = client;
     if (latitude && longitude) {
-      window.open(`https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`, '_blank');
+      window.open(
+        `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`,
+        '_blank'
+      );
     } else if (address || city) {
       const query = encodeURIComponent(`${address || ''} ${city}`.trim());
       window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
@@ -46,10 +54,15 @@ export function Clients() {
     <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 pb-20">
       <header className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 p-4 sticky top-0 z-10 flex justify-between items-center">
         <div className="flex items-center gap-3">
-          <button onClick={() => navigate(-1)} className="p-2 -ml-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+          <button
+            onClick={() => navigate(-1)}
+            className="p-2 -ml-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full"
+          >
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
-          <h1 className="text-xl font-bold">{user?.role === 'employee' ? 'Clients' : 'Manage Clients'}</h1>
+          <h1 className="text-xl font-bold">
+            {user?.role === 'employee' ? 'Clients' : 'Manage Clients'}
+          </h1>
         </div>
         {(user?.role === 'admin' || user?.role === 'manager') && (
           <button className="bg-primary text-white py-2 px-4 rounded-lg flex items-center gap-2 hover:bg-primary/90 transition-colors text-sm font-bold">
@@ -57,10 +70,12 @@ export function Clients() {
           </button>
         )}
       </header>
-      
+
       <main className="max-w-4xl mx-auto p-4 md:p-6 space-y-6">
         <div className="relative mb-6">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+            search
+          </span>
           <input
             type="text"
             placeholder="Search clients or cities..."
@@ -74,25 +89,38 @@ export function Clients() {
           {isLoading ? (
             <div className="col-span-full py-12 text-center text-slate-500">Loading clients...</div>
           ) : filteredClients.length === 0 ? (
-            <div className="col-span-full py-12 text-center text-slate-500">No clients found matching "{search}"</div>
+            <div className="col-span-full py-12 text-center text-slate-500">
+              No clients found matching "{search}"
+            </div>
           ) : (
             filteredClients.map((client) => (
-              <div key={client.id} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 hover:border-primary/50 hover:shadow-md transition-all group">
+              <div
+                key={client.id}
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 hover:border-primary/50 hover:shadow-md transition-all group"
+              >
                 <div className="flex justify-between items-start mb-3">
                   <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center text-primary shrink-0">
                     <span className="material-symbols-outlined">domain</span>
                   </div>
                   {(user?.role === 'admin' || user?.role === 'manager') && (
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="text-slate-400 hover:text-primary"><span className="material-symbols-outlined text-sm">edit</span></button>
+                      <button className="text-slate-400 hover:text-primary">
+                        <span className="material-symbols-outlined text-sm">edit</span>
+                      </button>
                     </div>
                   )}
                 </div>
-                <h3 className="font-bold text-lg truncate mb-1" title={client.name}>{client.name}</h3>
-                <p className="text-sm text-slate-500 mb-4 truncate">{client.branch || 'Main Branch'}</p>
-                
+                <h3 className="font-bold text-lg truncate mb-1" title={client.name}>
+                  {client.name}
+                </h3>
+                <p className="text-sm text-slate-500 mb-4 truncate">
+                  {client.branch || 'Main Branch'}
+                </p>
+
                 <div className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
-                  <span className="material-symbols-outlined text-base shrink-0 mt-0.5">location_on</span>
+                  <span className="material-symbols-outlined text-base shrink-0 mt-0.5">
+                    location_on
+                  </span>
                   <p className="line-clamp-2">{client.address || client.city}</p>
                 </div>
 

@@ -5,10 +5,10 @@ import { useTheme } from '@/hooks/useTheme';
 import { ROUTES, ROLES } from '@/constants';
 
 // Lazy load pages
-import { 
-  LoginPage, 
-  EmployeeDashboard, 
-  ClientSelection, 
+import {
+  LoginPage,
+  EmployeeDashboard,
+  ClientSelection,
   CheckinConfirmation,
   CheckOutScreen,
   ChangeClientLocation,
@@ -23,7 +23,7 @@ import {
   ManagerDashboard,
   HRDashboard,
   Clients,
-  Leaves
+  Leaves,
 } from '@/pages';
 
 // Protected Route Component
@@ -105,7 +105,7 @@ export function App() {
             </ProtectedRoute>
           }
         />
-        
+
         {/* Client Selection & Attendance */}
         <Route
           path={ROUTES.CLIENT_SELECTION}
@@ -212,16 +212,19 @@ export function App() {
 
         {/* Default redirect */}
         <Route path="/" element={<Navigate to={ROUTES.LOGIN} replace />} />
-        
+
         {/* 404 - Catch all */}
-        <Route path="*" element={
-          <div className="min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold text-primary mb-2">404</h1>
-              <p className="text-slate-500">Page not found</p>
+        <Route
+          path="*"
+          element={
+            <div className="min-h-screen bg-background-light dark:bg-background-dark flex items-center justify-center">
+              <div className="text-center">
+                <h1 className="text-4xl font-bold text-primary mb-2">404</h1>
+                <p className="text-slate-500">Page not found</p>
+              </div>
             </div>
-          </div>
-        } />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
