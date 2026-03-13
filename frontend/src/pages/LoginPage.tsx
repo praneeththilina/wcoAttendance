@@ -53,7 +53,10 @@ export function LoginPage() {
         navigate(roleRedirects[response.data.user.role] || ROUTES.DASHBOARD);
       }
     } catch (error: any) {
-      const errorMessage = error?.response?.data?.error?.message || error?.message || 'Login failed. Please try again.';
+      const errorMessage =
+        error?.response?.data?.error?.message ||
+        error?.message ||
+        'Login failed. Please try again.';
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -78,7 +81,8 @@ export function LoginPage() {
           <div
             className="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden bg-primary/10 rounded-lg min-h-[180px] relative"
             style={{
-              backgroundImage: 'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-IrZQQqhDSMLzIFlmHwTD02QeQfIi00ym-ECojtDyfbaqLvvqKymOo4zMjTmTLnBKDki4W2C4iPNj_DndW3eFfYnfi0e-QIQThgo_-9rK8dA-BcwQDFB3vK7AD1KWpCSIVEUqWre2T2hUgOHhqVxz8y0Wh-XmKuHQuhTpqs78wEZyE4S2p1-cGCXfXZA82jHwsXgq9JvRTH6l1Zdb31Cl9NO9c50fYKB4Gst9tsMtFqUR8wFH3uidlIK_03qxVkPclYtegbrg1F5p")',
+              backgroundImage:
+                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuC-IrZQQqhDSMLzIFlmHwTD02QeQfIi00ym-ECojtDyfbaqLvvqKymOo4zMjTmTLnBKDki4W2C4iPNj_DndW3eFfYnfi0e-QIQThgo_-9rK8dA-BcwQDFB3vK7AD1KWpCSIVEUqWre2T2hUgOHhqVxz8y0Wh-XmKuHQuhTpqs78wEZyE4S2p1-cGCXfXZA82jHwsXgq9JvRTH6l1Zdb31Cl9NO9c50fYKB4Gst9tsMtFqUR8wFH3uidlIK_03qxVkPclYtegbrg1F5p")',
             }}
           >
             <div className="absolute inset-0 bg-primary/40"></div>
@@ -122,12 +126,15 @@ export function LoginPage() {
             error={errors.password?.message}
             leftIcon={<span className="material-symbols-outlined">lock</span>}
             rightIcon={
-              <span
-                className="material-symbols-outlined cursor-pointer"
+              <button
+                type="button"
+                className="material-symbols-outlined cursor-pointer hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full p-1 -m-1 transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                title={showPassword ? 'Hide password' : 'Show password'}
               >
                 {showPassword ? 'visibility_off' : 'visibility'}
-              </span>
+              </button>
             }
             {...register('password')}
           />
@@ -135,7 +142,10 @@ export function LoginPage() {
           {/* Remember & Forgot */}
           <div className="flex items-center justify-between py-1">
             <Checkbox label="Remember me" {...register('rememberMe')} />
-            <a href="#" className="text-sm font-semibold text-primary dark:text-primary/80 hover:underline">
+            <a
+              href="#"
+              className="text-sm font-semibold text-primary dark:text-primary/80 hover:underline"
+            >
               Forgot password?
             </a>
           </div>
