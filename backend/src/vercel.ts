@@ -4,14 +4,27 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import { createApp } from './config/app.js';
+import prisma from './config/database.js';
 
 const app = createApp();
 
-const server = createServer((req, res) => {
-  // Handle /health endpoint at root for Vercel
+const server = createServer(async (req, res) => {
   if (req.url === '/health' || req.url === '/api/health') {
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'ok', timestamp: new Date().toISOString() }));
+    const health: { status: string; timestamp: string; database?: string } = {
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      await prisma.$queryRaw`SELECT 1`;
+      health.database = 'connected';
+    } catch {
+      health.status = 'degraded';
+      health.database = 'disconnected';
+    }
+
+    res.writeHead(health.status === 'ok' ? 200 : 503, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(health));
     return;
   }
   
