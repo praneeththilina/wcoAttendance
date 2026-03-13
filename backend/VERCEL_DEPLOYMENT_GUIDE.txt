@@ -1,0 +1,104 @@
+================================================================================
+                    VERCEL BACKEND DEPLOYMENT GUIDE
+================================================================================
+
+PREREQUISITES
+-------------
+1. Vercel account connected to GitHub
+2. PostgreSQL database (e.g., Neon, Supabase, Railway)
+3. Node.js 20+ installed locally
+
+ENVIRONMENT VARIABLES (Required in Vercel Dashboard)
+-----------------------------------------------------
+DATABASE_URL=postgresql://user:password@host:port/database
+JWT_SECRET=your-secure-jwt-secret-min-32-chars
+NODE_ENV=production
+CORS_ORIGIN=https://your-frontend.vercel.app
+
+LOCAL SETUP
+-----------
+1. Navigate to backend folder:
+   cd backend
+
+2. Install dependencies:
+   pnpm install
+
+3. Create .env file (copy from .env.example):
+   cp .env.example .env
+   # Edit .env with your DATABASE_URL and JWT_SECRET
+
+4. Generate Prisma client and push schema:
+   pnpm prisma generate
+   pnpm prisma db push
+
+5. (Optional) Seed database:
+   pnpm prisma seed
+
+6. Run locally:
+   pnpm dev
+
+VERCEL DEPLOYMENT
+-----------------
+1. Push code to GitHub:
+   git add .
+   git commit -m "Your message"
+   git push
+
+2. Vercel automatically builds when you push to master branch.
+
+3. Go to Vercel Dashboard > Your Project > Settings > Environment Variables
+   Add the required environment variables listed above.
+
+4. Trigger a new deployment or wait for next push.
+
+BUILD COMMAND (already configured in vercel.json)
+-------------------------------------------------
+pnpm prisma generate && pnpm exec tsc
+
+INSTALL COMMAND (already configured)
+-------------------------------------
+pnpm install --legacy-peer-deps
+
+KEY FILES
+---------
+- vercel.json          : Vercel configuration
+- tsconfig.json        : TypeScript configuration
+- prisma/schema.prisma : Database schema
+- src/index.ts         : Express app entry point
+- src/vercel.ts       : Vercel serverless handler
+- dist/vercel.js      : Compiled output (generated on build)
+
+TROUBLESHOOTING
+----------------
+1. Build fails with TypeScript errors:
+   - Ensure @types/express is installed: pnpm add -D @types/express
+   - Run: pnpm prisma generate
+   - Check tsconfig.json has correct types configured
+
+2. Prisma client errors:
+   - Run: pnpm prisma generate
+   - Make sure DATABASE_URL is set in Vercel env vars
+
+3. Internal server errors:
+   - Check Vercel function logs in Dashboard
+   - Verify DATABASE_URL is correct
+   - Ensure database is accessible from Vercel's IP ranges
+
+4. CORS errors:
+   - Set CORS_ORIGIN env var to your frontend URL
+   - Or update src/index.ts to allow your domain
+
+LOCAL BUILD TEST
+----------------
+pnpm build
+# Output will be in dist/ folder
+
+DEPLOYMENT URL FORMAT
+---------------------
+Your backend will be available at:
+https://your-backend-name.vercel.app
+
+Example API endpoint:
+https://your-backend-name.vercel.app/api/auth/login
+
+================================================================================
