@@ -10,8 +10,8 @@
       "use": "static"
     }
   ],
-  "installCommand": "cd backend && pnpm install --legacy-peer-deps && cd ../frontend && pnpm install",
-  "buildCommand": "cd backend && pnpm prisma generate && pnpm exec tsc && cd ../frontend && pnpm build",
+  "installCommand": "cd backend && pnpm install --legacy-peer-deps --ignore-scripts && pnpm prisma generate && cd ../frontend && pnpm install",
+  "buildCommand": "cd backend && pnpm exec tsc && cd ../frontend && pnpm build",
   "routes": [
     {
       "src": "/api/(.*)",
