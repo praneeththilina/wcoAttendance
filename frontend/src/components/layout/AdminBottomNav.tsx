@@ -20,7 +20,7 @@ export function AdminBottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-0 w-full flex gap-2 border-t border-primary/10 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md px-4 pb-4 pt-2 shadow-lg z-20">
+    <nav className="md:hidden fixed bottom-0 w-full flex gap-2 border-t border-primary/10 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md px-4 pb-4 pt-2 shadow-lg z-20">
       {navItems.map((item) => (
         <NavLink
           key={item.path}

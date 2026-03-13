@@ -51,7 +51,7 @@ export function EmployeeDashboard() {
     setIsCheckingIn(true);
     try {
       navigate(ROUTES.CLIENT_SELECTION);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Check-in failed:', error);
     } finally {
       setIsCheckingIn(false);
@@ -61,7 +61,7 @@ export function EmployeeDashboard() {
   const handleCheckOut = async () => {
     try {
       navigate(ROUTES.CHECKOUT);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Check-out failed:', error);
     }
   };
