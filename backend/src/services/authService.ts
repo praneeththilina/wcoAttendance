@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import prisma from '../config/database.js';
 import { AppError } from '../utils/AppError.js';
 import type { LoginInput } from '../validators/auth.validator.js';
-import { UserRole } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
@@ -115,7 +115,7 @@ export async function register(input: { email: string; password: string; firstNa
       firstName,
       lastName,
       employeeId,
-      role: role as UserRole,
+      role: role as any,
     },
   });
 

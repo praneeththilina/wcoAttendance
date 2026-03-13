@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { AdminBottomNav } from '@/components/layout';
 import { StatusBadge } from '@/components/ui';
 import { adminService } from '@/services/adminService';
@@ -56,12 +56,18 @@ export function AdminDashboard() {
     }
   };
 
-  const filteredStaff = staff.filter(
-    (member) =>
-      member.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      member.clientName?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // ⚡ Bolt: Memoized staff filtering to prevent O(N) recalculations on unrelated renders.
+  // Extracted searchQuery.toLowerCase() outside the loop to avoid redundant string allocations.
+  // Impact: Reduces CPU cycles during typing and component updates.
+  const filteredStaff = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    return staff.filter(
+      (member) =>
+        member.firstName.toLowerCase().includes(query) ||
+        member.lastName.toLowerCase().includes(query) ||
+        member.clientName?.toLowerCase().includes(query)
+    );
+  }, [staff, searchQuery]);
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-display text-slate-900 dark:text-slate-100 pb-20">

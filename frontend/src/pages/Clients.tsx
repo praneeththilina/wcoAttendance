@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
 import { clientService } from '@/services/auth';
@@ -27,11 +27,15 @@ export function Clients() {
     }
   };
 
-  const filteredClients = clients.filter(
-    (c) =>
-      c.name.toLowerCase().includes(search.toLowerCase()) ||
-      c.city.toLowerCase().includes(search.toLowerCase())
-  );
+  // ⚡ Bolt: Memoized client filtering to prevent O(N) recalculations on unrelated renders.
+  // Extracted search.toLowerCase() outside the loop to avoid redundant string allocations.
+  // Impact: Reduces CPU cycles during typing and component updates.
+  const filteredClients = useMemo(() => {
+    const query = search.toLowerCase();
+    return clients.filter(
+      (c) => c.name.toLowerCase().includes(query) || c.city.toLowerCase().includes(query)
+    );
+  }, [clients, search]);
 
   const openDirections = (client: Client) => {
     const { latitude, longitude, address, city } = client;
