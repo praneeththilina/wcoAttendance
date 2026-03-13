@@ -20,8 +20,10 @@ export function Settings() {
 
   useEffect(() => {
     fetch('/version.json')
-      .then(res => res.json())
-      .then(data => setAppVersion({ version: data.version, buildNumber: data.buildNumber || '1' }))
+      .then((res) => res.json())
+      .then((data) =>
+        setAppVersion({ version: data.version, buildNumber: data.buildNumber || '1' })
+      )
       .catch(() => {});
   }, []);
 
@@ -37,21 +39,23 @@ export function Settings() {
         <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
           <span className="material-symbols-outlined text-3xl">menu</span>
         </button>
-        <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">
-          Settings
-        </h1>
+        <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">Settings</h1>
       </header>
 
       <div className="p-4 pb-24 space-y-4">
         {/* Profile Section */}
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-primary/5 p-4">
-          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Profile</h3>
+          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">
+            Profile
+          </h3>
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
               <span className="material-symbols-outlined text-primary">person</span>
             </div>
             <div className="flex-1">
-              <p className="font-semibold">{user?.firstName} {user?.lastName}</p>
+              <p className="font-semibold">
+                {user?.firstName} {user?.lastName}
+              </p>
               <p className="text-sm text-slate-500">{user?.email}</p>
             </div>
             <span className="material-symbols-outlined text-slate-400">chevron_right</span>
@@ -60,8 +64,10 @@ export function Settings() {
 
         {/* App Settings */}
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-primary/5 p-4">
-          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">App Settings</h3>
-          
+          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">
+            App Settings
+          </h3>
+
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -124,8 +130,10 @@ export function Settings() {
 
         {/* Company Info */}
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-primary/5 p-4">
-          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Company</h3>
-          
+          <h3 className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">
+            Company
+          </h3>
+
           <div className="space-y-3">
             <button className="w-full flex items-center justify-between py-2">
               <div className="flex items-center gap-3">
@@ -154,7 +162,9 @@ export function Settings() {
         {/* App Info */}
         <div className="text-center py-4">
           <p className="text-sm text-slate-500">AA Attendance</p>
-          <p className="text-xs text-slate-400">Version {appVersion.version} (Build {appVersion.buildNumber})</p>
+          <p className="text-xs text-slate-400">
+            Version {appVersion.version} (Build {appVersion.buildNumber})
+          </p>
         </div>
 
         {/* Logout */}

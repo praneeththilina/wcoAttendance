@@ -45,7 +45,7 @@ describe('attendanceStore', () => {
     const store = useAttendanceStore.getState();
     store.setOnline(false);
     expect(useAttendanceStore.getState().isOnline).toBe(false);
-    
+
     store.setOnline(true);
     expect(useAttendanceStore.getState().isOnline).toBe(true);
   });

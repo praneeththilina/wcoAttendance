@@ -38,7 +38,14 @@ export function StaffDashboard() {
       await adminService.createStaff(newStaff);
       setShowAddModal(false);
       loadStaff();
-      setNewStaff({ firstName: '', lastName: '', email: '', employeeId: '', password: '', role: 'employee' });
+      setNewStaff({
+        firstName: '',
+        lastName: '',
+        email: '',
+        employeeId: '',
+        password: '',
+        role: 'employee',
+      });
     } catch (error: any) {
       console.error('Failed to add staff:', error);
       alert('Failed to add staff member. Check console.');
@@ -82,7 +89,7 @@ export function StaffDashboard() {
         <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">
           Staff Management
         </h1>
-        <button 
+        <button
           onClick={() => setShowAddModal(true)}
           className="flex items-center justify-center p-2 rounded-lg bg-primary text-white"
         >
@@ -169,7 +176,9 @@ export function StaffDashboard() {
       {showAddModal && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-800 rounded-2xl w-full max-w-md p-6 shadow-xl">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">Add Staff Member</h3>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-4">
+              Add Staff Member
+            </h3>
             <form onSubmit={handleAddStaff} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <input
@@ -177,14 +186,14 @@ export function StaffDashboard() {
                   placeholder="First Name"
                   className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2"
                   value={newStaff.firstName}
-                  onChange={e => setNewStaff({...newStaff, firstName: e.target.value})}
+                  onChange={(e) => setNewStaff({ ...newStaff, firstName: e.target.value })}
                 />
                 <input
                   required
                   placeholder="Last Name"
                   className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2"
                   value={newStaff.lastName}
-                  onChange={e => setNewStaff({...newStaff, lastName: e.target.value})}
+                  onChange={(e) => setNewStaff({ ...newStaff, lastName: e.target.value })}
                 />
               </div>
               <input
@@ -193,7 +202,7 @@ export function StaffDashboard() {
                 placeholder="Email Address"
                 className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2"
                 value={newStaff.email}
-                onChange={e => setNewStaff({...newStaff, email: e.target.value})}
+                onChange={(e) => setNewStaff({ ...newStaff, email: e.target.value })}
               />
               <div className="grid grid-cols-2 gap-4">
                 <input
@@ -201,12 +210,12 @@ export function StaffDashboard() {
                   placeholder="Employee ID"
                   className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2"
                   value={newStaff.employeeId}
-                  onChange={e => setNewStaff({...newStaff, employeeId: e.target.value})}
+                  onChange={(e) => setNewStaff({ ...newStaff, employeeId: e.target.value })}
                 />
                 <select
                   className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2"
                   value={newStaff.role}
-                  onChange={e => setNewStaff({...newStaff, role: e.target.value})}
+                  onChange={(e) => setNewStaff({ ...newStaff, role: e.target.value })}
                 >
                   <option value="employee">Employee</option>
                   <option value="manager">Manager</option>
@@ -220,7 +229,7 @@ export function StaffDashboard() {
                 placeholder="Initial Password"
                 className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2"
                 value={newStaff.password}
-                onChange={e => setNewStaff({...newStaff, password: e.target.value})}
+                onChange={(e) => setNewStaff({ ...newStaff, password: e.target.value })}
               />
               <div className="flex gap-3 pt-4">
                 <button

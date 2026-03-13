@@ -1,0 +1,5 @@
+
+# Capacitor
+frontend/android/
+frontend/ios/
+frontend/capacitor.config.ts

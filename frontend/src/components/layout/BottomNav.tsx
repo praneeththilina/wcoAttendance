@@ -26,7 +26,11 @@ export function BottomNav() {
             {({ isActive }) => (
               <>
                 <span className="material-symbols-outlined text-[24px]">{item.icon}</span>
-                <p className={`text-xs leading-normal tracking-[0.015em] ${isActive ? 'font-bold' : 'font-medium'}`}>{item.label}</p>
+                <p
+                  className={`text-xs leading-normal tracking-[0.015em] ${isActive ? 'font-bold' : 'font-medium'}`}
+                >
+                  {item.label}
+                </p>
               </>
             )}
           </NavLink>

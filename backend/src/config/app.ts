@@ -67,6 +67,7 @@ export function createApp(): Application {
   };
 
   app.get('/health', healthHandler);
+  app.get('/', healthHandler);
   app.get('/api/health', healthHandler);
 
   // API routes

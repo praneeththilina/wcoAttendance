@@ -38,7 +38,10 @@ export function CheckinConfirmation() {
       <div className="max-w-md mx-auto bg-background-light dark:bg-background-dark overflow-x-hidden shadow-xl">
         {/* Header */}
         <div className="flex items-center p-4 pb-2 justify-between">
-          <button onClick={() => navigate(-1)} className="text-primary dark:text-slate-100 flex size-12 shrink-0 items-center justify-start">
+          <button
+            onClick={() => navigate(-1)}
+            className="text-primary dark:text-slate-100 flex size-12 shrink-0 items-center justify-start"
+          >
             <span className="material-symbols-outlined text-2xl">arrow_back</span>
           </button>
           <h2 className="text-lg font-bold leading-tight tracking-tight flex-1 text-center pr-12">
@@ -55,8 +58,12 @@ export function CheckinConfirmation() {
         {/* Success Content */}
         <div className="flex flex-col px-6 py-8">
           <div className="flex flex-col items-center gap-6">
-            <div className={`flex items-center justify-center rounded-full p-6 ${isOffline ? 'bg-amber-100' : 'bg-success/10'}`}>
-              <span className={`material-symbols-outlined text-7xl font-bold ${isOffline ? 'text-amber-600' : 'text-success'}`}>
+            <div
+              className={`flex items-center justify-center rounded-full p-6 ${isOffline ? 'bg-amber-100' : 'bg-success/10'}`}
+            >
+              <span
+                className={`material-symbols-outlined text-7xl font-bold ${isOffline ? 'text-amber-600' : 'text-success'}`}
+              >
                 {isOffline ? 'cloud_upload' : 'check_circle'}
               </span>
             </div>
@@ -65,10 +72,9 @@ export function CheckinConfirmation() {
                 {isOffline ? 'Saved Offline' : 'Checked In Successfully'}
               </h1>
               <p className="text-slate-600 dark:text-slate-400 text-base font-normal leading-normal text-center">
-                {isOffline 
+                {isOffline
                   ? 'Your attendance has been saved locally and will sync automatically when you are back online.'
-                  : "Your attendance for today's audit has been securely recorded."
-                }
+                  : "Your attendance for today's audit has been securely recorded."}
               </p>
             </div>
           </div>
@@ -76,9 +82,11 @@ export function CheckinConfirmation() {
 
         {/* Details Card */}
         <div className="px-4 @container">
-          <div className={`flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm ${
-            isVariant1 ? 'rounded-xl' : 'rounded-lg'
-          }`}>
+          <div
+            className={`flex flex-col overflow-hidden border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm ${
+              isVariant1 ? 'rounded-xl' : 'rounded-lg'
+            }`}
+          >
             {/* Map Placeholder */}
             <div className="w-full h-24 bg-primary/10 bg-cover bg-center flex items-center justify-center">
               <span className="material-symbols-outlined text-primary/40 text-4xl">map</span>
@@ -108,7 +116,9 @@ export function CheckinConfirmation() {
                     Check-In Time
                   </p>
                   <div className="flex items-center gap-1">
-                    <span className="material-symbols-outlined text-slate-400 text-sm">schedule</span>
+                    <span className="material-symbols-outlined text-slate-400 text-sm">
+                      schedule
+                    </span>
                     <p className="text-slate-900 dark:text-slate-100 text-sm font-medium">
                       {formattedTime}
                     </p>
@@ -137,9 +147,7 @@ export function CheckinConfirmation() {
           <button
             onClick={() => navigate(ROUTES.DASHBOARD)}
             className={`w-full py-4 px-6 bg-primary text-white font-bold flex items-center justify-center gap-2 ${
-              isVariant1 
-                ? 'rounded-xl shadow-lg shadow-primary/20' 
-                : 'rounded-lg shadow-sm'
+              isVariant1 ? 'rounded-xl shadow-lg shadow-primary/20' : 'rounded-lg shadow-sm'
             }`}
           >
             <span>Go to Dashboard</span>
@@ -148,8 +156,8 @@ export function CheckinConfirmation() {
           <button
             onClick={() => navigate(ROUTES.CLIENT_SELECTION)}
             className={`w-full py-4 px-6 font-bold flex items-center justify-center gap-2 ${
-              isVariant1 
-                ? 'bg-transparent border-2 border-primary/20 text-primary dark:text-slate-300 rounded-xl' 
+              isVariant1
+                ? 'bg-transparent border-2 border-primary/20 text-primary dark:text-slate-300 rounded-xl'
                 : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-lg'
             }`}
           >

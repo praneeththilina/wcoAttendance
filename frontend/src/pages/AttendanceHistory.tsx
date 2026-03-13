@@ -21,7 +21,12 @@ export function AttendanceHistory() {
   const loadHistory = async () => {
     setIsLoading(true);
     try {
-      const data = await attendanceService.getHistory(page, limit, startDate || undefined, endDate || undefined);
+      const data = await attendanceService.getHistory(
+        page,
+        limit,
+        startDate || undefined,
+        endDate || undefined
+      );
       setRecords(data.records);
       setTotal(data.total);
     } catch (error: any) {
@@ -59,7 +64,8 @@ export function AttendanceHistory() {
       <div className="max-w-md mx-auto bg-background-light dark:bg-background-dark">
         {/* Header */}
         <header className="flex items-center bg-white dark:bg-slate-900 p-4 border-b border-primary/10 sticky top-0 z-10">
-          <button aria-label="Go back"
+          <button
+            aria-label="Go back"
             onClick={() => navigate(-1)}
             className="text-primary flex size-10 items-center justify-center rounded-full hover:bg-primary/10"
           >
@@ -119,8 +125,12 @@ export function AttendanceHistory() {
                         <span className="material-symbols-outlined text-primary">business</span>
                       </div>
                       <div>
-                        <p className="font-semibold text-sm">{(record as any).client?.name || 'Unknown Client'}</p>
-                        <p className="text-xs text-slate-500">{(record as any).client?.city || ''}</p>
+                        <p className="font-semibold text-sm">
+                          {(record as any).client?.name || 'Unknown Client'}
+                        </p>
+                        <p className="text-xs text-slate-500">
+                          {(record as any).client?.city || ''}
+                        </p>
                       </div>
                     </div>
                     <span
@@ -128,11 +138,15 @@ export function AttendanceHistory() {
                         record.status === 'checked_in'
                           ? 'bg-green-100 text-green-700'
                           : record.status === 'checked_out'
-                          ? 'bg-slate-100 text-slate-700'
-                          : 'bg-red-100 text-red-700'
+                            ? 'bg-slate-100 text-slate-700'
+                            : 'bg-red-100 text-red-700'
                       }`}
                     >
-                      {record.status === 'checked_in' ? 'Active' : record.status === 'checked_out' ? 'Completed' : 'Incomplete'}
+                      {record.status === 'checked_in'
+                        ? 'Active'
+                        : record.status === 'checked_out'
+                          ? 'Completed'
+                          : 'Incomplete'}
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-2 text-center">
@@ -146,7 +160,9 @@ export function AttendanceHistory() {
                     </div>
                     <div>
                       <p className="text-xs text-slate-500">Hours</p>
-                      <p className="font-medium text-sm">{record.totalHours ? `${record.totalHours.toFixed(1)}h` : '---'}</p>
+                      <p className="font-medium text-sm">
+                        {record.totalHours ? `${record.totalHours.toFixed(1)}h` : '---'}
+                      </p>
                     </div>
                   </div>
                   <div className="mt-2 pt-2 border-t border-slate-100 dark:border-slate-800">
