@@ -247,6 +247,11 @@ export async function checkOut(userId: string, input: CheckOutInput) {
   const checkInTime = new Date(attendance.checkInTime);
   const totalHours = (checkOutTime.getTime() - checkInTime.getTime()) / (1000 * 60 * 60);
 
+  // Standard work hours: 8.5 hours (8 hours work + 30 mins break)
+  const standardHours = 8.5;
+  const overtimeHours = totalHours > standardHours ? parseFloat((totalHours - standardHours).toFixed(2)) : 0;
+  const isLate = checkInTime.getHours() > 8 || (checkInTime.getHours() === 8 && checkInTime.getMinutes() > 30);
+
   const updated = await prisma.attendanceRecord.update({
     where: { id: attendance.id },
     data: {
@@ -258,6 +263,7 @@ export async function checkOut(userId: string, input: CheckOutInput) {
     include: {
       client: true,
       user: {
+
         select: {
           id: true,
           employeeId: true,

@@ -32,7 +32,7 @@ export function Leaves() {
       ]);
       setBalance(balData);
       setRequests(reqData.records);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to load leaves data:', error);
     } finally {
       setIsLoading(false);
@@ -59,8 +59,8 @@ export function Leaves() {
       setReason('');
       setDays(1);
       alert('Leave request submitted successfully');
-    } catch (error: any) {
-      alert(error?.response?.data?.error?.message || 'Failed to submit leave request');
+    } catch (error: unknown) {
+      alert(((error as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message) || 'Failed to submit leave request');
     } finally {
       setIsSubmitting(false);
     }

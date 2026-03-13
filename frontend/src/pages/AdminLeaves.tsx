@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { leaveService } from '@/services/leaveService';
-import { AdminBottomNav } from '@/components/layout';
+import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import type { LeaveRequest } from '@/types';
 
 export function AdminLeaves() {
@@ -63,7 +63,9 @@ export function AdminLeaves() {
   };
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 pb-20">
+    <div className="min-h-screen flex bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 pb-20">
+      <AdminSidebar />
+      <div className="flex-1 flex flex-col relative w-full overflow-x-hidden md:max-w-[calc(100vw-256px)]">
       <header className="bg-white dark:bg-slate-900 border-b border-primary/10 sticky top-0 z-10 flex justify-between items-center p-4">
         <div className="flex items-center gap-3">
           <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
@@ -223,5 +225,7 @@ export function AdminLeaves() {
 
       <AdminBottomNav />
     </div>
+    </div>
+
   );
 }

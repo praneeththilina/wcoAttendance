@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { AdminBottomNav } from '@/components/layout';
+import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import { StatusBadge } from '@/components/ui';
 import { adminService } from '@/services/adminService';
 
@@ -70,8 +70,10 @@ export function AdminDashboard() {
   }, [staff, searchQuery]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 font-display text-slate-900 dark:text-slate-100 pb-20">
-      <div className="relative flex min-h-screen w-full flex-col max-w-[430px] mx-auto bg-white dark:bg-background-dark shadow-2xl overflow-x-hidden">
+    <div className="min-h-screen flex bg-slate-50 dark:bg-slate-900 font-display text-slate-900 dark:text-slate-100 pb-20">
+      <AdminSidebar />
+      <div className="flex-1 flex flex-col relative w-full overflow-x-hidden md:max-w-[calc(100vw-256px)]">
+      <div className="relative flex min-h-screen w-full flex-col w-full max-w-7xl mx-auto md:px-8 lg:px-12 bg-white dark:bg-background-dark shadow-2xl overflow-x-hidden">
         {/* Header */}
         <header className="flex items-center bg-white dark:bg-background-dark p-4 justify-between sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
           <div className="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
@@ -212,5 +214,7 @@ export function AdminDashboard() {
 
       <AdminBottomNav />
     </div>
+    </div>
+
   );
 }

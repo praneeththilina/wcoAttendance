@@ -79,7 +79,7 @@ export const useAttendanceStore = create<AttendanceState>()(
               await attendanceService.changeLocation(action.data.clientId, action.data.location);
             }
             get().removeFromQueue(action.id);
-          } catch (error: any) {
+          } catch (error: unknown) {
             console.error(`Failed to sync action ${action.id}:`, error);
             // If it's a 400 error (e.g. already checked in), we might want to remove it
             // For now, we stop syncing this queue to avoid out-of-order execution issues
@@ -95,7 +95,7 @@ export const useAttendanceStore = create<AttendanceState>()(
         try {
           const status = await attendanceService.getTodayStatus();
           set({ todayStatus: status });
-        } catch (error: any) {
+        } catch (error: unknown) {
           console.error('Failed to fetch today status:', error);
         }
       },

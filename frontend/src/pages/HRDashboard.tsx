@@ -1,19 +1,26 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '@/stores/authStore';
-import { ROUTES } from '@/constants';
+
+import { AdminSidebar } from '@/components/layout';
+
+
 import apiClient from '@/services/api';
 
 interface DashboardStats {
   totalEmployees: number;
   activeToday: number;
   complianceRate: number;
-  todaysAttendance: any[];
+  todaysAttendance: {
+    id: string;
+    user: { firstName: string; lastName: string; employeeId: string; };
+    client?: { name: string; city: string; };
+    checkInTime: string;
+    status: string;
+  }[];
 }
 
 export function HRDashboard() {
-  const navigate = useNavigate();
-  const { logout } = useAuthStore();
+
+
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,7 +33,7 @@ export function HRDashboard() {
       setIsLoading(true);
       const response = await apiClient.get('/hr/dashboard');
       setStats(response.data.data);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to load HR dashboard:', error);
     } finally {
       setIsLoading(false);
@@ -36,55 +43,7 @@ export function HRDashboard() {
   return (
     <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col hidden md:flex">
-        <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
-          <div className="bg-primary text-white p-2 rounded-lg">
-            <span className="material-symbols-outlined">corporate_fare</span>
-          </div>
-          <div>
-            <h1 className="font-bold text-lg leading-tight">HR Portal</h1>
-            <p className="text-xs text-slate-500">Enterprise Admin</p>
-          </div>
-        </div>
-        <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-          <a
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold"
-            href="#"
-          >
-            <span className="material-symbols-outlined">dashboard</span>
-            <span className="text-sm">Dashboard</span>
-          </a>
-          <a
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-            onClick={() => navigate(ROUTES.ADMIN_CLIENTS)}
-          >
-            <span className="material-symbols-outlined">business</span>
-            <span className="text-sm">Clients</span>
-          </a>
-          <a
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-            onClick={() => navigate(ROUTES.ADMIN_LEAVES)}
-          >
-            <span className="material-symbols-outlined">event_busy</span>
-            <span className="text-sm">Leave Management</span>
-          </a>
-          <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800">
-            <p className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
-              System
-            </p>
-            <a
-              className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-              onClick={() => {
-                logout();
-                navigate(ROUTES.LOGIN);
-              }}
-            >
-              <span className="material-symbols-outlined text-red-500">logout</span>
-              <span className="text-sm font-medium text-red-500">Logout</span>
-            </a>
-          </div>
-        </nav>
-      </aside>
+      <AdminSidebar />
 
       <main className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-900/50">
         {/* Header */}

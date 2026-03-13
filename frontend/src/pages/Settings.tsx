@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
 import { useTheme } from '@/hooks/useTheme';
-import { AdminBottomNav } from '@/components/layout';
+import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import { ROUTES } from '@/constants';
 
 interface AppVersion {
@@ -33,7 +33,9 @@ export function Settings() {
   };
 
   return (
-    <div className="min-h-screen bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen flex bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+      <AdminSidebar />
+      <div className="flex-1 flex flex-col relative w-full overflow-x-hidden md:max-w-[calc(100vw-256px)]">
       {/* Header */}
       <header className="flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-primary/10 sticky top-0 z-10">
         <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
@@ -179,5 +181,7 @@ export function Settings() {
 
       <AdminBottomNav />
     </div>
+    </div>
+
   );
 }

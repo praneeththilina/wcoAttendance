@@ -1,12 +1,12 @@
 import re
 
-filepath = 'frontend/src/pages/ClientSelection.tsx'
+filepath = 'frontend/src/stores/attendanceStore.ts'
 with open(filepath, 'r') as f:
     content = f.read()
 
-# Fix types in ClientSelection.tsx
+# Fix types in attendanceStore.ts
 content = content.replace("catch (error: any)", "catch (error: unknown)")
 
 with open(filepath, 'w') as f:
     f.write(content)
-print("Fixed types in ClientSelection")
+print("Fixed types in attendanceStore")
