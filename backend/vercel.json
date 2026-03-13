@@ -6,16 +6,9 @@
       "use": "@vercel/node"
     }
   ],
-  "installCommand": "pnpm install --legacy-peer-deps",
-  "buildCommand": "pnpm prisma generate && pnpm exec tsc",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/vercel.js"
-    }
-  ],
+  "installCommand": "cd backend && pnpm install --legacy-peer-deps",
+  "buildCommand": "cd backend && pnpm prisma generate && pnpm exec tsc",
   "env": {
-    "NODE_ENV": "production",
-    "CORS_ORIGIN": "https://wco-attendance-frontend.vercel.app"
+    "NODE_ENV": "production"
   }
 }
