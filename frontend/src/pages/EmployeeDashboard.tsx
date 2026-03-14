@@ -109,6 +109,7 @@ export function EmployeeDashboard() {
               logout();
               navigate(ROUTES.LOGIN);
             }}
+            aria-label="Notifications"
             className="flex cursor-pointer items-center justify-center rounded-lg h-10 w-10 bg-transparent"
           >
             <span className="material-symbols-outlined">notifications</span>
