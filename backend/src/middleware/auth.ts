@@ -7,7 +7,10 @@ export interface AuthRequest extends Request {
   user?: TokenPayload;
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'test' ? 'test-secret' : undefined);
+if (!JWT_SECRET) {
+  throw new Error('CRITICAL: JWT_SECRET environment variable is not set. Refusing to start insecurely.');
+}
 
 export function authenticate(req: Request, _res: Response, next: NextFunction) {
   try {
