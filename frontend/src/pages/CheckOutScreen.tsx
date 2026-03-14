@@ -126,6 +126,7 @@ export function CheckOutScreen() {
         >
           <button
             onClick={() => navigate(-1)}
+            aria-label="Go back"
             className="text-primary dark:text-slate-100 flex size-10 items-center justify-center rounded-full hover:bg-primary/5"
           >
             <span className="material-symbols-outlined">arrow_back</span>
