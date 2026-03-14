@@ -28,7 +28,9 @@ export function AdminSidebar() {
           A
         </div>
         <div>
-          <h1 className="font-bold text-lg leading-tight text-slate-900 dark:text-slate-100">Audit Firm</h1>
+          <h1 className="font-bold text-lg leading-tight text-slate-900 dark:text-slate-100">
+            Audit Firm
+          </h1>
           <p className="text-xs text-slate-500 font-medium">Admin Portal</p>
         </div>
       </div>
