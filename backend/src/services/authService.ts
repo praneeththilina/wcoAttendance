@@ -5,7 +5,11 @@ import { AppError } from '../utils/AppError.js';
 import type { LoginInput } from '../validators/auth.validator.js';
 import { Prisma } from '@prisma/client';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'test' ? 'test-secret' : undefined);
+if (!JWT_SECRET) {
+  throw new Error('CRITICAL: JWT_SECRET environment variable is not set. Refusing to start insecurely.');
+}
+
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
 const REFRESH_TOKEN_EXPIRES_IN = process.env.REFRESH_TOKEN_EXPIRES_IN || '7d';
 
