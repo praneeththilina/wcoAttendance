@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 import { AdminSidebar } from '@/components/layout';
 
-
 import apiClient from '@/services/api';
 
 interface DashboardStats {
@@ -11,16 +10,14 @@ interface DashboardStats {
   complianceRate: number;
   todaysAttendance: {
     id: string;
-    user: { firstName: string; lastName: string; employeeId: string; };
-    client?: { name: string; city: string; };
+    user: { firstName: string; lastName: string; employeeId: string };
+    client?: { name: string; city: string };
     checkInTime: string;
     status: string;
   }[];
 }
 
 export function HRDashboard() {
-
-
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

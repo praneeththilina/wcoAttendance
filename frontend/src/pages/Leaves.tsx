@@ -60,7 +60,10 @@ export function Leaves() {
       setDays(1);
       alert('Leave request submitted successfully');
     } catch (error: unknown) {
-      alert(((error as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error?.message) || 'Failed to submit leave request');
+      alert(
+        (error as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error
+          ?.message || 'Failed to submit leave request'
+      );
     } finally {
       setIsSubmitting(false);
     }
