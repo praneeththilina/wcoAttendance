@@ -40,7 +40,8 @@ export function CheckinConfirmation() {
         <div className="flex items-center p-4 pb-2 justify-between">
           <button
             onClick={() => navigate(-1)}
-            className="text-primary dark:text-slate-100 flex size-12 shrink-0 items-center justify-start"
+            aria-label="Go back"
+            className="text-primary dark:text-slate-100 flex size-12 shrink-0 items-center justify-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
           >
             <span className="material-symbols-outlined text-2xl">arrow_back</span>
           </button>
