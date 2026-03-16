@@ -100,6 +100,7 @@ export function ChangeClientLocation() {
           <div className="flex items-center p-4 justify-between">
             <button
               onClick={() => navigate(-1)}
+              aria-label="Go back"
               className="text-primary dark:text-primary/80 flex size-10 items-center justify-center rounded-full hover:bg-primary/10 transition-colors"
             >
               <span className="material-symbols-outlined">arrow_back</span>

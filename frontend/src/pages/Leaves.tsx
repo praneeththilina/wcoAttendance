@@ -75,6 +75,7 @@ export function Leaves() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate(-1)}
+            aria-label="Go back"
             className="p-2 -ml-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
           >
             <span className="material-symbols-outlined">arrow_back</span>

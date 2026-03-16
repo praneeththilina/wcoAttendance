@@ -68,9 +68,13 @@ export function LoginPage() {
       <div className="relative flex flex-col h-auto min-h-screen w-full overflow-x-hidden pb-12 group/design-root">
         {/* Top App Bar */}
         <div className="flex items-center p-4 pb-2 justify-between">
-          <div className="text-primary dark:text-primary/80 flex size-12 shrink-0 items-center justify-start cursor-pointer">
+          <button
+            type="button"
+            aria-label="Go back"
+            className="text-primary dark:text-primary/80 flex size-12 shrink-0 items-center justify-start cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+          >
             <span className="material-symbols-outlined">arrow_back</span>
-          </div>
+          </button>
           <h2 className="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">
             Attendance Tracker
           </h2>
