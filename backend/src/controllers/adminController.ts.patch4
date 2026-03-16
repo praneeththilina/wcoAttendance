@@ -1,0 +1,11 @@
+--- backend/src/controllers/adminController.ts
++++ backend/src/controllers/adminController.ts
+@@ -14,7 +14,7 @@
+   latitude: z.number().optional(),
+   longitude: z.number().optional(),
+   isActive: z.boolean().default(true)
+-}).required();
++});
+
+ export const adminController = {
+   // Dashboard and Reports

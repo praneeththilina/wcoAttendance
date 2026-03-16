@@ -1,0 +1,10 @@
+--- backend/src/controllers/authController.ts
++++ backend/src/controllers/authController.ts
+@@ -89,7 +89,7 @@
+ export async function updateProfile(req: Request, res: Response, next: NextFunction) {
+   try {
+     const userId = (req as AuthRequest).user?.userId;
+-    const { firstName, lastName, profilePicture } = req.body;
++    const { firstName, lastName, profilePicture } = updateProfileSchema.shape.body.parse(req.body);
+
+     const result = await authService.updateProfile(userId!, { firstName, lastName, profilePicture });

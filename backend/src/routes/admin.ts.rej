@@ -1,0 +1,8 @@
+--- admin.ts
++++ admin.ts
+@@ -25,5 +25,5 @@
+
+ // Settings endpoints
+ adminRoutes.get('/settings', adminController.getSettings);
+-adminRoutes.put('/settings', adminController.updateSettings);
++adminRoutes.put('/settings', validate(updateSettingsSchema.shape), adminController.updateSettings);

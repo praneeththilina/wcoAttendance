@@ -1,0 +1,11 @@
+--- backend/src/controllers/adminController.ts
++++ backend/src/controllers/adminController.ts
+@@ -237,7 +237,7 @@
+
+   createClient: async (req: Request, res: Response, next: NextFunction) => {
+     try {
+-      const validatedData = clientSchema.parse(req.body);
++      const validatedData = clientSchema.parse(req.body) as any;
+       const newClient = await prisma.client.create({
+         data: validatedData
+       });
