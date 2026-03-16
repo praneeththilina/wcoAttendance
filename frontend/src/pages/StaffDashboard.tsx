@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import { adminService, StaffMember } from '@/services/adminService';
 
@@ -52,10 +52,26 @@ export function StaffDashboard() {
     }
   };
 
-  const filteredStaff = staff.filter((member) => {
-    if (activeTab === 'all') return true;
-    return member.todayStatus === activeTab;
-  });
+  // ⚡ Bolt: Memoized staff filtering to prevent O(N) recalculations on unrelated renders (e.g., typing in 'Add Staff' form).
+  // Impact: Reduces CPU cycles during component updates.
+  const filteredStaff = useMemo(() => {
+    return staff.filter((member) => {
+      if (activeTab === 'all') return true;
+      return member.todayStatus === activeTab;
+    });
+  }, [staff, activeTab]);
+
+  // ⚡ Bolt: Consolidated O(2N) filtering into a single O(N) pass, memoized to prevent recalculation.
+  // Impact: Reduces CPU cycles during component updates.
+  const { presentCount, notReportedCount } = useMemo(() => {
+    let presentCount = 0;
+    let notReportedCount = 0;
+    for (const s of staff) {
+      if (s.todayStatus === 'checked_in') presentCount++;
+      if (s.todayStatus === 'not_reported') notReportedCount++;
+    }
+    return { presentCount, notReportedCount };
+  }, [staff]);
 
   const getStatusIndicator = (status: string) => {
     switch (status) {
@@ -107,15 +123,11 @@ export function StaffDashboard() {
               <p className="text-xs text-slate-500">Total Staff</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-primary/5">
-              <p className="text-2xl font-bold text-green-600">
-                {staff.filter((s) => s.todayStatus === 'checked_in').length}
-              </p>
+              <p className="text-2xl font-bold text-green-600">{presentCount}</p>
               <p className="text-xs text-slate-500">Present Today</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-primary/5">
-              <p className="text-2xl font-bold text-slate-400">
-                {staff.filter((s) => s.todayStatus === 'not_reported').length}
-              </p>
+              <p className="text-2xl font-bold text-slate-400">{notReportedCount}</p>
               <p className="text-xs text-slate-500">Not Reported</p>
             </div>
           </div>
