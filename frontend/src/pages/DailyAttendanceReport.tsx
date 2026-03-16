@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import { adminService, DailyReportRecord } from '@/services/adminService';
 
@@ -23,11 +23,22 @@ export function DailyAttendanceReport() {
     }
   };
 
-  const stats = {
-    present: records.filter((r) => r.status === 'present').length,
-    absent: records.filter((r) => r.status === 'absent').length,
-    late: records.filter((r) => r.status === 'late').length,
-  };
+  // ⚡ Bolt: Reduced three O(N) Array.filter passes into a single O(N) loop with useMemo.
+  // Impact: Cuts array iterations from 3N to 1N and prevents recalculating stats on unrelated re-renders.
+  const stats = useMemo(() => {
+    let present = 0;
+    let absent = 0;
+    let late = 0;
+
+    for (let i = 0; i < records.length; i++) {
+      const status = records[i].status;
+      if (status === 'present') present++;
+      else if (status === 'absent') absent++;
+      else if (status === 'late') late++;
+    }
+
+    return { present, absent, late };
+  }, [records]);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
