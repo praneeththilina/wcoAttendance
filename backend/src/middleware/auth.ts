@@ -24,6 +24,11 @@ export function authenticate(req: Request, _res: Response, next: NextFunction) {
 
     const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload;
 
+    // Prevent using refresh tokens as access tokens
+    if (decoded.type === 'refresh') {
+      throw new AppError('Refresh token cannot be used as an access token', 401);
+    }
+
     (req as AuthRequest).user = decoded;
 
     next();
@@ -49,7 +54,10 @@ export function optionalAuth(req: Request, _res: Response, next: NextFunction) {
     const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload;
 
-    (req as AuthRequest).user = decoded;
+    // Prevent using refresh tokens as access tokens
+    if (decoded.type !== 'refresh') {
+      (req as AuthRequest).user = decoded;
+    }
   } catch {
     // Ignore token errors for optional auth
   }
