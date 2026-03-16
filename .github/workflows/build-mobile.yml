@@ -97,11 +97,29 @@ jobs:
           cd frontend
           npm run build
 
+      - name: Build iOS App
+        run: |
+          cd frontend
+          cat << 'CONF' > capacitor.config.ts
+          import { CapacitorConfig } from '@capacitor/cli';
+          const config: CapacitorConfig = {
+            appId: 'com.aa.attendance',
+            appName: 'AA Attendance',
+            webDir: 'dist',
+            bundledWebRuntime: false
+          };
+          export default config;
+          CONF
+          npx cap add ios
+          npx cap sync ios
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug -destination 'generic/platform=iOS' archive -archivePath App.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+
       - name: Upload iOS build
         uses: actions/upload-artifact@v4
         with:
           name: ios-build
-          path: frontend/dist
+          path: frontend/ios/App/App.xcarchive
           retention-days: 7
 
   release:
