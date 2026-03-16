@@ -1,0 +1,10 @@
+--- backend/src/controllers/authController.ts
++++ backend/src/controllers/authController.ts
+@@ -1,6 +1,6 @@
+ import type { Request, Response, NextFunction } from 'express';
+ import * as authService from '../services/authService.js';
+-import { loginSchema, registerSchema } from '../validators/auth.validator.js';
++import { loginSchema, registerSchema, updateProfileSchema } from '../validators/auth.validator.js';
+ import type { AuthRequest } from '../middleware/auth.js';
+
+ export async function login(req: Request, res: Response, next: NextFunction) {

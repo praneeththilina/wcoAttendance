@@ -1,0 +1,24 @@
+--- backend/src/validators/admin.validator.ts
++++ backend/src/validators/admin.validator.ts
+@@ -23,6 +23,16 @@
+   }),
+ });
+
++export const updateSettingsSchema = z.object({
++  body: z.object({
++    checkInDeadlineHour: z.number().int().min(0).max(23).optional(),
++    checkInDeadlineMinute: z.number().int().min(0).max(59).optional(),
++    maxDistanceMeters: z.number().int().positive().optional(),
++    autoLocationCaptureHour: z.number().int().min(0).max(23).optional(),
++    autoLocationCaptureMinute: z.number().int().min(0).max(59).optional(),
++  }),
++});
++
+ export const getDailyReportSchema = z.object({
+   query: z.object({
+     date: z.string().min(1, 'Date is required'),
+@@ -32,3 +42,4 @@
+ export type CreateStaffInput = z.infer<typeof createStaffSchema>['body'];
+ export type UpdateStaffInput = z.infer<typeof updateStaffSchema>['body'];
+ export type GetDailyReportInput = z.infer<typeof getDailyReportSchema>['query'];
++export type UpdateSettingsInput = z.infer<typeof updateSettingsSchema>['body'];

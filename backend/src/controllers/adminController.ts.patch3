@@ -1,0 +1,20 @@
+--- backend/src/controllers/adminController.ts
++++ backend/src/controllers/adminController.ts
+@@ -16,8 +16,6 @@
+   isActive: z.boolean().default(true)
+ }).required();
+
+-type ClientCreateInput = z.infer<typeof clientSchema>;
+-
+ export const adminController = {
+   // Dashboard and Reports
+   getDashboardStats: async (_req: Request, res: Response, next: NextFunction) => {
+@@ -240,7 +238,7 @@
+
+   createClient: async (req: Request, res: Response, next: NextFunction) => {
+     try {
+-      const validatedData = clientSchema.parse(req.body) as any;
++      const validatedData = clientSchema.parse(req.body);
+       const newClient = await prisma.client.create({
+         data: validatedData
+       });
