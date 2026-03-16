@@ -175,7 +175,10 @@ export function ClientSelection() {
               Quick Actions
             </h3>
             <div className="grid grid-cols-2 gap-3">
-              <button className="flex flex-col gap-2 border border-primary/10 bg-white dark:bg-primary/10 p-4 items-center justify-center text-center hover:border-primary transition-all group rounded-lg shadow-sm">
+              <button
+                className="flex flex-col gap-2 border border-primary/10 bg-white dark:bg-primary/10 p-4 items-center justify-center text-center hover:border-primary transition-all group rounded-lg shadow-sm"
+                aria-label="Check in to HQ Office"
+              >
                 <div className="bg-primary/10 dark:bg-primary/20 p-3 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-2xl">corporate_fare</span>
                 </div>
@@ -183,7 +186,10 @@ export function ClientSelection() {
                   HQ Office
                 </span>
               </button>
-              <button className="flex flex-col gap-2 border border-primary/10 bg-white dark:bg-primary/10 p-4 items-center justify-center text-center hover:border-primary transition-all group rounded-lg shadow-sm">
+              <button
+                className="flex flex-col gap-2 border border-primary/10 bg-white dark:bg-primary/10 p-4 items-center justify-center text-center hover:border-primary transition-all group rounded-lg shadow-sm"
+                aria-label="Start Travel"
+              >
                 <div className="bg-primary/10 dark:bg-primary/20 p-3 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-colors">
                   <span className="material-symbols-outlined text-2xl">commute</span>
                 </div>
@@ -211,6 +217,7 @@ export function ClientSelection() {
                     onClick={() => handleClientSelect(client)}
                     disabled={isCheckingIn}
                     className="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 hover:border-primary/30 transition-all text-left rounded-lg disabled:opacity-50"
+                    aria-label={`Select client ${client.name}`}
                   >
                     <div className="size-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary">
                       <span className="material-symbols-outlined">
