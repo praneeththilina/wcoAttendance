@@ -83,7 +83,10 @@ export function AdminDashboard() {
               Attendance Dashboard
             </h2>
             <div className="flex gap-2 items-center justify-end">
-              <button className="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <button
+                aria-label="Notifications"
+                className="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
                 <span className="material-symbols-outlined text-slate-900 dark:text-slate-100">
                   notifications
                 </span>
