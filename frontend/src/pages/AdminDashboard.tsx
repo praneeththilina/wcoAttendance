@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import { StatusBadge } from '@/components/ui';
 import { adminService } from '@/services/adminService';
@@ -20,6 +20,53 @@ interface DashboardStats {
   atOffice: number;
   atClientSites: number;
 }
+
+// ⚡ Bolt: Extracted and memoized staff list item to prevent O(N) redundant renders
+// of the entire list when unrelated state (like search input or polling) changes.
+// Impact: Significantly reduces CPU and layout thrashing during typing or polling.
+const StaffListItem = React.memo(({ member }: { member: LocalStaffMember }) => (
+  <div
+    className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col gap-3"
+  >
+    <div className="flex justify-between items-start">
+      <div className="flex gap-3">
+        <div className="size-12 rounded-full overflow-hidden border-2 border-slate-200 bg-slate-100 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-500">
+          {member.firstName[0]}
+          {member.lastName[0]}
+        </div>
+        <div>
+          <h3 className="font-bold text-slate-900 dark:text-slate-100">
+            {member.firstName} {member.lastName}
+          </h3>
+          <p className="text-xs text-slate-500 dark:text-slate-400">{member.role}</p>
+        </div>
+      </div>
+      <StatusBadge status={member.status} />
+    </div>
+    <div className="flex items-center justify-between pt-2 border-t border-slate-50 dark:border-slate-700">
+      <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+        <span className="material-symbols-outlined text-sm">
+          {member.status === 'travel'
+            ? 'commute'
+            : member.status === 'checked_out'
+              ? 'home'
+              : 'location_on'}
+        </span>
+        <span className="text-xs font-semibold line-clamp-1 max-w-[150px]">
+          {member.clientName
+            ? `${member.clientName}${member.clientCity ? `, ${member.clientCity}` : ''}`
+            : member.status === 'checked_out'
+              ? 'Checked Out'
+              : 'Not at a site'}
+        </span>
+      </div>
+      <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
+        <span className="material-symbols-outlined text-sm">schedule</span>
+        <span className="text-xs font-semibold">{member.checkInTime || '---'}</span>
+      </div>
+    </div>
+  </div>
+));
 
 export function AdminDashboard() {
   const [staff, setStaff] = useState<LocalStaffMember[]>([]);
@@ -167,48 +214,7 @@ export function AdminDashboard() {
               </div>
             ) : (
               filteredStaff.map((member) => (
-                <div
-                  key={member.id}
-                  className="p-4 bg-white dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col gap-3"
-                >
-                  <div className="flex justify-between items-start">
-                    <div className="flex gap-3">
-                      <div className="size-12 rounded-full overflow-hidden border-2 border-slate-200 bg-slate-100 dark:bg-slate-700 flex items-center justify-center font-bold text-slate-500">
-                        {member.firstName[0]}
-                        {member.lastName[0]}
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-slate-900 dark:text-slate-100">
-                          {member.firstName} {member.lastName}
-                        </h3>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">{member.role}</p>
-                      </div>
-                    </div>
-                    <StatusBadge status={member.status} />
-                  </div>
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-50 dark:border-slate-700">
-                    <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
-                      <span className="material-symbols-outlined text-sm">
-                        {member.status === 'travel'
-                          ? 'commute'
-                          : member.status === 'checked_out'
-                            ? 'home'
-                            : 'location_on'}
-                      </span>
-                      <span className="text-xs font-semibold line-clamp-1 max-w-[150px]">
-                        {member.clientName
-                          ? `${member.clientName}${member.clientCity ? `, ${member.clientCity}` : ''}`
-                          : member.status === 'checked_out'
-                            ? 'Checked Out'
-                            : 'Not at a site'}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
-                      <span className="material-symbols-outlined text-sm">schedule</span>
-                      <span className="text-xs font-semibold">{member.checkInTime || '---'}</span>
-                    </div>
-                  </div>
-                </div>
+                <StaffListItem key={member.id} member={member} />
               ))
             )}
           </div>
