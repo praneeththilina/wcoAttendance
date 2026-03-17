@@ -26,18 +26,22 @@ export function AdminClients() {
     loadClients();
   }, []);
 
+  // ⚡ Bolt: Pre-calculate lowercase strings for searching to avoid O(N) redundant allocations per keystroke.
+  // Impact: Improves typing responsiveness when filtering large client lists.
+  const searchableClients = useMemo(() => {
+    return clients.map((client) => ({
+      ...client,
+      _searchStr: `${client.name} ${client.city} ${client.address || ''}`.toLowerCase(),
+    }));
+  }, [clients]);
+
   const filteredClients = useMemo(() => {
     if (searchQuery.trim() === '') {
       return clients;
     }
     const query = searchQuery.toLowerCase();
-    return clients.filter(
-      (client) =>
-        client.name.toLowerCase().includes(query) ||
-        client.city.toLowerCase().includes(query) ||
-        client.address?.toLowerCase().includes(query)
-    );
-  }, [searchQuery, clients]);
+    return searchableClients.filter((client) => client._searchStr.includes(query));
+  }, [searchQuery, searchableClients, clients]);
 
   const loadClients = async () => {
     try {
