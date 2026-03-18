@@ -130,11 +130,15 @@ export function AdminClients() {
       <div className="flex-1 flex flex-col relative w-full overflow-x-hidden md:max-w-[calc(100vw-256px)]">
         {/* Header */}
         <header className="flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-primary/10 sticky top-0 z-10">
-          <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
+          <button
+            aria-label="Open menu"
+            className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center"
+          >
             <span className="material-symbols-outlined text-3xl">menu</span>
           </button>
           <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">Clients</h1>
           <button
+            aria-label="Add client"
             onClick={openCreateModal}
             className="flex items-center justify-center p-2 rounded-lg bg-primary text-white hover:bg-primary/90"
           >
@@ -211,12 +215,14 @@ export function AdminClients() {
                 </div>
                 <div className="flex items-center gap-1">
                   <button
+                    aria-label={`Edit client ${client.name}`}
                     onClick={() => openEditModal(client)}
                     className="p-2 text-slate-400 hover:text-primary hover:bg-primary/10 rounded-lg"
                   >
                     <span className="material-symbols-outlined text-sm">edit</span>
                   </button>
                   <button
+                    aria-label={`Delete client ${client.name}`}
                     onClick={() => setDeleteConfirm(client.id)}
                     className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"
                   >
