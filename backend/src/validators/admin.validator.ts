@@ -22,6 +22,24 @@ export const updateStaffSchema = z.object({
   }),
 });
 
+const clientBaseSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  branch: z.string().optional(),
+  city: z.string().min(1, 'City is required'),
+  address: z.string().optional(),
+  latitude: z.number().optional(),
+  longitude: z.number().optional(),
+  isActive: z.boolean().default(true)
+});
+
+export const createClientSchema = z.object({
+  body: clientBaseSchema
+});
+
+export const updateClientSchema = z.object({
+  body: clientBaseSchema.partial()
+});
+
 export const updateSettingsSchema = z.object({
   body: z.object({
     checkInDeadlineHour: z.number().int().min(0).max(23).optional(),
