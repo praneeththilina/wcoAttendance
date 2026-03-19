@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { adminController } from '../controllers/adminController.js';
 import { authenticate, requireRole } from '../middleware/auth.js';
 import { validate } from '../validators/index.js';
-import { createStaffSchema, updateStaffSchema, getDailyReportSchema, updateSettingsSchema } from '../validators/admin.validator.js';
+import { createStaffSchema, updateStaffSchema, getDailyReportSchema, updateSettingsSchema, createClientSchema, updateClientSchema } from '../validators/admin.validator.js';
 
 export const adminRoutes: Router = Router();
 
@@ -20,8 +20,8 @@ adminRoutes.put('/staff/:id', validate(updateStaffSchema.shape), adminController
 
 // Client endpoints
 adminRoutes.get('/clients', adminController.getAllClients);
-adminRoutes.post('/clients', adminController.createClient);
-adminRoutes.put('/clients/:id', adminController.updateClient);
+adminRoutes.post('/clients', validate(createClientSchema.shape), adminController.createClient);
+adminRoutes.put('/clients/:id', validate(updateClientSchema.shape), adminController.updateClient);
 adminRoutes.delete('/clients/:id', adminController.deleteClient);
 
 // Settings endpoints
