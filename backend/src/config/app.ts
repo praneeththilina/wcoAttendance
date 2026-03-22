@@ -22,14 +22,16 @@ export function createApp(): Application {
 
   // Security middleware
   app.use(helmet());
-  
+
   // CORS configuration
-  app.use(cors({
-    origin: CORS_ORIGIN,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  }));
+  app.use(
+    cors({
+      origin: CORS_ORIGIN,
+      credentials: true,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization'],
+    })
+  );
 
   // Rate limiting
   const limiter = rateLimit({

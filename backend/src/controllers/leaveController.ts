@@ -1,10 +1,10 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as leaveService from '../services/leaveService.js';
-import { 
-  createLeaveRequestSchema, 
-  updateLeaveStatusSchema, 
-  getLeaveRequestsSchema, 
-  updateLeaveBalanceSchema 
+import {
+  createLeaveRequestSchema,
+  updateLeaveStatusSchema,
+  getLeaveRequestsSchema,
+  updateLeaveBalanceSchema,
 } from '../validators/leave.validator.js';
 import type { AuthRequest } from '../middleware/auth.js';
 
@@ -27,7 +27,7 @@ export async function createLeaveRequest(req: Request, res: Response, next: Next
   try {
     const validated = createLeaveRequestSchema.shape.body.parse(req.body);
     const userId = (req as AuthRequest).user!.userId;
-    
+
     // Pass everything explicitly but only allowed leave types based on the union type
     const result = await leaveService.createLeaveRequest(userId, {
       type: validated.type as 'sick' | 'annual' | 'unpaid' | 'other',
@@ -50,7 +50,7 @@ export async function getMyLeaveRequests(req: Request, res: Response, next: Next
   try {
     const userId = (req as AuthRequest).user!.userId;
     const validated = getLeaveRequestsSchema.shape.query.parse(req.query);
-    
+
     const result = await leaveService.getLeaveRequests({
       userId,
       ...validated,
@@ -74,7 +74,7 @@ export async function getMyLeaveRequests(req: Request, res: Response, next: Next
 export async function getAllLeaveRequests(req: Request, res: Response, next: NextFunction) {
   try {
     const validated = getLeaveRequestsSchema.shape.query.parse(req.query);
-    
+
     const result = await leaveService.getLeaveRequests({
       ...validated,
       status: validated.status as 'pending' | 'approved' | 'rejected' | undefined,
