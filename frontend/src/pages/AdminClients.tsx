@@ -39,6 +39,19 @@ export function AdminClients() {
     );
   }, [searchQuery, clients]);
 
+  // ⚡ Bolt: Prevent O(2N) recount of active/inactive clients on every keystroke/render
+  // Replaced two .filter().length calls with a single O(N) useMemo block
+  const clientStats = useMemo(() => {
+    return clients.reduce(
+      (acc, client) => {
+        if (client.isActive) acc.active++;
+        else acc.inactive++;
+        return acc;
+      },
+      { active: 0, inactive: 0 }
+    );
+  }, [clients]);
+
   const loadClients = async () => {
     try {
       const data = await adminService.getAllClients();
@@ -166,13 +179,13 @@ export function AdminClients() {
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
               <p className="text-2xl font-bold text-green-600">
-                {clients.filter((c) => c.isActive).length}
+                {clientStats.active}
               </p>
               <p className="text-xs text-slate-500">Active</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
               <p className="text-2xl font-bold text-slate-400">
-                {clients.filter((c) => !c.isActive).length}
+                {clientStats.inactive}
               </p>
               <p className="text-xs text-slate-500">Inactive</p>
             </div>
