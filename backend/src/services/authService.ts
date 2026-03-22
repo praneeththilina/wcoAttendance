@@ -5,9 +5,12 @@ import { AppError } from '../utils/AppError.js';
 import type { LoginInput } from '../validators/auth.validator.js';
 import { Prisma } from '@prisma/client';
 
-const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'test' ? 'test-secret' : undefined);
+const JWT_SECRET =
+  process.env.JWT_SECRET || (process.env.NODE_ENV === 'test' ? 'test-secret' : undefined);
 if (!JWT_SECRET) {
-  throw new Error('CRITICAL: JWT_SECRET environment variable is not set. Refusing to start insecurely.');
+  throw new Error(
+    'CRITICAL: JWT_SECRET environment variable is not set. Refusing to start insecurely.'
+  );
 }
 
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
@@ -49,11 +52,9 @@ export async function login(input: LoginInput) {
     { expiresIn: tokenExpiry as jwt.SignOptions['expiresIn'] }
   );
 
-  const refreshToken = jwt.sign(
-    { userId: user.id, type: 'refresh' },
-    JWT_SECRET,
-    { expiresIn: REFRESH_TOKEN_EXPIRES_IN as jwt.SignOptions['expiresIn'] }
-  );
+  const refreshToken = jwt.sign({ userId: user.id, type: 'refresh' }, JWT_SECRET, {
+    expiresIn: REFRESH_TOKEN_EXPIRES_IN as jwt.SignOptions['expiresIn'],
+  });
 
   return {
     accessToken,
@@ -102,7 +103,14 @@ export async function logout(_userId: string) {
   return { message: 'Logged out successfully' };
 }
 
-export async function register(input: { email: string; password: string; firstName: string; lastName: string; employeeId: string; role?: string }) {
+export async function register(input: {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  employeeId: string;
+  role?: string;
+}) {
   const { email, password, firstName, lastName, employeeId, role = 'employee' } = input;
 
   const existing = await prisma.user.findUnique({ where: { email } });
@@ -133,7 +141,10 @@ export async function register(input: { email: string; password: string; firstNa
   };
 }
 
-export async function updateProfile(userId: string, input: { firstName?: string; lastName?: string; profilePicture?: string }) {
+export async function updateProfile(
+  userId: string,
+  input: { firstName?: string; lastName?: string; profilePicture?: string }
+) {
   const { firstName, lastName, profilePicture } = input;
 
   const updateData: Record<string, unknown> = {};

@@ -1,6 +1,10 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as attendanceService from '../services/attendanceService.js';
-import { checkInSchema, checkOutSchema, getHistorySchema } from '../validators/attendance.validator.js';
+import {
+  checkInSchema,
+  checkOutSchema,
+  getHistorySchema,
+} from '../validators/attendance.validator.js';
 import type { AuthRequest } from '../middleware/auth.js';
 
 export async function checkIn(req: Request, res: Response, next: NextFunction) {

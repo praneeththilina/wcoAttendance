@@ -21,14 +21,18 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
   const Δφ = ((lat2 - lat1) * Math.PI) / 180;
   const Δλ = ((lon2 - lon1) * Math.PI) / 180;
 
-  const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+  const a =
+    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
     Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
   return R * c;
 }
 
-function validateLocation(location: LocationData | undefined, client: { latitude: number | null; longitude: number | null }): { valid: boolean; error?: string; warning?: string } {
+function validateLocation(
+  location: LocationData | undefined,
+  client: { latitude: number | null; longitude: number | null }
+): { valid: boolean; error?: string; warning?: string } {
   if (!location) {
     return { valid: false, error: 'Location is required' };
   }
@@ -50,7 +54,10 @@ function validateLocation(location: LocationData | undefined, client: { latitude
     );
 
     if (distance > MAX_DISTANCE_METERS) {
-      return { valid: false, error: `You are ${Math.round(distance)}m away from the client location (max: ${MAX_DISTANCE_METERS}m)` };
+      return {
+        valid: false,
+        error: `You are ${Math.round(distance)}m away from the client location (max: ${MAX_DISTANCE_METERS}m)`,
+      };
     }
   }
 
@@ -64,7 +71,10 @@ function isWithinDeadline(): boolean {
   return now.getTime() <= deadline.getTime();
 }
 
-async function checkImpossibleTravel(userId: string, location: LocationData): Promise<{ valid: boolean; error?: string }> {
+async function checkImpossibleTravel(
+  userId: string,
+  location: LocationData
+): Promise<{ valid: boolean; error?: string }> {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const tomorrow = new Date(today);
@@ -109,9 +119,12 @@ async function checkImpossibleTravel(userId: string, location: LocationData): Pr
   const timeDiffHours = (now - lastCheckOutTime) / (1000 * 60 * 60);
 
   if (timeDiffHours > 0 && timeDiffHours < 24) {
-    const speedKmh = (distance / 1000) / timeDiffHours;
+    const speedKmh = distance / 1000 / timeDiffHours;
     if (speedKmh > MAX_IMPOSSIBLE_TRAVEL_SPEED_KMH) {
-      return { valid: false, error: `Impossible travel detected: ${Math.round(speedKmh)} km/h since last check-out` };
+      return {
+        valid: false,
+        error: `Impossible travel detected: ${Math.round(speedKmh)} km/h since last check-out`,
+      };
     }
   }
 
@@ -237,7 +250,10 @@ export async function checkOut(userId: string, input: CheckOutInput) {
   }
 
   if (location) {
-    const locationValidation = validateLocation(location as LocationData | undefined, attendance.client);
+    const locationValidation = validateLocation(
+      location as LocationData | undefined,
+      attendance.client
+    );
     if (!locationValidation.valid) {
       throw new AppError(locationValidation.error || 'Location validation failed', 400);
     }
@@ -249,8 +265,10 @@ export async function checkOut(userId: string, input: CheckOutInput) {
 
   // Standard work hours: 8.5 hours (8 hours work + 30 mins break)
   const standardHours = 8.5;
-  const overtimeHours = totalHours > standardHours ? parseFloat((totalHours - standardHours).toFixed(2)) : 0;
-  const isLate = checkInTime.getHours() > 8 || (checkInTime.getHours() === 8 && checkInTime.getMinutes() > 30);
+  const overtimeHours =
+    totalHours > standardHours ? parseFloat((totalHours - standardHours).toFixed(2)) : 0;
+  const isLate =
+    checkInTime.getHours() > 8 || (checkInTime.getHours() === 8 && checkInTime.getMinutes() > 30);
 
   const updated = await prisma.attendanceRecord.update({
     where: { id: attendance.id },
@@ -263,7 +281,6 @@ export async function checkOut(userId: string, input: CheckOutInput) {
     include: {
       client: true,
       user: {
-
         select: {
           id: true,
           employeeId: true,
@@ -311,7 +328,9 @@ export async function getTodayStatus(userId: string) {
   if (attendance.checkOutTime) {
     const checkInTime = new Date(attendance.checkInTime);
     const checkOutTime = new Date(attendance.checkOutTime);
-    totalHours = parseFloat(((checkOutTime.getTime() - checkInTime.getTime()) / (1000 * 60 * 60)).toFixed(2));
+    totalHours = parseFloat(
+      ((checkOutTime.getTime() - checkInTime.getTime()) / (1000 * 60 * 60)).toFixed(2)
+    );
   }
 
   return {
@@ -323,12 +342,15 @@ export async function getTodayStatus(userId: string) {
   };
 }
 
-export async function getHistory(userId: string, options: {
-  page?: number;
-  limit?: number;
-  startDate?: string;
-  endDate?: string;
-}) {
+export async function getHistory(
+  userId: string,
+  options: {
+    page?: number;
+    limit?: number;
+    startDate?: string;
+    endDate?: string;
+  }
+) {
   const { page = 1, limit = 20, startDate, endDate } = options;
   const skip = (page - 1) * limit;
 
@@ -374,7 +396,11 @@ export async function getHistory(userId: string, options: {
   };
 }
 
-export async function changeLocation(userId: string, clientId: string, location?: { latitude: number; longitude: number }) {
+export async function changeLocation(
+  userId: string,
+  clientId: string,
+  location?: { latitude: number; longitude: number }
+) {
   const client = await prisma.client.findUnique({
     where: { id: clientId, isActive: true },
   });
