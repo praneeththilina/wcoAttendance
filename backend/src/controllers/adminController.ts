@@ -206,10 +206,16 @@ export const adminController = {
   updateStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
+        const { email, firstName, lastName, role, isActive } = req.body;
         
-        // Exclude password from general updates; could create a separate endpoint for pw reset if needed
-        delete updateData.password;
+        // Construct updateData safely to prevent mass assignment vulnerabilities
+        const updateData = {
+          ...(email !== undefined && { email }),
+          ...(firstName !== undefined && { firstName }),
+          ...(lastName !== undefined && { lastName }),
+          ...(role !== undefined && { role }),
+          ...(isActive !== undefined && { isActive }),
+        };
 
         const updatedUser = await prisma.user.update({
           where: { id },
