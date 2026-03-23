@@ -83,7 +83,10 @@ export function AdminDashboard() {
               Attendance Dashboard
             </h2>
             <div className="flex gap-2 items-center justify-end">
-              <button className="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <button
+                className="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Notifications"
+              >
                 <span className="material-symbols-outlined text-slate-900 dark:text-slate-100">
                   notifications
                 </span>
@@ -155,7 +158,12 @@ export function AdminDashboard() {
             <h2 className="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight">
               Live Staff Board
             </h2>
-            <button className="text-primary text-sm font-semibold">View All</button>
+            <button
+              className="text-primary text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md px-2 py-1 -mr-2"
+              aria-label="View all staff members"
+            >
+              View All
+            </button>
           </div>
           {/* Staff List */}
           <div className="flex flex-col px-4 pb-24 gap-3">
