@@ -14,7 +14,7 @@ const clientSchema = z.object({
   address: z.string().optional(),
   latitude: z.number().optional(),
   longitude: z.number().optional(),
-  isActive: z.boolean().default(true)
+  isActive: z.boolean().default(true),
 });
 
 export const adminController = {
@@ -29,8 +29,8 @@ export const adminController = {
         prisma.attendanceRecord.count({
           where: {
             checkInTime: { gte: today },
-            status: 'checked_in'
-          }
+            status: 'checked_in',
+          },
         }),
         prisma.attendanceRecord.findMany({
           where: {
@@ -38,22 +38,23 @@ export const adminController = {
           },
           include: {
             user: {
-              select: { id: true, firstName: true, lastName: true, role: true }
+              select: { id: true, firstName: true, lastName: true, role: true },
             },
             client: {
-              select: { name: true, city: true }
-            }
+              select: { name: true, city: true },
+            },
           },
           orderBy: { checkInTime: 'desc' },
-          take: 20
-        })
+          take: 20,
+        }),
       ]);
 
       let atOffice = 0;
       let atClientSites = 0;
 
-      const liveStaff = attendanceRecords.map(record => {
-        const isClientSite = record.client?.name && !record.client.name.toLowerCase().includes('office');
+      const liveStaff = attendanceRecords.map((record) => {
+        const isClientSite =
+          record.client?.name && !record.client.name.toLowerCase().includes('office');
         if (record.status === 'checked_in') {
           if (isClientSite) atClientSites++;
           else atOffice++;
@@ -67,7 +68,10 @@ export const adminController = {
           status: record.status,
           clientName: record.client?.name || null,
           clientCity: record.client?.city || null,
-          checkInTime: record.checkInTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+          checkInTime: record.checkInTime.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+          }),
         };
       });
 
@@ -78,8 +82,8 @@ export const adminController = {
           checkedIn: checkedInCount,
           atOffice,
           atClientSites,
-          liveStaff
-        }
+          liveStaff,
+        },
       });
     } catch (error) {
       next(error);
@@ -90,7 +94,7 @@ export const adminController = {
     try {
       const dateStr = req.query.date as string;
       if (!dateStr) return next(new AppError('Date is required', 400));
-      
+
       const targetDate = new Date(dateStr);
       const nextDate = new Date(targetDate);
       nextDate.setDate(targetDate.getDate() + 1);
@@ -99,29 +103,39 @@ export const adminController = {
         where: {
           checkInTime: {
             gte: targetDate,
-            lt: nextDate
-          }
+            lt: nextDate,
+          },
         },
         include: {
           user: {
-            select: { firstName: true, lastName: true, role: true }
+            select: { firstName: true, lastName: true, role: true },
           },
           client: {
-            select: { name: true }
-          }
+            select: { name: true },
+          },
         },
-        orderBy: { checkInTime: 'asc' }
+        orderBy: { checkInTime: 'asc' },
       });
 
-      const formattedRecords = records.map(r => ({
+      const formattedRecords = records.map((r) => ({
         id: r.id,
         employeeName: `${r.user.firstName} ${r.user.lastName}`,
         role: r.user.role,
         clientName: r.client?.name || 'Unknown',
-        checkInTime: r.checkInTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-        checkOutTime: r.checkOutTime ? r.checkOutTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : '-',
+        checkInTime: r.checkInTime.toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+        }),
+        checkOutTime: r.checkOutTime
+          ? r.checkOutTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+          : '-',
         totalHours: r.totalHours ? Number(r.totalHours.toFixed(2)) : 0,
-        status: r.status === 'checked_in' ? 'present' : (r.status === 'checked_out' ? 'present' : 'incomplete') // Simplified status map for now
+        status:
+          r.status === 'checked_in'
+            ? 'present'
+            : r.status === 'checked_out'
+              ? 'present'
+              : 'incomplete', // Simplified status map for now
       }));
 
       res.status(200).json({ success: true, data: formattedRecords });
@@ -143,7 +157,7 @@ export const adminController = {
           role: true,
           isActive: true,
         },
-        orderBy: { firstName: 'asc' }
+        orderBy: { firstName: 'asc' },
       });
 
       // Get today's attendance status for all users if possible
@@ -152,21 +166,21 @@ export const adminController = {
       const records = await prisma.attendanceRecord.findMany({
         where: { checkInTime: { gte: today } },
         select: { userId: true, status: true },
-        orderBy: { checkInTime: 'desc' } // Get latest status
+        orderBy: { checkInTime: 'desc' }, // Get latest status
       });
 
       const userStatusMap = new Map();
-      records.forEach(r => {
+      records.forEach((r) => {
         if (!userStatusMap.has(r.userId)) userStatusMap.set(r.userId, r.status);
       });
 
-      const data = users.map(user => ({
+      const data = users.map((user) => ({
         id: user.id,
         name: `${user.firstName} ${user.lastName}`,
         email: user.email,
         role: user.role,
         status: user.isActive ? 'active' : 'inactive',
-        todayStatus: userStatusMap.get(user.id) || 'not_reported'
+        todayStatus: userStatusMap.get(user.id) || 'not_reported',
       }));
 
       res.status(200).json({ success: true, data });
@@ -178,11 +192,12 @@ export const adminController = {
   createStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { employeeId, email, password, firstName, lastName, role, isActive } = req.body;
-      
+
       const existingUser = await prisma.user.findFirst({
-        where: { OR: [{ email }, { employeeId }] }
+        where: { OR: [{ email }, { employeeId }] },
       });
-      if (existingUser) return next(new AppError('User with email or employee ID already exists', 400));
+      if (existingUser)
+        return next(new AppError('User with email or employee ID already exists', 400));
 
       const hashedPassword = await bcrypt.hash(password, 12);
       const newUser = await prisma.user.create({
@@ -193,9 +208,9 @@ export const adminController = {
           firstName,
           lastName,
           role,
-          isActive: isActive ?? true
+          isActive: isActive ?? true,
         },
-        select: { id: true, email: true, firstName: true, lastName: true, role: true }
+        select: { id: true, email: true, firstName: true, lastName: true, role: true },
       });
       res.status(201).json({ success: true, data: newUser });
     } catch (error) {
@@ -205,21 +220,35 @@ export const adminController = {
 
   updateStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { id } = req.params;
-        const updateData = req.body;
-        
-        // Exclude password from general updates; could create a separate endpoint for pw reset if needed
-        delete updateData.password;
+      const { id } = req.params;
 
-        const updatedUser = await prisma.user.update({
-          where: { id },
-          data: updateData,
-          select: { id: true, email: true, firstName: true, lastName: true, role: true, isActive: true }
-        });
-        res.status(200).json({ success: true, data: updatedUser });
+      // Explicitly extract allowed fields to prevent mass assignment vulnerabilities
+      const { employeeId, email, firstName, lastName, role, isActive } = req.body;
+
+      const updateData: any = {};
+      if (employeeId !== undefined) updateData.employeeId = employeeId;
+      if (email !== undefined) updateData.email = email;
+      if (firstName !== undefined) updateData.firstName = firstName;
+      if (lastName !== undefined) updateData.lastName = lastName;
+      if (role !== undefined) updateData.role = role;
+      if (isActive !== undefined) updateData.isActive = isActive;
+
+      const updatedUser = await prisma.user.update({
+        where: { id },
+        data: updateData,
+        select: {
+          id: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          role: true,
+          isActive: true,
+        },
+      });
+      res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
-        if ((error as any).code === 'P2025') return next(new AppError('Staff not found', 404));
-        next(error);
+      if ((error as any).code === 'P2025') return next(new AppError('Staff not found', 404));
+      next(error);
     }
   },
 
@@ -227,7 +256,7 @@ export const adminController = {
   getAllClients: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       const clients = await prisma.client.findMany({
-        orderBy: { name: 'asc' }
+        orderBy: { name: 'asc' },
       });
       res.status(200).json({ success: true, data: clients });
     } catch (error) {
@@ -239,7 +268,7 @@ export const adminController = {
     try {
       const validatedData = clientSchema.parse(req.body) as any;
       const newClient = await prisma.client.create({
-        data: validatedData
+        data: validatedData,
       });
       res.status(201).json({ success: true, data: newClient });
     } catch (error) {
@@ -251,10 +280,10 @@ export const adminController = {
     try {
       const { id } = req.params;
       const validatedData = clientSchema.partial().parse(req.body);
-      
+
       const updatedClient = await prisma.client.update({
         where: { id },
-        data: validatedData
+        data: validatedData,
       });
       res.status(200).json({ success: true, data: updatedClient });
     } catch (error) {
@@ -270,12 +299,12 @@ export const adminController = {
     try {
       const { id } = req.params;
       await prisma.client.delete({
-        where: { id }
+        where: { id },
       });
       res.status(200).json({ success: true, message: 'Client deleted successfully' });
     } catch (error) {
-       // Prisma error for not found
-       if ((error as any).code === 'P2025') {
+      // Prisma error for not found
+      if ((error as any).code === 'P2025') {
         return next(new AppError('Client not found', 404));
       }
       next(error);
@@ -286,7 +315,7 @@ export const adminController = {
   getSettings: async (_req: Request, res: Response, next: NextFunction) => {
     try {
       let settings = await prisma.settings.findFirst();
-      
+
       if (!settings) {
         settings = await prisma.settings.create({
           data: {
@@ -295,7 +324,7 @@ export const adminController = {
             maxDistanceMeters: 500,
             autoLocationCaptureHour: 9,
             autoLocationCaptureMinute: 30,
-          }
+          },
         });
       }
 
@@ -307,12 +336,12 @@ export const adminController = {
 
   updateSettings: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { 
-        checkInDeadlineHour, 
-        checkInDeadlineMinute, 
+      const {
+        checkInDeadlineHour,
+        checkInDeadlineMinute,
         maxDistanceMeters,
         autoLocationCaptureHour,
-        autoLocationCaptureMinute 
+        autoLocationCaptureMinute,
       } = updateSettingsSchema.shape.body.parse(req.body);
 
       let settings = await prisma.settings.findFirst();
@@ -325,7 +354,7 @@ export const adminController = {
             maxDistanceMeters: maxDistanceMeters ?? 500,
             autoLocationCaptureHour: autoLocationCaptureHour ?? 9,
             autoLocationCaptureMinute: autoLocationCaptureMinute ?? 30,
-          }
+          },
         });
       } else {
         settings = await prisma.settings.update({
@@ -336,7 +365,7 @@ export const adminController = {
             ...(maxDistanceMeters !== undefined && { maxDistanceMeters }),
             ...(autoLocationCaptureHour !== undefined && { autoLocationCaptureHour }),
             ...(autoLocationCaptureMinute !== undefined && { autoLocationCaptureMinute }),
-          }
+          },
         });
       }
 
@@ -344,5 +373,5 @@ export const adminController = {
     } catch (error) {
       next(error);
     }
-  }
+  },
 };

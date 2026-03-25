@@ -16,7 +16,11 @@ const requireAdminOrManagerOrHr = requireRole(['admin', 'manager', 'hr']);
 const requireAdminOrHr = requireRole(['admin', 'hr']);
 
 router.get('/all-requests', requireAdminOrManagerOrHr, leaveController.getAllLeaveRequests);
-router.put('/request/:id/status', requireAdminOrManagerOrHr, leaveController.updateLeaveRequestStatus);
+router.put(
+  '/request/:id/status',
+  requireAdminOrManagerOrHr,
+  leaveController.updateLeaveRequestStatus
+);
 
 // Specifically HR and Admin for balance set up
 router.put('/balance/:userId', requireAdminOrHr, leaveController.updateLeaveBalance);

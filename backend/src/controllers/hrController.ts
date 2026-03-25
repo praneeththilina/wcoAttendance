@@ -8,7 +8,7 @@ export const hrController = {
     try {
       // Basic stats for HR Dashboard
       const totalEmployees = await prisma.user.count({
-        where: { role: 'employee', isActive: true }
+        where: { role: 'employee', isActive: true },
       });
 
       const today = new Date();
@@ -18,17 +18,17 @@ export const hrController = {
         where: {
           checkInTime: {
             gte: today,
-          }
+          },
         },
         include: {
           user: {
-            select: { firstName: true, lastName: true, employeeId: true }
+            select: { firstName: true, lastName: true, employeeId: true },
           },
           client: {
-            select: { name: true, city: true }
-          }
+            select: { name: true, city: true },
+          },
         },
-        orderBy: { checkInTime: 'desc' }
+        orderBy: { checkInTime: 'desc' },
       });
 
       const activeToday = todaysAttendance.length;
@@ -39,11 +39,11 @@ export const hrController = {
           totalEmployees,
           activeToday,
           complianceRate: totalEmployees > 0 ? (activeToday / totalEmployees) * 100 : 0,
-          todaysAttendance
-        }
+          todaysAttendance,
+        },
       });
     } catch (error) {
       next(error);
     }
-  }
+  },
 };
