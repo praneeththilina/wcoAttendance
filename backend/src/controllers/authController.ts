@@ -92,7 +92,11 @@ export async function updateProfile(req: Request, res: Response, next: NextFunct
     const userId = (req as AuthRequest).user?.userId;
     const { firstName, lastName, profilePicture } = updateProfileSchema.shape.body.parse(req.body);
 
-    const result = await authService.updateProfile(userId!, { firstName, lastName, profilePicture });
+    const result = await authService.updateProfile(userId!, {
+      firstName,
+      lastName,
+      profilePicture,
+    });
 
     res.status(200).json({
       success: true,
