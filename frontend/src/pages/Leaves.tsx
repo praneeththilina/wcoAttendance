@@ -156,10 +156,14 @@ export function Leaves() {
               <form onSubmit={handleRequestSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="leaveType"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Leave Type
                     </label>
                     <select
+                      id="leaveType"
                       value={leaveType}
                       onChange={(e) => setLeaveType(e.target.value)}
                       className="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary font-medium"
@@ -172,10 +176,14 @@ export function Leaves() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="startDate"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Start Date
                     </label>
                     <input
+                      id="startDate"
                       type="date"
                       value={startDate}
                       onChange={(e) => setStartDate(e.target.value)}
@@ -184,10 +192,14 @@ export function Leaves() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="endDate"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       End Date
                     </label>
                     <input
+                      id="endDate"
                       type="date"
                       value={endDate}
                       onChange={(e) => setEndDate(e.target.value)}
@@ -196,10 +208,14 @@ export function Leaves() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="days"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Total Days
                     </label>
                     <input
+                      id="days"
                       type="number"
                       min="0.5"
                       step="0.5"
@@ -210,10 +226,14 @@ export function Leaves() {
                     />
                   </div>
                   <div className="col-span-2">
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="reason"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Reason (Optional)
                     </label>
                     <input
+                      id="reason"
                       type="text"
                       value={reason}
                       onChange={(e) => setReason(e.target.value)}
