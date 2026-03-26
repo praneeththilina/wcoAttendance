@@ -50,6 +50,18 @@ export function AdminClients() {
     }
   };
 
+  // ⚡ Bolt: Consolidated multiple O(N) filters into a single O(N) pass, memoized to prevent recalculation.
+  // Impact: Reduces algorithmic complexity from O(kN) to O(N) and prevents recalculating stats on unrelated re-renders.
+  const { activeCount, inactiveCount } = useMemo(() => {
+    let active = 0;
+    let inactive = 0;
+    for (const c of clients) {
+      if (c.isActive) active++;
+      else inactive++;
+    }
+    return { activeCount: active, inactiveCount: inactive };
+  }, [clients]);
+
   const openCreateModal = () => {
     setEditingClient(null);
     setFormData({
@@ -165,15 +177,11 @@ export function AdminClients() {
               <p className="text-xs text-slate-500">Total</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-green-600">
-                {clients.filter((c) => c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-green-600">{activeCount}</p>
               <p className="text-xs text-slate-500">Active</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-slate-400">
-                {clients.filter((c) => !c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-slate-400">{inactiveCount}</p>
               <p className="text-xs text-slate-500">Inactive</p>
             </div>
           </div>
