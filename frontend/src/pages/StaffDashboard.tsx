@@ -101,7 +101,10 @@ export function StaffDashboard() {
       <div className="flex-1 flex flex-col relative w-full overflow-x-hidden md:max-w-[calc(100vw-256px)]">
         {/* Header */}
         <header className="flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-primary/10 sticky top-0 z-10">
-          <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
+          <button
+            aria-label="Open menu"
+            className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center"
+          >
             <span className="material-symbols-outlined text-3xl">menu</span>
           </button>
           <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">
@@ -109,6 +112,7 @@ export function StaffDashboard() {
           </h1>
           <button
             onClick={() => setShowAddModal(true)}
+            aria-label="Add new staff member"
             className="flex items-center justify-center p-2 rounded-lg bg-primary text-white"
           >
             <span className="material-symbols-outlined">person_add</span>
