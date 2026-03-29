@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clientService } from '@/services/auth';
 import { useAttendanceStore } from '@/stores/attendanceStore';
@@ -6,6 +6,42 @@ import { useLocationValidation } from '@/hooks/useLocationValidation';
 import { BottomNav } from '@/components/layout';
 import { ROUTES } from '@/constants';
 import type { Client } from '@/types';
+
+// ⚡ Bolt: Extracted list item into React.memo to prevent O(N) re-renders
+// when parent state (like searchQuery or location validation) changes.
+// Impact: Reduces CPU cycles during typing and component updates.
+const ClientItem = React.memo(
+  ({
+    client,
+    onSelect,
+    isCheckingIn,
+    icon,
+  }: {
+    client: Client;
+    onSelect: (client: Client) => void;
+    isCheckingIn: boolean;
+    icon: string;
+  }) => (
+    <button
+      onClick={() => onSelect(client)}
+      disabled={isCheckingIn}
+      className="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 hover:border-primary/30 transition-all text-left rounded-lg disabled:opacity-50"
+      aria-label={`Select client ${client.name}`}
+    >
+      <div className="size-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary">
+        <span className="material-symbols-outlined">{icon}</span>
+      </div>
+      <div className="flex-1">
+        <p className="font-semibold text-slate-900 dark:text-slate-100">{client.name}</p>
+        <p className="text-xs text-slate-500">
+          {client.branch ? `${client.branch}, ` : ''}
+          {client.city}
+        </p>
+      </div>
+      <span className="material-symbols-outlined text-slate-400 text-sm">chevron_right</span>
+    </button>
+  )
+);
 
 export function ClientSelection() {
   const navigate = useNavigate();
@@ -45,10 +81,10 @@ export function ClientSelection() {
     }
   };
 
-  const handleClientSelect = (client: Client) => {
+  const handleClientSelect = useCallback((client: Client) => {
     setSelectedClient(client);
     setShowConfirmModal(true);
-  };
+  }, []);
 
   const confirmCheckIn = async () => {
     if (!selectedClient) return;
@@ -212,31 +248,13 @@ export function ClientSelection() {
                 <div className="text-center py-8 text-slate-500">No clients found</div>
               ) : (
                 filteredClients.map((client) => (
-                  <button
+                  <ClientItem
                     key={client.id}
-                    onClick={() => handleClientSelect(client)}
-                    disabled={isCheckingIn}
-                    className="flex items-center gap-4 p-4 bg-white dark:bg-primary/10 border border-primary/5 hover:border-primary/30 transition-all text-left rounded-lg disabled:opacity-50"
-                    aria-label={`Select client ${client.name}`}
-                  >
-                    <div className="size-10 flex items-center justify-center rounded-lg bg-primary/5 text-primary">
-                      <span className="material-symbols-outlined">
-                        {getClientIcon(client.city)}
-                      </span>
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-slate-900 dark:text-slate-100">
-                        {client.name}
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        {client.branch ? `${client.branch}, ` : ''}
-                        {client.city}
-                      </p>
-                    </div>
-                    <span className="material-symbols-outlined text-slate-400 text-sm">
-                      chevron_right
-                    </span>
-                  </button>
+                    client={client}
+                    onSelect={handleClientSelect}
+                    isCheckingIn={isCheckingIn}
+                    icon={getClientIcon(client.city)}
+                  />
                 ))
               )}
             </div>
