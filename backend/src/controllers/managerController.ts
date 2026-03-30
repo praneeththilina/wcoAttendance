@@ -14,37 +14,37 @@ export const managerController = {
         where: {
           checkInTime: {
             gte: today,
-          }
+          },
         },
         include: {
           user: {
             select: {
               firstName: true,
               lastName: true,
-              employeeId: true
-            }
+              employeeId: true,
+            },
           },
           client: {
             select: {
               name: true,
-              city: true
-            }
-          }
+              city: true,
+            },
+          },
         },
         orderBy: {
-          checkInTime: 'desc'
-        }
+          checkInTime: 'desc',
+        },
       });
 
       res.status(200).json({
         success: true,
         data: {
           todaysAttendance,
-          totalPresent: todaysAttendance.length
-        }
+          totalPresent: todaysAttendance.length,
+        },
       });
     } catch (error) {
       next(error);
     }
-  }
+  },
 };

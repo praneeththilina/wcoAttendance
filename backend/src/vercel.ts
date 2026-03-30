@@ -27,7 +27,7 @@ const server = createServer(async (req, res) => {
     res.end(JSON.stringify(health));
     return;
   }
-  
+
   app(req, res);
 });
 
