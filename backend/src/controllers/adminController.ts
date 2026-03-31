@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
 import { z } from 'zod';
-import { updateSettingsSchema } from '../validators/admin.validator.js';
+import { createStaffSchema, updateStaffSchema, updateSettingsSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -177,7 +177,8 @@ export const adminController = {
 
   createStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { employeeId, email, password, firstName, lastName, role, isActive } = req.body;
+      // 🛡️ SECURITY: Prevent Mass Assignment by parsing only expected fields using Zod
+      const { employeeId, email, password, firstName, lastName, role, isActive } = createStaffSchema.shape.body.parse(req.body);
       
       const existingUser = await prisma.user.findFirst({
         where: { OR: [{ email }, { employeeId }] }
@@ -206,8 +207,10 @@ export const adminController = {
   updateStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
+        // 🛡️ SECURITY: Prevent Mass Assignment by parsing only expected fields using Zod
+        const updateData = updateStaffSchema.shape.body.parse(req.body) as Record<string, any>;
         
+        // 🛡️ SECURITY: Defense in depth - explicitly prevent password update here
         // Exclude password from general updates; could create a separate endpoint for pw reset if needed
         delete updateData.password;
 
