@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
 import { z } from 'zod';
-import { updateSettingsSchema } from '../validators/admin.validator.js';
+import { updateSettingsSchema, updateStaffSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -206,10 +206,17 @@ export const adminController = {
   updateStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
+        // Parse and validate the input data to prevent mass assignment vulnerabilities
+        const validatedData = updateStaffSchema.shape.body.parse(req.body);
+        const { email, firstName, lastName, role, isActive } = validatedData;
         
-        // Exclude password from general updates; could create a separate endpoint for pw reset if needed
-        delete updateData.password;
+        const updateData = {
+          ...(email !== undefined && { email }),
+          ...(firstName !== undefined && { firstName }),
+          ...(lastName !== undefined && { lastName }),
+          ...(role !== undefined && { role }),
+          ...(isActive !== undefined && { isActive }),
+        };
 
         const updatedUser = await prisma.user.update({
           where: { id },
