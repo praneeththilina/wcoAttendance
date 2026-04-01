@@ -39,6 +39,7 @@ export function ManagerDashboard() {
           <p className="text-sm text-slate-500">Welcome, {user?.firstName}</p>
         </div>
         <button
+          aria-label="Logout"
           onClick={() => {
             logout();
             navigate(ROUTES.LOGIN);
