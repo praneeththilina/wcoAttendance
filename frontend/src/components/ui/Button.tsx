@@ -45,17 +45,23 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const classes = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
 
     return (
-      <button ref={ref} className={classes} disabled={disabled || isLoading} {...props}>
+      <button
+        ref={ref}
+        className={classes}
+        disabled={disabled || isLoading}
+        aria-disabled={disabled || isLoading}
+        {...props}
+      >
         {isLoading ? (
           <>
-            <span className="material-symbols-outlined animate-spin mr-2">progress_activity</span>
+            <span className="material-symbols-outlined animate-spin mr-2" aria-hidden="true">progress_activity</span>
             <span>Loading...</span>
           </>
         ) : (
           <>
-            {leftIcon && <span className="mr-2">{leftIcon}</span>}
+            {leftIcon && <span className="mr-2" aria-hidden="true">{leftIcon}</span>}
             {children}
-            {rightIcon && <span className="ml-2">{rightIcon}</span>}
+            {rightIcon && <span className="ml-2" aria-hidden="true">{rightIcon}</span>}
           </>
         )}
       </button>
