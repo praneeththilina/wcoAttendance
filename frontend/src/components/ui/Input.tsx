@@ -11,6 +11,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, error, leftIcon, rightIcon, helperText, className = '', id, ...props }, ref) => {
     const inputId = id || label?.toLowerCase().replace(/\s+/g, '-');
+    const errorId = inputId ? `${inputId}-error` : undefined;
+    const helperId = inputId ? `${inputId}-helper` : undefined;
 
     const baseStyles =
       'flex w-full rounded-lg border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50 h-14 text-base font-normal';
@@ -20,6 +22,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       : 'border-slate-200 dark:border-slate-800 focus:border-primary focus:ring-primary';
 
     const classes = `${baseStyles} ${stateStyles} ${className}`;
+
+    let describedBy = props['aria-describedby'];
+    if (error && errorId) {
+      describedBy = describedBy ? `${describedBy} ${errorId}` : errorId;
+    } else if (helperText && helperId) {
+      describedBy = describedBy ? `${describedBy} ${helperId}` : helperId;
+    }
 
     return (
       <div className="flex flex-col w-full">
@@ -41,6 +50,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             className={`${classes} ${leftIcon ? 'pl-12' : 'pl-4'} ${rightIcon ? 'pr-12' : 'pr-4'}`}
+            aria-invalid={!!error}
+            aria-describedby={describedBy}
             {...props}
           />
           {rightIcon && (
@@ -49,9 +60,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             </span>
           )}
         </div>
-        {error && <p className="text-sm text-error mt-1">{error}</p>}
+        {error && <p id={errorId} className="text-sm text-error mt-1">{error}</p>}
         {helperText && !error && (
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{helperText}</p>
+          <p id={helperId} className="text-sm text-slate-500 dark:text-slate-400 mt-1">{helperText}</p>
         )}
       </div>
     );
