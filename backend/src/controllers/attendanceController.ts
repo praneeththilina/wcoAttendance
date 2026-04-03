@@ -78,7 +78,13 @@ export async function changeLocation(req: Request, res: Response, next: NextFunc
     const validated = changeLocationSchema.shape.body.parse(req.body);
     const { clientId, location } = validated;
     const userId = (req as AuthRequest).user!.userId;
-    const result = await attendanceService.changeLocation(userId, clientId, location);
+    const result = await attendanceService.changeLocation(
+      userId,
+      clientId,
+      location && location.latitude !== undefined && location.longitude !== undefined
+        ? { latitude: location.latitude, longitude: location.longitude }
+        : undefined
+    );
 
     res.status(200).json({
       success: true,
