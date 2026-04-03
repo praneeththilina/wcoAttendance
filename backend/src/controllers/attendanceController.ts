@@ -1,6 +1,11 @@
 import type { Request, Response, NextFunction } from 'express';
 import * as attendanceService from '../services/attendanceService.js';
-import { checkInSchema, checkOutSchema, getHistorySchema } from '../validators/attendance.validator.js';
+import {
+  checkInSchema,
+  checkOutSchema,
+  getHistorySchema,
+  changeLocationSchema,
+} from '../validators/attendance.validator.js';
 import type { AuthRequest } from '../middleware/auth.js';
 
 export async function checkIn(req: Request, res: Response, next: NextFunction) {
@@ -70,7 +75,8 @@ export async function getHistory(req: Request, res: Response, next: NextFunction
 
 export async function changeLocation(req: Request, res: Response, next: NextFunction) {
   try {
-    const { clientId, location } = req.body;
+    const validated = changeLocationSchema.shape.body.parse(req.body);
+    const { clientId, location } = validated;
     const userId = (req as AuthRequest).user!.userId;
     const result = await attendanceService.changeLocation(userId, clientId, location);
 

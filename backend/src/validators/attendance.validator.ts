@@ -12,6 +12,18 @@ export const checkInSchema = z.object({
   }),
 });
 
+export const changeLocationSchema = z.object({
+  body: z.object({
+    clientId: z.string().min(1, 'Client ID is required'),
+    location: z
+      .object({
+        latitude: z.number(),
+        longitude: z.number(),
+      })
+      .optional(),
+  }),
+});
+
 export const checkOutSchema = z.object({
   body: z.object({
     location: z
@@ -40,5 +52,6 @@ export const getHistorySchema = z.object({
 
 export type CheckInInput = z.infer<typeof checkInSchema>['body'];
 export type CheckOutInput = z.infer<typeof checkOutSchema>['body'];
+export type ChangeLocationInput = z.infer<typeof changeLocationSchema>['body'];
 export type GetTodayInput = z.infer<typeof getTodaySchema>['query'];
 export type GetHistoryInput = z.infer<typeof getHistorySchema>['query'];
