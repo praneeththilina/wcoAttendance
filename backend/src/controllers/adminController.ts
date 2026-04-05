@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
 import { z } from 'zod';
-import { updateSettingsSchema } from '../validators/admin.validator.js';
+import { createStaffSchema, updateStaffSchema, updateSettingsSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -177,7 +177,8 @@ export const adminController = {
 
   createStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { employeeId, email, password, firstName, lastName, role, isActive } = req.body;
+      const validated = createStaffSchema.shape.body.parse(req.body);
+      const { employeeId, email, password, firstName, lastName, role, isActive } = validated;
       
       const existingUser = await prisma.user.findFirst({
         where: { OR: [{ email }, { employeeId }] }
@@ -206,14 +207,12 @@ export const adminController = {
   updateStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
+        const validated = updateStaffSchema.shape.body.parse(req.body);
+        const { email, firstName, lastName, role, isActive } = validated;
         
-        // Exclude password from general updates; could create a separate endpoint for pw reset if needed
-        delete updateData.password;
-
         const updatedUser = await prisma.user.update({
           where: { id },
-          data: updateData,
+          data: { email, firstName, lastName, role, isActive },
           select: { id: true, email: true, firstName: true, lastName: true, role: true, isActive: true }
         });
         res.status(200).json({ success: true, data: updatedUser });
