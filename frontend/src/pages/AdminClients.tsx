@@ -39,6 +39,23 @@ export function AdminClients() {
     );
   }, [searchQuery, clients]);
 
+  // ⚡ Bolt: Reduced multiple O(N) Array.filter passes into a single O(N) loop with useMemo.
+  // Impact: Cuts array iterations from 2N to 1N and prevents recalculating stats on unrelated re-renders.
+  const { activeCount, inactiveCount } = useMemo(() => {
+    let activeCount = 0;
+    let inactiveCount = 0;
+
+    for (let i = 0; i < clients.length; i++) {
+      if (clients[i].isActive) {
+        activeCount++;
+      } else {
+        inactiveCount++;
+      }
+    }
+
+    return { activeCount, inactiveCount };
+  }, [clients]);
+
   const loadClients = async () => {
     try {
       const data = await adminService.getAllClients();
@@ -165,15 +182,11 @@ export function AdminClients() {
               <p className="text-xs text-slate-500">Total</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-green-600">
-                {clients.filter((c) => c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-green-600">{activeCount}</p>
               <p className="text-xs text-slate-500">Active</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-slate-400">
-                {clients.filter((c) => !c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-slate-400">{inactiveCount}</p>
               <p className="text-xs text-slate-500">Inactive</p>
             </div>
           </div>
