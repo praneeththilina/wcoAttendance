@@ -28,7 +28,12 @@ export async function getLeaveBalance(userId: string, year: number) {
   return balance;
 }
 
-export async function setLeaveBalance(userId: string, year: number, sickTotal?: number, annualTotal?: number) {
+export async function setLeaveBalance(
+  userId: string,
+  year: number,
+  sickTotal?: number,
+  annualTotal?: number
+) {
   return await prisma.leaveBalance.upsert({
     where: {
       userId_year: {
@@ -49,13 +54,16 @@ export async function setLeaveBalance(userId: string, year: number, sickTotal?: 
   });
 }
 
-export async function createLeaveRequest(userId: string, data: {
-  type: 'sick' | 'annual' | 'unpaid' | 'other';
-  startDate: string;
-  endDate: string;
-  reason?: string;
-  days: number;
-}) {
+export async function createLeaveRequest(
+  userId: string,
+  data: {
+    type: 'sick' | 'annual' | 'unpaid' | 'other';
+    startDate: string;
+    endDate: string;
+    reason?: string;
+    days: number;
+  }
+) {
   const year = new Date(data.startDate).getFullYear();
   const balance = await getLeaveBalance(userId, year);
 
@@ -125,7 +133,11 @@ export async function getLeaveRequests(params: {
   };
 }
 
-export async function updateLeaveRequestStatus(requestId: string, status: 'approved' | 'rejected', reviewerId: string) {
+export async function updateLeaveRequestStatus(
+  requestId: string,
+  status: 'approved' | 'rejected',
+  reviewerId: string
+) {
   const leaveRequest = await prisma.leaveRequest.findUnique({
     where: { id: requestId },
   });
@@ -150,7 +162,7 @@ export async function updateLeaveRequestStatus(requestId: string, status: 'appro
     if (status === 'approved') {
       const year = new Date(leaveRequest.startDate).getFullYear();
       const balance = await tx.leaveBalance.findUnique({
-        where: { userId_year: { userId: leaveRequest.userId, year } }
+        where: { userId_year: { userId: leaveRequest.userId, year } },
       });
 
       if (!balance) throw new AppError('Leave balance entry missing', 500);
@@ -158,22 +170,22 @@ export async function updateLeaveRequestStatus(requestId: string, status: 'appro
       if (leaveRequest.type === 'sick') {
         await tx.leaveBalance.update({
           where: { id: balance.id },
-          data: { sickLeaveUsed: balance.sickLeaveUsed + leaveRequest.days }
+          data: { sickLeaveUsed: balance.sickLeaveUsed + leaveRequest.days },
         });
       } else if (leaveRequest.type === 'annual') {
         await tx.leaveBalance.update({
           where: { id: balance.id },
-          data: { annualLeaveUsed: balance.annualLeaveUsed + leaveRequest.days }
+          data: { annualLeaveUsed: balance.annualLeaveUsed + leaveRequest.days },
         });
       } else if (leaveRequest.type === 'unpaid') {
         await tx.leaveBalance.update({
           where: { id: balance.id },
-          data: { unpaidLeaveUsed: balance.unpaidLeaveUsed + leaveRequest.days }
+          data: { unpaidLeaveUsed: balance.unpaidLeaveUsed + leaveRequest.days },
         });
       } else {
         await tx.leaveBalance.update({
           where: { id: balance.id },
-          data: { otherLeaveUsed: balance.otherLeaveUsed + leaveRequest.days }
+          data: { otherLeaveUsed: balance.otherLeaveUsed + leaveRequest.days },
         });
       }
     }

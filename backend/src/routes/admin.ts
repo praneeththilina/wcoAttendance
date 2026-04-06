@@ -2,7 +2,12 @@ import { Router } from 'express';
 import { adminController } from '../controllers/adminController.js';
 import { authenticate, requireRole } from '../middleware/auth.js';
 import { validate } from '../validators/index.js';
-import { createStaffSchema, updateStaffSchema, getDailyReportSchema, updateSettingsSchema } from '../validators/admin.validator.js';
+import {
+  createStaffSchema,
+  updateStaffSchema,
+  getDailyReportSchema,
+  updateSettingsSchema,
+} from '../validators/admin.validator.js';
 
 export const adminRoutes: Router = Router();
 
@@ -11,7 +16,11 @@ adminRoutes.use(authenticate, requireRole(['admin']));
 
 // Admin Dashboard & Reports
 adminRoutes.get('/dashboard', adminController.getDashboardStats);
-adminRoutes.get('/reports/daily', validate(getDailyReportSchema.shape), adminController.getDailyReport);
+adminRoutes.get(
+  '/reports/daily',
+  validate(getDailyReportSchema.shape),
+  adminController.getDailyReport
+);
 
 // Staff Management
 adminRoutes.get('/staff', adminController.getAllStaff);
