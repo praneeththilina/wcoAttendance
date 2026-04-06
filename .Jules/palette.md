@@ -9,3 +9,6 @@
 ## 2024-05-15 - [Added aria-labels to icon-only back buttons]
 **Learning:** In the project, there is a recurring pattern of creating icon-only back buttons using either `<button>` tags without `aria-label`s or semantically incorrect `<div>` tags acting as buttons. This makes navigation significantly harder for screen-reader users, as they are left without context about the button's action.
 **Action:** When adding new navigation buttons or fixing existing ones, always ensure `aria-label`s exist for icon-only buttons. If the element is a `div` acting as a button, convert it to a semantic `<button type="button">` or at minimum add `role="button"` and `tabIndex={0}`. Adding proper `focus-visible` states using Tailwind (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`) also drastically improves keyboard navigation.
+## 2026-04-06 - Accessible Custom Toggle Switches
+**Learning:** Found custom toggle switches built with `<button>` and `<span>` elements in Settings that lacked `aria-pressed` states, `aria-label`s for context, and visible focus rings. Screen readers would just announce them as generic buttons, and keyboard users wouldn't see when they were focused.
+**Action:** Always add `aria-pressed={booleanState}` and descriptive `aria-label`s to custom switch components, along with proper `focus-visible:ring` Tailwind classes.
