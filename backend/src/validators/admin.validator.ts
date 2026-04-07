@@ -42,3 +42,31 @@ export type CreateStaffInput = z.infer<typeof createStaffSchema>['body'];
 export type UpdateStaffInput = z.infer<typeof updateStaffSchema>['body'];
 export type GetDailyReportInput = z.infer<typeof getDailyReportSchema>['query'];
 export type UpdateSettingsInput = z.infer<typeof updateSettingsSchema>['body'];
+
+
+export const createClientSchema = z.object({
+  body: z.object({
+    name: z.string().min(1, 'Name is required'),
+    branch: z.string().optional(),
+    city: z.string().min(1, 'City is required'),
+    address: z.string().optional(),
+    latitude: z.number().optional(),
+    longitude: z.number().optional(),
+    isActive: z.boolean().default(true),
+  }),
+});
+
+export const updateClientSchema = z.object({
+  body: z.object({
+    name: z.string().min(1, 'Name is required').optional(),
+    branch: z.string().optional(),
+    city: z.string().min(1, 'City is required').optional(),
+    address: z.string().optional(),
+    latitude: z.number().optional(),
+    longitude: z.number().optional(),
+    isActive: z.boolean().optional(),
+  }),
+});
+
+export type CreateClientInput = z.infer<typeof createClientSchema>['body'];
+export type UpdateClientInput = z.infer<typeof updateClientSchema>['body'];
