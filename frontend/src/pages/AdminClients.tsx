@@ -26,6 +26,17 @@ export function AdminClients() {
     loadClients();
   }, []);
 
+  // ⚡ Bolt: Reduced multiple O(N) Array.filter passes into a single O(N) loop with useMemo.
+  const clientStats = useMemo(() => {
+    let active = 0;
+    let inactive = 0;
+    for (const client of clients) {
+      if (client.isActive) active++;
+      else inactive++;
+    }
+    return { total: clients.length, active, inactive };
+  }, [clients]);
+
   const filteredClients = useMemo(() => {
     if (searchQuery.trim() === '') {
       return clients;
@@ -161,19 +172,15 @@ export function AdminClients() {
         <div className="px-4 pb-4">
           <div className="grid grid-cols-3 gap-3">
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-primary">{clients.length}</p>
+              <p className="text-2xl font-bold text-primary">{clientStats.total}</p>
               <p className="text-xs text-slate-500">Total</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-green-600">
-                {clients.filter((c) => c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-green-600">{clientStats.active}</p>
               <p className="text-xs text-slate-500">Active</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-slate-400">
-                {clients.filter((c) => !c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-slate-400">{clientStats.inactive}</p>
               <p className="text-xs text-slate-500">Inactive</p>
             </div>
           </div>
