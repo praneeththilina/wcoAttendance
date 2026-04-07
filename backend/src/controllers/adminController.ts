@@ -1,21 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
-import { z } from 'zod';
+
 import { updateSettingsSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
-
-const clientSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  branch: z.string().optional(),
-  city: z.string().min(1, 'City is required'),
-  address: z.string().optional(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
-  isActive: z.boolean().default(true)
-});
 
 export const adminController = {
   // Dashboard and Reports
@@ -237,9 +227,10 @@ export const adminController = {
 
   createClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = clientSchema.parse(req.body) as any;
+      // Use validated body from middleware to prevent mass assignment of unknown properties
+      const { name, branch, city, address, latitude, longitude, isActive } = req.body;
       const newClient = await prisma.client.create({
-        data: validatedData
+        data: { name, branch, city, address, latitude, longitude, isActive }
       });
       res.status(201).json({ success: true, data: newClient });
     } catch (error) {
@@ -250,11 +241,13 @@ export const adminController = {
   updateClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
-      const validatedData = clientSchema.partial().parse(req.body);
+
+      // Use validated body from middleware to prevent mass assignment
+      const { name, branch, city, address, latitude, longitude, isActive } = req.body;
       
       const updatedClient = await prisma.client.update({
         where: { id },
-        data: validatedData
+        data: { name, branch, city, address, latitude, longitude, isActive }
       });
       res.status(200).json({ success: true, data: updatedClient });
     } catch (error) {
