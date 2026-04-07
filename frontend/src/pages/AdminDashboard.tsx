@@ -76,14 +76,22 @@ export function AdminDashboard() {
         <div className="relative flex min-h-screen w-full flex-col w-full max-w-7xl mx-auto md:px-8 lg:px-12 bg-white dark:bg-background-dark shadow-2xl overflow-x-hidden">
           {/* Header */}
           <header className="flex items-center bg-white dark:bg-background-dark p-4 justify-between sticky top-0 z-10 border-b border-slate-100 dark:border-slate-800">
-            <div className="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
+            <button
+              aria-label="Open menu"
+              title="Open menu"
+              className="text-slate-900 dark:text-slate-100 flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
               <span className="material-symbols-outlined">menu</span>
-            </div>
+            </button>
             <h2 className="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight flex-1 text-center">
               Attendance Dashboard
             </h2>
             <div className="flex gap-2 items-center justify-end">
-              <button className="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+              <button
+                aria-label="View notifications"
+                title="View notifications"
+                className="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              >
                 <span className="material-symbols-outlined text-slate-900 dark:text-slate-100">
                   notifications
                 </span>
@@ -155,7 +163,13 @@ export function AdminDashboard() {
             <h2 className="text-slate-900 dark:text-slate-100 text-xl font-bold tracking-tight">
               Live Staff Board
             </h2>
-            <button className="text-primary text-sm font-semibold">View All</button>
+            <button
+              aria-label="View all live staff"
+              title="View all live staff"
+              className="text-primary text-sm font-semibold px-2 py-1 rounded hover:bg-primary/5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              View All
+            </button>
           </div>
           {/* Staff List */}
           <div className="flex flex-col px-4 pb-24 gap-3">
