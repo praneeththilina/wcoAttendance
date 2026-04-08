@@ -43,6 +43,7 @@ export function ManagerDashboard() {
             logout();
             navigate(ROUTES.LOGIN);
           }}
+          aria-label="Logout"
           className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full bg-slate-100 dark:bg-slate-800"
         >
           <span className="material-symbols-outlined">logout</span>
