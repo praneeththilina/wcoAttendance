@@ -50,6 +50,18 @@ export function AdminClients() {
     }
   };
 
+  // ⚡ Bolt: Reduced two O(N) filter passes into a single O(N) loop with useMemo.
+  // Impact: Cuts array iterations from 2N to 1N and prevents recalculating on unrelated re-renders (like typing in search).
+  const clientStats = useMemo(() => {
+    let active = 0;
+    let inactive = 0;
+    for (let i = 0; i < clients.length; i++) {
+      if (clients[i].isActive) active++;
+      else inactive++;
+    }
+    return { active, inactive };
+  }, [clients]);
+
   const openCreateModal = () => {
     setEditingClient(null);
     setFormData({
@@ -165,15 +177,11 @@ export function AdminClients() {
               <p className="text-xs text-slate-500">Total</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-green-600">
-                {clients.filter((c) => c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-green-600">{clientStats.active}</p>
               <p className="text-xs text-slate-500">Active</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-slate-400">
-                {clients.filter((c) => !c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-slate-400">{clientStats.inactive}</p>
               <p className="text-xs text-slate-500">Inactive</p>
             </div>
           </div>
