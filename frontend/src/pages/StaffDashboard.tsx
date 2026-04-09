@@ -109,7 +109,9 @@ export function StaffDashboard() {
           </h1>
           <button
             onClick={() => setShowAddModal(true)}
-            className="flex items-center justify-center p-2 rounded-lg bg-primary text-white"
+            aria-label="Add new staff member"
+            title="Add new staff member"
+            className="flex items-center justify-center p-2 rounded-lg bg-primary text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-background-dark"
           >
             <span className="material-symbols-outlined">person_add</span>
           </button>
