@@ -39,6 +39,18 @@ export function AdminClients() {
     );
   }, [searchQuery, clients]);
 
+  // ⚡ Bolt: Consolidated active/inactive counting from two O(N) filter passes into a single O(N) reduce pass, memoized to prevent recalculation.
+  const { activeCount, inactiveCount } = useMemo(() => {
+    return clients.reduce(
+      (acc, client) => {
+        if (client.isActive) acc.activeCount++;
+        else acc.inactiveCount++;
+        return acc;
+      },
+      { activeCount: 0, inactiveCount: 0 }
+    );
+  }, [clients]);
+
   const loadClients = async () => {
     try {
       const data = await adminService.getAllClients();
@@ -165,15 +177,11 @@ export function AdminClients() {
               <p className="text-xs text-slate-500">Total</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-green-600">
-                {clients.filter((c) => c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-green-600">{activeCount}</p>
               <p className="text-xs text-slate-500">Active</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-slate-400">
-                {clients.filter((c) => !c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-slate-400">{inactiveCount}</p>
               <p className="text-xs text-slate-500">Inactive</p>
             </div>
           </div>
