@@ -22,7 +22,7 @@ export const updateProfileSchema = z.object({
   body: z.object({
     firstName: z.string().min(1, 'First name cannot be empty').optional(),
     lastName: z.string().min(1, 'Last name cannot be empty').optional(),
-    profilePicture: z.string().url('Invalid URL format').optional(),
+    profilePicture: z.string().url('Invalid URL format').refine((url) => !url.toLowerCase().startsWith('javascript:'), 'Invalid URL protocol').optional(),
   }),
 });
 
