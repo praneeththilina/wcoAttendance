@@ -5,3 +5,6 @@
 ## 2024-03-24 - React Filter String Processing Optimization
 **Learning:** Performing multiple `.toLowerCase()` string transformations inside O(N) Array.filter loops inside React components can cause unnecessary allocation/overhead during frequent typing (e.g. typing in a search bar), even for small arrays. Combined with re-calculating the filter on every re-render (e.g. state changes not involving the search string or array), this causes significant performance drain on client devices.
 **Action:** When filtering arrays by strings, hoist `toLowerCase()` conversions of search terms *outside* the filter loop and wrap the filtering logic in `useMemo` so it only re-runs when the dependencies (array reference or search term) actually change.
+## 2024-04-14 - Optimize derived state array filtering
+**Learning:** Using multiple `.filter().length` array iterations directly inside JSX elements to calculate derived metrics (like active vs inactive counts) causes redundant O(N) operations on every render phase.
+**Action:** Consolidate multiple metrics into a single `useMemo` block with a one-pass loop over the array (O(N) total) to return computed counts.
