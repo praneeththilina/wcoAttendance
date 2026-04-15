@@ -39,6 +39,23 @@ export function AdminClients() {
     );
   }, [searchQuery, clients]);
 
+  // ⚡ Bolt: Consolidated active/inactive metric calculations into a single O(N) pass.
+  // Previously: Used two separate array.filter() calls inline during render (O(2N)).
+  // Impact: Reduces algorithmic complexity and prevents recalculations on unrelated renders.
+  const metrics = useMemo(() => {
+    return clients.reduce(
+      (acc, client) => {
+        if (client.isActive) {
+          acc.active++;
+        } else {
+          acc.inactive++;
+        }
+        return acc;
+      },
+      { active: 0, inactive: 0 }
+    );
+  }, [clients]);
+
   const loadClients = async () => {
     try {
       const data = await adminService.getAllClients();
@@ -165,15 +182,11 @@ export function AdminClients() {
               <p className="text-xs text-slate-500">Total</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-green-600">
-                {clients.filter((c) => c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-green-600">{metrics.active}</p>
               <p className="text-xs text-slate-500">Active</p>
             </div>
             <div className="bg-white dark:bg-slate-800 rounded-lg p-3 text-center border border-primary/5">
-              <p className="text-2xl font-bold text-slate-400">
-                {clients.filter((c) => !c.isActive).length}
-              </p>
+              <p className="text-2xl font-bold text-slate-400">{metrics.inactive}</p>
               <p className="text-xs text-slate-500">Inactive</p>
             </div>
           </div>
