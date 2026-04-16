@@ -78,7 +78,10 @@ export function Settings() {
                 </div>
                 <button
                   onClick={toggleTheme}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  role="switch"
+                  aria-checked={isDark}
+                  aria-label="Toggle dark mode"
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     isDark ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -97,7 +100,10 @@ export function Settings() {
                 </div>
                 <button
                   onClick={() => setNotifications(!notifications)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  role="switch"
+                  aria-checked={notifications}
+                  aria-label="Toggle push notifications"
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     notifications ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -116,7 +122,10 @@ export function Settings() {
                 </div>
                 <button
                   onClick={() => setLocationTracking(!locationTracking)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  role="switch"
+                  aria-checked={locationTracking}
+                  aria-label="Toggle location tracking"
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     locationTracking ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
