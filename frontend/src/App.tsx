@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '@/stores/authStore';
 import { useOfflineSync } from '@/hooks/useOfflineSync';
@@ -5,26 +6,24 @@ import { useTheme } from '@/hooks/useTheme';
 import { ROUTES, ROLES } from '@/constants';
 
 // Lazy load pages
-import {
-  LoginPage,
-  EmployeeDashboard,
-  ClientSelection,
-  CheckinConfirmation,
-  CheckOutScreen,
-  ChangeClientLocation,
-  AdminDashboard,
-  DailyAttendanceReport,
-  StaffDashboard,
-  AttendanceHistory,
-  Profile,
-  AdminClients,
-  AdminLeaves,
-  Settings,
-  ManagerDashboard,
-  HRDashboard,
-  Clients,
-  Leaves,
-} from '@/pages';
+const LoginPage = lazy(() => import('@/pages/LoginPage').then(m => ({ default: m.LoginPage })));
+const EmployeeDashboard = lazy(() => import('@/pages/EmployeeDashboard').then(m => ({ default: m.EmployeeDashboard })));
+const ClientSelection = lazy(() => import('@/pages/ClientSelection').then(m => ({ default: m.ClientSelection })));
+const CheckinConfirmation = lazy(() => import('@/pages/CheckinConfirmation').then(m => ({ default: m.CheckinConfirmation })));
+const CheckOutScreen = lazy(() => import('@/pages/CheckOutScreen').then(m => ({ default: m.CheckOutScreen })));
+const ChangeClientLocation = lazy(() => import('@/pages/ChangeClientLocation').then(m => ({ default: m.ChangeClientLocation })));
+const AdminDashboard = lazy(() => import('@/pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
+const DailyAttendanceReport = lazy(() => import('@/pages/DailyAttendanceReport').then(m => ({ default: m.DailyAttendanceReport })));
+const StaffDashboard = lazy(() => import('@/pages/StaffDashboard').then(m => ({ default: m.StaffDashboard })));
+const AttendanceHistory = lazy(() => import('@/pages/AttendanceHistory').then(m => ({ default: m.AttendanceHistory })));
+const Profile = lazy(() => import('@/pages/Profile').then(m => ({ default: m.Profile })));
+const AdminClients = lazy(() => import('@/pages/AdminClients').then(m => ({ default: m.AdminClients })));
+const AdminLeaves = lazy(() => import('@/pages/AdminLeaves').then(m => ({ default: m.AdminLeaves })));
+const Settings = lazy(() => import('@/pages/Settings').then(m => ({ default: m.Settings })));
+const ManagerDashboard = lazy(() => import('@/pages/ManagerDashboard').then(m => ({ default: m.ManagerDashboard })));
+const HRDashboard = lazy(() => import('@/pages/HRDashboard').then(m => ({ default: m.HRDashboard })));
+const Clients = lazy(() => import('@/pages/Clients').then(m => ({ default: m.Clients })));
+const Leaves = lazy(() => import('@/pages/Leaves').then(m => ({ default: m.Leaves })));
 
 // Protected Route Component
 interface ProtectedRouteProps {
@@ -60,7 +59,9 @@ export function App() {
   useTheme();
   return (
     <BrowserRouter>
-      <Routes>
+      {/* ⚡ Bolt: Added Suspense boundary to support lazy-loaded route components, reducing initial bundle size. */}
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
+        <Routes>
         {/* Public Routes */}
         <Route path={ROUTES.LOGIN} element={<LoginPage />} />
 
@@ -226,6 +227,7 @@ export function App() {
           }
         />
       </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
