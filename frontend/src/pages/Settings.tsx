@@ -77,8 +77,11 @@ export function Settings() {
                   <span className="text-sm">Dark Mode</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={isDark}
+                  aria-label="Toggle dark mode"
                   onClick={toggleTheme}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     isDark ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -96,8 +99,11 @@ export function Settings() {
                   <span className="text-sm">Push Notifications</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={notifications}
+                  aria-label="Toggle push notifications"
                   onClick={() => setNotifications(!notifications)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     notifications ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -115,8 +121,11 @@ export function Settings() {
                   <span className="text-sm">Location Tracking</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={locationTracking}
+                  aria-label="Toggle location tracking"
                   onClick={() => setLocationTracking(!locationTracking)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     locationTracking ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
