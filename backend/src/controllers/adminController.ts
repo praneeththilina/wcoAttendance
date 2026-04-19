@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
 import { z } from 'zod';
-import { updateSettingsSchema } from '../validators/admin.validator.js';
+import { updateSettingsSchema, updateStaffSchema, createStaffSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -177,7 +177,7 @@ export const adminController = {
 
   createStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { employeeId, email, password, firstName, lastName, role, isActive } = req.body;
+      const { employeeId, email, password, firstName, lastName, role, isActive } = createStaffSchema.shape.body.parse(req.body);
       
       const existingUser = await prisma.user.findFirst({
         where: { OR: [{ email }, { employeeId }] }
@@ -206,10 +206,12 @@ export const adminController = {
   updateStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
+        const updateData = updateStaffSchema.shape.body.parse(req.body);
         
         // Exclude password from general updates; could create a separate endpoint for pw reset if needed
-        delete updateData.password;
+        if ('password' in updateData) {
+          delete (updateData as { password?: string }).password;
+        }
 
         const updatedUser = await prisma.user.update({
           where: { id },
@@ -237,9 +239,9 @@ export const adminController = {
 
   createClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = clientSchema.parse(req.body) as any;
+      const validatedData = clientSchema.parse(req.body);
       const newClient = await prisma.client.create({
-        data: validatedData
+        data: validatedData as Prisma.ClientCreateInput
       });
       res.status(201).json({ success: true, data: newClient });
     } catch (error) {
