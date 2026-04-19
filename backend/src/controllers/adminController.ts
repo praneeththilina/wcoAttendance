@@ -220,7 +220,7 @@ export const adminController = {
         });
         res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
-        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') return next(new AppError('Staff not found', 404));
+        if ((error as any).code === 'P2025') return next(new AppError('Staff not found', 404));
         next(error);
     }
   },
@@ -261,7 +261,7 @@ export const adminController = {
       res.status(200).json({ success: true, data: updatedClient });
     } catch (error) {
       // Prisma error for not found
-      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+      if ((error as any).code === 'P2025') {
         return next(new AppError('Client not found', 404));
       }
       next(error);
@@ -277,7 +277,7 @@ export const adminController = {
       res.status(200).json({ success: true, message: 'Client deleted successfully' });
     } catch (error) {
        // Prisma error for not found
-       if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+       if ((error as any).code === 'P2025') {
         return next(new AppError('Client not found', 404));
       }
       next(error);
