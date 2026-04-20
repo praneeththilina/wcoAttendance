@@ -133,27 +133,31 @@ export const adminController = {
   // Staff Management
   getAllStaff: async (_req: Request, res: Response, next: NextFunction) => {
     try {
-      const users = await prisma.user.findMany({
-        select: {
-          id: true,
-          employeeId: true,
-          firstName: true,
-          lastName: true,
-          email: true,
-          role: true,
-          isActive: true,
-        },
-        orderBy: { firstName: 'asc' }
-      });
-
       // Get today's attendance status for all users if possible
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      const records = await prisma.attendanceRecord.findMany({
-        where: { checkInTime: { gte: today } },
-        select: { userId: true, status: true },
-        orderBy: { checkInTime: 'desc' } // Get latest status
-      });
+
+      // ⚡ Bolt Performance Optimization:
+      // Parallelize independent database queries using Promise.all to reduce total latency.
+      const [users, records] = await Promise.all([
+        prisma.user.findMany({
+          select: {
+            id: true,
+            employeeId: true,
+            firstName: true,
+            lastName: true,
+            email: true,
+            role: true,
+            isActive: true,
+          },
+          orderBy: { firstName: 'asc' }
+        }),
+        prisma.attendanceRecord.findMany({
+          where: { checkInTime: { gte: today } },
+          select: { userId: true, status: true },
+          orderBy: { checkInTime: 'desc' } // Get latest status
+        })
+      ]);
 
       const userStatusMap = new Map();
       records.forEach(r => {
