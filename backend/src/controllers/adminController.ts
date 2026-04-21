@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
 import { z } from 'zod';
-import { updateSettingsSchema } from '../validators/admin.validator.js';
+import { updateSettingsSchema, createStaffSchema, updateStaffSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
@@ -177,7 +177,7 @@ export const adminController = {
 
   createStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const { employeeId, email, password, firstName, lastName, role, isActive } = req.body;
+      const { employeeId, email, password, firstName, lastName, role, isActive } = createStaffSchema.shape.body.parse(req.body);
       
       const existingUser = await prisma.user.findFirst({
         where: { OR: [{ email }, { employeeId }] }
@@ -206,7 +206,7 @@ export const adminController = {
   updateStaff: async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { id } = req.params;
-        const updateData = req.body;
+        const updateData = updateStaffSchema.shape.body.parse(req.body) as { [key: string]: string | boolean | undefined };
         
         // Exclude password from general updates; could create a separate endpoint for pw reset if needed
         delete updateData.password;
@@ -218,7 +218,7 @@ export const adminController = {
         });
         res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
-        if ((error as any).code === 'P2025') return next(new AppError('Staff not found', 404));
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') return next(new AppError('Staff not found', 404));
         next(error);
     }
   },
@@ -237,7 +237,7 @@ export const adminController = {
 
   createClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = clientSchema.parse(req.body) as any;
+      const validatedData = clientSchema.parse(req.body);
       const newClient = await prisma.client.create({
         data: validatedData
       });
@@ -259,7 +259,7 @@ export const adminController = {
       res.status(200).json({ success: true, data: updatedClient });
     } catch (error) {
       // Prisma error for not found
-      if ((error as any).code === 'P2025') {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         return next(new AppError('Client not found', 404));
       }
       next(error);
@@ -275,7 +275,7 @@ export const adminController = {
       res.status(200).json({ success: true, message: 'Client deleted successfully' });
     } catch (error) {
        // Prisma error for not found
-       if ((error as any).code === 'P2025') {
+       if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         return next(new AppError('Client not found', 404));
       }
       next(error);
