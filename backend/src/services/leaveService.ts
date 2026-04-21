@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
 
 const prisma = new PrismaClient();
