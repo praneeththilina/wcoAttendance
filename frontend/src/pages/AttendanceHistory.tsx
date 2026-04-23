@@ -67,7 +67,7 @@ export function AttendanceHistory() {
           <button
             aria-label="Go back"
             onClick={() => navigate(-1)}
-            className="text-primary flex size-10 items-center justify-center rounded-full hover:bg-primary/10"
+            className="text-primary flex size-10 items-center justify-center rounded-full hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <span className="material-symbols-outlined">arrow_back</span>
           </button>

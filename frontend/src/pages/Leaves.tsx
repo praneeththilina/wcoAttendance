@@ -76,7 +76,7 @@ export function Leaves() {
           <button
             onClick={() => navigate(-1)}
             aria-label="Go back"
-            className="p-2 -ml-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors"
+            className="p-2 -ml-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <span className="material-symbols-outlined">arrow_back</span>
           </button>
