@@ -9,3 +9,6 @@
 ## 2024-05-15 - [Added aria-labels to icon-only back buttons]
 **Learning:** In the project, there is a recurring pattern of creating icon-only back buttons using either `<button>` tags without `aria-label`s or semantically incorrect `<div>` tags acting as buttons. This makes navigation significantly harder for screen-reader users, as they are left without context about the button's action.
 **Action:** When adding new navigation buttons or fixing existing ones, always ensure `aria-label`s exist for icon-only buttons. If the element is a `div` acting as a button, convert it to a semantic `<button type="button">` or at minimum add `role="button"` and `tabIndex={0}`. Adding proper `focus-visible` states using Tailwind (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`) also drastically improves keyboard navigation.
+## 2024-04-24 - Semantic Buttons for Action Elements
+**Learning:** Icon-only action elements (like menu toggles) are sometimes built using `<div>` tags instead of `<button>`s, which breaks keyboard navigation.
+**Action:** Always prefer native `<button>` elements for interactive UI actions. Remember to pair them with `aria-label` attributes and visible focus states (`focus-visible:ring-2`) to ensure full keyboard and screen reader accessibility.
