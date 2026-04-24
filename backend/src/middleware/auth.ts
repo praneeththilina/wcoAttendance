@@ -7,9 +7,12 @@ export interface AuthRequest extends Request {
   user?: TokenPayload;
 }
 
-const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'test' ? 'test-secret' : undefined);
+const JWT_SECRET =
+  process.env.JWT_SECRET || (process.env.NODE_ENV === 'test' ? 'test-secret' : undefined);
 if (!JWT_SECRET) {
-  throw new Error('CRITICAL: JWT_SECRET environment variable is not set. Refusing to start insecurely.');
+  throw new Error(
+    'CRITICAL: JWT_SECRET environment variable is not set. Refusing to start insecurely.'
+  );
 }
 
 export function authenticate(req: Request, _res: Response, next: NextFunction) {
@@ -68,7 +71,7 @@ export function optionalAuth(req: Request, _res: Response, next: NextFunction) {
 export function requireRole(roles: string[]) {
   return (req: Request, _res: Response, next: NextFunction) => {
     const authReq = req as AuthRequest;
-    
+
     if (!authReq.user) {
       return next(new AppError('Authentication required', 401));
     }
