@@ -72,13 +72,16 @@ export function Settings() {
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3" id="label-dark-mode">
                   <span className="material-symbols-outlined text-slate-400">dark_mode</span>
                   <span className="text-sm">Dark Mode</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={isDark}
+                  aria-labelledby="label-dark-mode"
                   onClick={toggleTheme}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                     isDark ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -91,13 +94,16 @@ export function Settings() {
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3" id="label-notifications">
                   <span className="material-symbols-outlined text-slate-400">notifications</span>
                   <span className="text-sm">Push Notifications</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={notifications}
+                  aria-labelledby="label-notifications"
                   onClick={() => setNotifications(!notifications)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                     notifications ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -110,13 +116,16 @@ export function Settings() {
               </div>
 
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3" id="label-location">
                   <span className="material-symbols-outlined text-slate-400">location_on</span>
                   <span className="text-sm">Location Tracking</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={locationTracking}
+                  aria-labelledby="label-location"
                   onClick={() => setLocationTracking(!locationTracking)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                     locationTracking ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
