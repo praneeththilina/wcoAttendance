@@ -156,10 +156,14 @@ export function Leaves() {
               <form onSubmit={handleRequestSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="leave-type"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Leave Type
                     </label>
                     <select
+                      id="leave-type"
                       value={leaveType}
                       onChange={(e) => setLeaveType(e.target.value)}
                       className="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl p-3 text-sm focus:ring-2 focus:ring-primary font-medium"
@@ -172,10 +176,14 @@ export function Leaves() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="start-date"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Start Date
                     </label>
                     <input
+                      id="start-date"
                       type="date"
                       value={startDate}
                       onChange={(e) => setStartDate(e.target.value)}
@@ -184,10 +192,14 @@ export function Leaves() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="end-date"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       End Date
                     </label>
                     <input
+                      id="end-date"
                       type="date"
                       value={endDate}
                       onChange={(e) => setEndDate(e.target.value)}
@@ -196,10 +208,14 @@ export function Leaves() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="total-days"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Total Days
                     </label>
                     <input
+                      id="total-days"
                       type="number"
                       min="0.5"
                       step="0.5"
@@ -210,10 +226,14 @@ export function Leaves() {
                     />
                   </div>
                   <div className="col-span-2">
-                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5">
+                    <label
+                      htmlFor="leave-reason"
+                      className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5"
+                    >
                       Reason (Optional)
                     </label>
                     <input
+                      id="leave-reason"
                       type="text"
                       value={reason}
                       onChange={(e) => setReason(e.target.value)}
@@ -225,7 +245,7 @@ export function Leaves() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-primary hover:bg-primary/90 text-white p-3 rounded-xl font-bold shadow-md shadow-primary/20 transition-all disabled:opacity-50 mt-2"
+                  className="w-full bg-primary hover:bg-primary/90 text-white p-3 rounded-xl font-bold shadow-md shadow-primary/20 transition-all disabled:opacity-50 mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                 >
                   {isSubmitting ? 'Submitting...' : 'Request Leave'}
                 </button>
