@@ -130,11 +130,18 @@ async function main() {
     },
   ];
 
-  for (const client of clients) {
-    const existing = await prisma.client.findFirst({ where: { name: client.name } });
-    if (!existing) {
-      await prisma.client.create({ data: client });
-    }
+  const existingClients = await prisma.client.findMany({
+    where: {
+      name: { in: clients.map((client) => client.name) },
+    },
+    select: { name: true },
+  });
+
+  const existingNames = new Set(existingClients.map((c) => c.name));
+  const newClients = clients.filter((c) => !existingNames.has(c.name));
+
+  if (newClients.length > 0) {
+    await prisma.client.createMany({ data: newClients });
   }
 
   console.log('Created clients');
