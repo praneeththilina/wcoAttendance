@@ -77,6 +77,7 @@ export interface AttendanceRecord {
   status: 'checked_in' | 'checked_out' | 'incomplete';
   createdAt: string;
   updatedAt: string;
+  client?: Client;
 }
 
 export interface Location {
