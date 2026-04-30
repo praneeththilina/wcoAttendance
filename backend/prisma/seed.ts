@@ -52,13 +52,15 @@ async function main() {
     },
   ];
 
-  for (const user of users) {
-    await prisma.user.upsert({
-      where: { email: user.email },
-      update: { passwordHash: user.passwordHash },
-      create: user,
-    });
-  }
+  await Promise.all(
+    users.map((user) =>
+      prisma.user.upsert({
+        where: { email: user.email },
+        update: { passwordHash: user.passwordHash },
+        create: user,
+      })
+    )
+  );
 
   console.log('Created users');
 
@@ -130,12 +132,14 @@ async function main() {
     },
   ];
 
-  for (const client of clients) {
-    const existing = await prisma.client.findFirst({ where: { name: client.name } });
-    if (!existing) {
-      await prisma.client.create({ data: client });
-    }
-  }
+  await Promise.all(
+    clients.map(async (client) => {
+      const existing = await prisma.client.findFirst({ where: { name: client.name } });
+      if (!existing) {
+        await prisma.client.create({ data: client });
+      }
+    })
+  );
 
   console.log('Created clients');
   console.log('Seeding completed!');
