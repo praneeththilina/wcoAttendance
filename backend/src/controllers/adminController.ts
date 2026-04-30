@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
-import { Prisma } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
 
 import { z } from 'zod';
@@ -239,9 +238,9 @@ export const adminController = {
 
   createClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = clientSchema.parse(req.body) as unknown;
+      const validatedData = clientSchema.parse(req.body) as unknown as Prisma.ClientCreateInput;
       const newClient = await prisma.client.create({
-        data: validatedData as Prisma.ClientCreateInput
+        data: validatedData
       });
       res.status(201).json({ success: true, data: newClient });
     } catch (error) {
@@ -252,11 +251,11 @@ export const adminController = {
   updateClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
-      const validatedData = clientSchema.partial().parse(req.body) as unknown;
+      const validatedData = clientSchema.partial().parse(req.body) as unknown as Prisma.ClientUpdateInput;
       
       const updatedClient = await prisma.client.update({
         where: { id },
-        data: validatedData as Prisma.ClientUpdateInput
+        data: validatedData
       });
       res.status(200).json({ success: true, data: updatedClient });
     } catch (error) {
