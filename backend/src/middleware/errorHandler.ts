@@ -1,10 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../utils/AppError.js';
 import { logger } from '../utils/logger.js';
-import { Prisma } from '@prisma/client';
+
+interface PrismaError extends Error {
+  code: string;
+  meta?: Record<string, unknown>;
+}
 
 export const errorHandler = (
-  err: Error,
+  err: Error | AppError | PrismaError,
   req: Request,
   _res: Response,
   _next: NextFunction
@@ -30,7 +34,7 @@ export const errorHandler = (
 
   // Prisma errors
   if (err.name === 'PrismaClientKnownRequestError') {
-    const prismaErr = err as any;
+    const prismaErr = err as PrismaError;
     // Unique constraint failed
     if (prismaErr.code === 'P2002') {
       return _res.status(409).json({
