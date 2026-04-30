@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { PrismaClient, Prisma } from '@prisma/client';
+
 import { AppError } from '../utils/AppError.js';
 import { z } from 'zod';
 import { updateSettingsSchema } from '../validators/admin.validator.js';
