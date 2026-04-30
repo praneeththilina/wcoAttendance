@@ -58,6 +58,7 @@ export interface Client {
 }
 
 export interface AttendanceRecord {
+  client?: Client;
   id: string;
   userId: string;
   clientId: string;
