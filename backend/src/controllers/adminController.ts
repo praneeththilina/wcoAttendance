@@ -239,9 +239,9 @@ export const adminController = {
 
   createClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = clientSchema.parse(req.body) as Prisma.ClientCreateInput;
+      const validatedData = clientSchema.parse(req.body) as unknown;
       const newClient = await prisma.client.create({
-        data: validatedData
+        data: validatedData as Prisma.ClientCreateInput
       });
       res.status(201).json({ success: true, data: newClient });
     } catch (error) {
@@ -252,11 +252,11 @@ export const adminController = {
   updateClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;
-      const validatedData = clientSchema.partial().parse(req.body) as Prisma.ClientUpdateInput;
+      const validatedData = clientSchema.partial().parse(req.body) as unknown;
       
       const updatedClient = await prisma.client.update({
         where: { id },
-        data: validatedData
+        data: validatedData as Prisma.ClientUpdateInput
       });
       res.status(200).json({ success: true, data: updatedClient });
     } catch (error) {
