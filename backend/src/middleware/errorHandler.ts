@@ -4,7 +4,7 @@ import { logger } from '../utils/logger.js';
 import { Prisma } from '@prisma/client';
 
 export const errorHandler = (
-  err: Error,
+  err: Error | Prisma.PrismaClientKnownRequestError,
   req: Request,
   _res: Response,
   _next: NextFunction
@@ -29,9 +29,13 @@ export const errorHandler = (
   }
 
   // Prisma errors
-  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+  if (
+    err instanceof Prisma.PrismaClientKnownRequestError ||
+    (err.name === 'PrismaClientKnownRequestError' && 'code' in err)
+  ) {
+    const prismaError = err as Prisma.PrismaClientKnownRequestError;
     // Unique constraint failed
-    if (err.code === 'P2002') {
+    if (prismaError.code === 'P2002') {
       return _res.status(409).json({
         success: false,
         error: {
@@ -42,7 +46,7 @@ export const errorHandler = (
     }
 
     // Record not found
-    if (err.code === 'P2025') {
+    if (prismaError.code === 'P2025') {
       return _res.status(404).json({
         success: false,
         error: {
