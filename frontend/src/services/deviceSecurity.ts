@@ -61,37 +61,25 @@ async function checkRooted(): Promise<boolean> {
     '/system/bin/failsafe/su',
     '/data/local/su',
     '/su/bin/su',
+    '/system/etc/install-recovery.sh',
+    '/system/etc/recovery.img',
+    '/cache/recovery',
   ];
 
-  if (typeof window !== 'undefined') {
-    for (const path of rootIndicators) {
+  if (typeof window === 'undefined') return false;
+
+  const results = await Promise.all(
+    rootIndicators.map(async (path) => {
       try {
         const response = await fetch(`file://${path}`, { method: 'HEAD' });
-        if (response.ok) return true;
+        return response.ok;
       } catch {
-        continue;
+        return false;
       }
-    }
-  }
+    })
+  );
 
-  if (typeof window !== 'undefined') {
-    const testLocations = [
-      '/system/etc/install-recovery.sh',
-      '/system/etc/recovery.img',
-      '/cache/recovery',
-    ];
-
-    for (const path of testLocations) {
-      try {
-        const response = await fetch(`file://${path}`, { method: 'HEAD' });
-        if (response.ok) return true;
-      } catch {
-        continue;
-      }
-    }
-  }
-
-  return false;
+  return results.some(Boolean);
 }
 
 function checkJailbreak(): boolean {
