@@ -1,14 +1,34 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { AttendanceStatus } from '@/types';
+import type { AttendanceStatus, Location } from '@/types';
 import { attendanceService } from '@/services/auth';
 
-export interface OfflineAction {
+export type OfflineActionPayload =
+  | {
+      type: 'check-in';
+      data: {
+        clientId: string;
+        location: Location;
+      };
+    }
+  | {
+      type: 'check-out';
+      data: {
+        location?: Location;
+      };
+    }
+  | {
+      type: 'change-location';
+      data: {
+        clientId: string;
+        location: Location;
+      };
+    };
+
+export type OfflineAction = OfflineActionPayload & {
   id: string;
-  type: 'check-in' | 'check-out' | 'change-location';
-  data: any;
   timestamp: string;
-}
+};
 
 interface AttendanceState {
   todayStatus: AttendanceStatus | null;
@@ -18,7 +38,7 @@ interface AttendanceState {
 
   // Actions
   setTodayStatus: (status: AttendanceStatus | null) => void;
-  addToQueue: (action: Omit<OfflineAction, 'id' | 'timestamp'>) => void;
+  addToQueue: (action: OfflineActionPayload) => void;
   removeFromQueue: (id: string) => void;
   clearQueue: () => void;
   setOnline: (online: boolean) => void;
