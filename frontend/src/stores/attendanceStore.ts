@@ -69,6 +69,8 @@ export const useAttendanceStore = create<AttendanceState>()(
         set({ isSyncing: true });
 
         const queue = [...offlineQueue];
+        const successfulIds = new Set<string>();
+
         for (const action of queue) {
           try {
             if (action.type === 'check-in') {
@@ -78,13 +80,19 @@ export const useAttendanceStore = create<AttendanceState>()(
             } else if (action.type === 'change-location') {
               await attendanceService.changeLocation(action.data.clientId, action.data.location);
             }
-            get().removeFromQueue(action.id);
+            successfulIds.add(action.id);
           } catch (error: unknown) {
             console.error(`Failed to sync action ${action.id}:`, error);
             // If it's a 400 error (e.g. already checked in), we might want to remove it
             // For now, we stop syncing this queue to avoid out-of-order execution issues
             break;
           }
+        }
+
+        if (successfulIds.size > 0) {
+          set((state) => ({
+            offlineQueue: state.offlineQueue.filter((a) => !successfulIds.has(a.id)),
+          }));
         }
 
         set({ isSyncing: false });
