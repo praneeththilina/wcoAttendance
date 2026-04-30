@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { leaveService } from '@/services/leaveService';
 import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import type { LeaveRequest } from '@/types';
+import { getErrorMessage } from '@/utils/error';
 
 export function AdminLeaves() {
   const [requests, setRequests] = useState<LeaveRequest[]>([]);
@@ -24,7 +25,7 @@ export function AdminLeaves() {
       setIsLoading(true);
       const data = await leaveService.getAllRequests(1, 100, statusFilter || undefined);
       setRequests(data.records);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load leave requests:', error);
     } finally {
       setIsLoading(false);
@@ -35,8 +36,8 @@ export function AdminLeaves() {
     try {
       await leaveService.updateRequestStatus(id, newStatus);
       loadRequests();
-    } catch (error: any) {
-      alert(error?.response?.data?.error?.message || 'Failed to update status');
+    } catch (error) {
+      alert(getErrorMessage(error, 'Failed to update status'));
     }
   };
 
@@ -55,8 +56,8 @@ export function AdminLeaves() {
       setShowBalanceModal(false);
       setSelectedUserId('');
       alert('Balance updated successfully');
-    } catch (error: any) {
-      alert(error?.response?.data?.error?.message || 'Failed to update balance');
+    } catch (error) {
+      alert(getErrorMessage(error, 'Failed to update balance'));
     } finally {
       setIsUpdating(false);
     }

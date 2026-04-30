@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { adminService, type ClientFormData } from '@/services/adminService';
 import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import type { Client } from '@/types';
+import { getErrorMessage } from '@/utils/error';
 
 export function AdminClients() {
   const [clients, setClients] = useState<Client[]>([]);
@@ -43,7 +44,7 @@ export function AdminClients() {
     try {
       const data = await adminService.getAllClients();
       setClients(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load clients:', error);
     } finally {
       setIsLoading(false);
@@ -93,8 +94,8 @@ export function AdminClients() {
       }
       await loadClients();
       setShowModal(false);
-    } catch (error: any) {
-      alert(error?.response?.data?.error?.message || 'Failed to save client');
+    } catch (error) {
+      alert(getErrorMessage(error, 'Failed to save client'));
     } finally {
       setIsSaving(false);
     }
@@ -105,8 +106,8 @@ export function AdminClients() {
       await adminService.deleteClient(id);
       await loadClients();
       setDeleteConfirm(null);
-    } catch (error: any) {
-      alert(error?.response?.data?.error?.message || 'Failed to delete client');
+    } catch (error) {
+      alert(getErrorMessage(error, 'Failed to delete client'));
     }
   };
 

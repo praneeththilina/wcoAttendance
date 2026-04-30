@@ -8,6 +8,7 @@ import { loginSchema, type LoginFormData } from '@/validators/auth.validator';
 import { ROUTES } from '@/constants';
 import { Button, Input, Checkbox } from '@/components/ui';
 import type { UserRole } from '@/types';
+import { getErrorMessage } from '@/utils/error';
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -52,11 +53,9 @@ export function LoginPage() {
 
         navigate(roleRedirects[response.data.user.role] || ROUTES.DASHBOARD);
       }
-    } catch (error: any) {
+    } catch (error) {
       const errorMessage =
-        error?.response?.data?.error?.message ||
-        error?.message ||
-        'Login failed. Please try again.';
+        getErrorMessage(error, 'Login failed. Please try again.');
       setError(errorMessage);
     } finally {
       setLoading(false);

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { leaveService } from '@/services/leaveService';
 import { BottomNav } from '@/components/layout';
 import type { LeaveBalance, LeaveRequest } from '@/types';
+import { getErrorMessage } from '@/utils/error';
 
 export function Leaves() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export function Leaves() {
       ]);
       setBalance(balData);
       setRequests(reqData.records);
-    } catch (error: unknown) {
+    } catch (error) {
       console.error('Failed to load leaves data:', error);
     } finally {
       setIsLoading(false);
@@ -59,11 +60,8 @@ export function Leaves() {
       setReason('');
       setDays(1);
       alert('Leave request submitted successfully');
-    } catch (error: unknown) {
-      alert(
-        (error as { response?: { data?: { error?: { message?: string } } } })?.response?.data?.error
-          ?.message || 'Failed to submit leave request'
-      );
+    } catch (error) {
+      alert(getErrorMessage(error, 'Failed to submit leave request'));
     } finally {
       setIsSubmitting(false);
     }

@@ -4,6 +4,7 @@ import { clientService, attendanceService } from '@/services/auth';
 import { BottomNav } from '@/components/layout';
 import { ROUTES } from '@/constants';
 import type { Client } from '@/types';
+import { getErrorMessage } from '@/utils/error';
 
 export function ChangeClientLocation() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export function ChangeClientLocation() {
     try {
       const data = await clientService.getAll();
       setClients(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load clients:', error);
     } finally {
       setIsLoading(false);
@@ -44,9 +45,9 @@ export function ChangeClientLocation() {
       const location = await getCurrentLocation();
       await attendanceService.changeLocation(client.id, location);
       navigate(ROUTES.DASHBOARD);
-    } catch (error: any) {
+    } catch (error) {
       const message =
-        error?.response?.data?.error?.message || error?.message || 'Failed to change location';
+        getErrorMessage(error, 'Failed to change location');
       alert(message);
       console.error('Change location failed:', message);
     } finally {

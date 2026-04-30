@@ -6,7 +6,14 @@ import apiClient from '@/services/api';
 
 interface DashboardStats {
   totalPresent: number;
-  todaysAttendance: any[];
+  todaysAttendance: {
+    id: string;
+    user: { firstName: string; lastName: string; employeeId: string };
+    client?: { name: string; city: string };
+    checkInTime: string;
+    checkOutTime: string | null;
+    status: string;
+  }[];
 }
 
 export function ManagerDashboard() {
@@ -24,7 +31,7 @@ export function ManagerDashboard() {
       setIsLoading(true);
       const response = await apiClient.get('/manager/dashboard');
       setStats(response.data.data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load manager dashboard:', error);
     } finally {
       setIsLoading(false);
