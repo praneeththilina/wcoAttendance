@@ -16,7 +16,7 @@ export function DailyAttendanceReport() {
       setIsLoading(true);
       const data = await adminService.getDailyReport(selectedDate);
       setRecords(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load daily report:', error);
     } finally {
       setIsLoading(false);

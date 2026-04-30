@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -52,11 +53,13 @@ export function LoginPage() {
 
         navigate(roleRedirects[response.data.user.role] || ROUTES.DASHBOARD);
       }
-    } catch (error: any) {
-      const errorMessage =
-        error?.response?.data?.error?.message ||
-        error?.message ||
-        'Login failed. Please try again.';
+    } catch (error) {
+      let errorMessage = 'An error occurred during login. Please try again.';
+      if (axios.isAxiosError(error)) {
+        errorMessage = error.response?.data?.error?.message || error.message || errorMessage;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
       setError(errorMessage);
     } finally {
       setLoading(false);

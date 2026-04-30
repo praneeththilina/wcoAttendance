@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUISettings } from '@/stores/uiSettings';
@@ -76,8 +77,13 @@ export function CheckOutScreen() {
       }
 
       navigate(ROUTES.DASHBOARD);
-    } catch (error: any) {
-      const message = error?.response?.data?.error?.message || error?.message || 'Check-out failed';
+    } catch (error) {
+      let message = 'Check-out failed';
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.error?.message || error.message || message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
       alert(message);
       console.error('Check-out failed:', message);
     } finally {
