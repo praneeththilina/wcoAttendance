@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
+import { Prisma } from '@prisma/client';
 import { z } from 'zod';
 import { updateSettingsSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
@@ -218,7 +219,7 @@ export const adminController = {
         });
         res.status(200).json({ success: true, data: updatedUser });
     } catch (error) {
-        if ((error as any).code === 'P2025') return next(new AppError('Staff not found', 404));
+        if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') return next(new AppError('Staff not found', 404));
         next(error);
     }
   },
@@ -237,9 +238,9 @@ export const adminController = {
 
   createClient: async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const validatedData = clientSchema.parse(req.body) as any;
+      const validatedData = clientSchema.parse(req.body);
       const newClient = await prisma.client.create({
-        data: validatedData
+        data: validatedData as Prisma.ClientCreateInput
       });
       res.status(201).json({ success: true, data: newClient });
     } catch (error) {
@@ -254,12 +255,12 @@ export const adminController = {
       
       const updatedClient = await prisma.client.update({
         where: { id },
-        data: validatedData
+        data: validatedData as Prisma.ClientUpdateInput
       });
       res.status(200).json({ success: true, data: updatedClient });
     } catch (error) {
       // Prisma error for not found
-      if ((error as any).code === 'P2025') {
+      if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         return next(new AppError('Client not found', 404));
       }
       next(error);
@@ -275,7 +276,7 @@ export const adminController = {
       res.status(200).json({ success: true, message: 'Client deleted successfully' });
     } catch (error) {
        // Prisma error for not found
-       if ((error as any).code === 'P2025') {
+       if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
         return next(new AppError('Client not found', 404));
       }
       next(error);
