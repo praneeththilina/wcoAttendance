@@ -1,10 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
 import { AppError } from '../utils/AppError.js';
 import { logger } from '../utils/logger.js';
-import { Prisma } from '@prisma/client';
+
+// Define a type for Prisma known errors to avoid 'any'
+interface PrismaKnownError extends Error {
+  name: 'PrismaClientKnownRequestError';
+  code: string;
+  meta?: Record<string, unknown>;
+}
+
+function isPrismaKnownError(err: any): err is PrismaKnownError {
+  return err && typeof err === 'object' && err.name === 'PrismaClientKnownRequestError';
+}
 
 export const errorHandler = (
-  err: Error,
+  err: Error | any,
   req: Request,
   _res: Response,
   _next: NextFunction
@@ -29,10 +39,9 @@ export const errorHandler = (
   }
 
   // Prisma errors
-  if (err.name === 'PrismaClientKnownRequestError') {
-    const prismaErr = err as any;
+  if (isPrismaKnownError(err)) {
     // Unique constraint failed
-    if (prismaErr.code === 'P2002') {
+    if (err.code === 'P2002') {
       return _res.status(409).json({
         success: false,
         error: {
@@ -43,7 +52,7 @@ export const errorHandler = (
     }
 
     // Record not found
-    if (prismaErr.code === 'P2025') {
+    if (err.code === 'P2025') {
       return _res.status(404).json({
         success: false,
         error: {
