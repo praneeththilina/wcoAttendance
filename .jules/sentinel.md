@@ -7,3 +7,7 @@
 **Vulnerability:** The `/api/v1/admin/settings` and `/api/v1/auth/profile` endpoints directly destructured properties from `req.body` without prior type validation, enabling potential type-juggling attacks or persistence of malformed data into the database (e.g., negative integers for hour settings or XSS payloads in profile strings).
 **Learning:** Destructuring request bodies does not validate the type or semantic safety of the data. Explicit Zod validation schemas are required to enforce boundaries and strip unexpected fields. Additionally, the pre-existing `clientSchema` incorrectly used `.required()`, which broke Prisma updates requiring partial parameters.
 **Prevention:** Always attach the `validate(schema.shape)` middleware to Express routes and define strict boundary constraints (like `.min(0).max(23)` for hours) in the associated Zod schema to ensure input sanitization before reaching controller logic.
+## 2026-04-30 - Prevent Mass Assignment in Admin Controller
+**Vulnerability:** Unvalidated input (req.body) was directly passed into a Prisma database update in the `updateStaff` controller.
+**Learning:** Destructuring or simply deleting fields (like password) from req.body is insufficient to prevent mass assignment or guarantee data types, leading to potential privilege escalation or data corruption.
+**Prevention:** Always parse and validate req.body explicitly using Zod schemas (e.g., `schema.shape.body.parse(req.body)`) before performing database operations.
