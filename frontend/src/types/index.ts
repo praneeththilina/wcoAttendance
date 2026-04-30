@@ -61,6 +61,7 @@ export interface AttendanceRecord {
   id: string;
   userId: string;
   clientId: string;
+  client?: Client | null;
   checkInTime: string;
   checkOutTime: string | null;
   checkInLocation: {

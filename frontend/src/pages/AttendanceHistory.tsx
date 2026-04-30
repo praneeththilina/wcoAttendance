@@ -29,7 +29,7 @@ export function AttendanceHistory() {
       );
       setRecords(data.records);
       setTotal(data.total);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Failed to load history:', error);
     } finally {
       setIsLoading(false);
@@ -126,11 +126,9 @@ export function AttendanceHistory() {
                       </div>
                       <div>
                         <p className="font-semibold text-sm">
-                          {(record as any).client?.name || 'Unknown Client'}
+                          {record.client?.name || 'Unknown Client'}
                         </p>
-                        <p className="text-xs text-slate-500">
-                          {(record as any).client?.city || ''}
-                        </p>
+                        <p className="text-xs text-slate-500">{record.client?.city || ''}</p>
                       </div>
                     </div>
                     <span
