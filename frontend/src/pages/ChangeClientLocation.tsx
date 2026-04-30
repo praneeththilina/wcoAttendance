@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clientService, attendanceService } from '@/services/auth';
@@ -31,7 +32,7 @@ export function ChangeClientLocation() {
     try {
       const data = await clientService.getAll();
       setClients(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load clients:', error);
     } finally {
       setIsLoading(false);
@@ -44,9 +45,13 @@ export function ChangeClientLocation() {
       const location = await getCurrentLocation();
       await attendanceService.changeLocation(client.id, location);
       navigate(ROUTES.DASHBOARD);
-    } catch (error: any) {
-      const message =
-        error?.response?.data?.error?.message || error?.message || 'Failed to change location';
+    } catch (error) {
+      let message = 'Failed to change location';
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.error?.message || error.message || message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
       alert(message);
       console.error('Change location failed:', message);
     } finally {

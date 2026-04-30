@@ -49,7 +49,7 @@ export function AdminDashboard() {
         atOffice: data.atOffice,
         atClientSites: data.atClientSites,
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load dashboard:', error);
     } finally {
       setIsLoading(false);

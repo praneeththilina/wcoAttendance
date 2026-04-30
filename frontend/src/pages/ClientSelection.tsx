@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { clientService } from '@/services/auth';
@@ -38,7 +39,7 @@ export function ClientSelection() {
     try {
       const data = await clientService.getAll();
       setClients(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load clients:', error);
     } finally {
       setIsLoading(false);
@@ -110,8 +111,13 @@ export function ClientSelection() {
           isOffline: !isOnline,
         },
       });
-    } catch (error: any) {
-      const message = error?.response?.data?.error?.message || error?.message || 'Check-in failed';
+    } catch (error) {
+      let message = 'Check-in failed';
+      if (axios.isAxiosError(error)) {
+        message = error.response?.data?.error?.message || error.message || message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
       setLocationError(message);
       console.error('Check-in failed:', message);
     } finally {

@@ -29,7 +29,7 @@ export function AttendanceHistory() {
       );
       setRecords(data.records);
       setTotal(data.total);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load history:', error);
     } finally {
       setIsLoading(false);
