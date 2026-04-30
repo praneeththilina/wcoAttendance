@@ -1,12 +1,23 @@
 import api from './api';
 import type { Client } from '@/types';
 
+export interface LiveStaffMember {
+  id: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  status: 'checked_in' | 'checked_out' | 'incomplete' | 'travel' | 'not_checked_in';
+  clientName?: string;
+  clientCity?: string;
+  checkInTime?: string;
+}
+
 export interface DashboardStats {
   totalEmployees: number;
   checkedIn: number;
   atOffice: number;
   atClientSites: number;
-  liveStaff: any[];
+  liveStaff: LiveStaffMember[];
 }
 
 export interface DailyReportRecord {
