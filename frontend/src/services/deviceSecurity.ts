@@ -148,6 +148,7 @@ export function getDeviceInfo(): {
   userAgent: string;
   language: string;
   timezone: string;
+  screenResolution: string;
 } {
   if (typeof window === 'undefined') {
     return {
@@ -155,6 +156,7 @@ export function getDeviceInfo(): {
       userAgent: '',
       language: 'en',
       timezone: 'UTC',
+      screenResolution: 'unknown',
     };
   }
 
@@ -163,5 +165,6 @@ export function getDeviceInfo(): {
     userAgent: navigator.userAgent || '',
     language: navigator.language || 'en',
     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+    screenResolution: `${window.screen.width}x${window.screen.height}`,
   };
 }
