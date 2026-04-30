@@ -1,18 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { AdminBottomNav, AdminSidebar } from '@/components/layout';
 import { StatusBadge } from '@/components/ui';
-import { adminService } from '@/services/adminService';
-
-interface LocalStaffMember {
-  id: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-  status: 'checked_in' | 'checked_out' | 'incomplete' | 'travel' | 'not_checked_in';
-  clientName?: string;
-  clientCity?: string;
-  checkInTime?: string;
-}
+import { adminService, type LiveStaffMember } from '@/services/adminService';
 
 interface DashboardStats {
   totalEmployees: number;
@@ -22,7 +11,7 @@ interface DashboardStats {
 }
 
 export function AdminDashboard() {
-  const [staff, setStaff] = useState<LocalStaffMember[]>([]);
+  const [staff, setStaff] = useState<LiveStaffMember[]>([]);
   const [stats, setStats] = useState<DashboardStats>({
     totalEmployees: 0,
     checkedIn: 0,
