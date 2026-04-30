@@ -5,7 +5,7 @@ import { AppError } from '../utils/AppError.js';
 import type { LoginInput } from '../validators/auth.validator.js';
 import { Prisma } from '@prisma/client';
 
-const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'test' ? 'test-secret' : undefined);
+const JWT_SECRET = process.env.JWT_SECRET;
 if (!JWT_SECRET) {
   throw new Error('CRITICAL: JWT_SECRET environment variable is not set. Refusing to start insecurely.');
 }
