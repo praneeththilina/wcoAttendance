@@ -5,3 +5,6 @@
 ## 2024-03-24 - React Filter String Processing Optimization
 **Learning:** Performing multiple `.toLowerCase()` string transformations inside O(N) Array.filter loops inside React components can cause unnecessary allocation/overhead during frequent typing (e.g. typing in a search bar), even for small arrays. Combined with re-calculating the filter on every re-render (e.g. state changes not involving the search string or array), this causes significant performance drain on client devices.
 **Action:** When filtering arrays by strings, hoist `toLowerCase()` conversions of search terms *outside* the filter loop and wrap the filtering logic in `useMemo` so it only re-runs when the dependencies (array reference or search term) actually change.
+## 2025-02-23 - Optimize Device Security Emulator Checking
+**Learning:** Sequential asynchronous checks (like multiple `fetch` calls in a `for` loop) can create significant bottlenecks, especially when checking file existence.
+**Action:** Use `Promise.all` to execute independent asynchronous operations in parallel.

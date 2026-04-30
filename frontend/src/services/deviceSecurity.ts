@@ -50,6 +50,10 @@ export async function checkDeviceSecurity(): Promise<DeviceSecurityResult> {
 }
 
 async function checkRooted(): Promise<boolean> {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
   const rootIndicators = [
     '/system/app/Superuser.apk',
     '/sbin/su',
@@ -63,35 +67,25 @@ async function checkRooted(): Promise<boolean> {
     '/su/bin/su',
   ];
 
-  if (typeof window !== 'undefined') {
-    for (const path of rootIndicators) {
-      try {
-        const response = await fetch(`file://${path}`, { method: 'HEAD' });
-        if (response.ok) return true;
-      } catch {
-        continue;
-      }
+  const testLocations = [
+    '/system/etc/install-recovery.sh',
+    '/system/etc/recovery.img',
+    '/cache/recovery',
+  ];
+
+  const allPaths = [...rootIndicators, ...testLocations];
+
+  const checkPath = async (path: string): Promise<boolean> => {
+    try {
+      const response = await fetch(`file://${path}`, { method: 'HEAD' });
+      return response.ok;
+    } catch {
+      return false;
     }
-  }
+  };
 
-  if (typeof window !== 'undefined') {
-    const testLocations = [
-      '/system/etc/install-recovery.sh',
-      '/system/etc/recovery.img',
-      '/cache/recovery',
-    ];
-
-    for (const path of testLocations) {
-      try {
-        const response = await fetch(`file://${path}`, { method: 'HEAD' });
-        if (response.ok) return true;
-      } catch {
-        continue;
-      }
-    }
-  }
-
-  return false;
+  const results = await Promise.all(allPaths.map(checkPath));
+  return results.some((result) => result);
 }
 
 function checkJailbreak(): boolean {
