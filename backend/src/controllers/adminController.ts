@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Prisma } from '@prisma/client';
 import { AppError } from '../utils/AppError.js';
-import { Prisma } from '@prisma/client';
+
 import { z } from 'zod';
 import { updateSettingsSchema } from '../validators/admin.validator.js';
 import bcrypt from 'bcryptjs';
