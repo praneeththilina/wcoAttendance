@@ -6,6 +6,7 @@ import { useLocationValidation } from '@/hooks/useLocationValidation';
 import { BottomNav } from '@/components/layout';
 import { ROUTES } from '@/constants';
 import type { Client } from '@/types';
+import { getErrorMessage } from '@/utils/error';
 
 export function ClientSelection() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ export function ClientSelection() {
     try {
       const data = await clientService.getAll();
       setClients(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Failed to load clients:', error);
     } finally {
       setIsLoading(false);
@@ -110,8 +111,8 @@ export function ClientSelection() {
           isOffline: !isOnline,
         },
       });
-    } catch (error: any) {
-      const message = error?.response?.data?.error?.message || error?.message || 'Check-in failed';
+    } catch (error) {
+      const message = getErrorMessage(error, 'Check-in failed');
       setLocationError(message);
       console.error('Check-in failed:', message);
     } finally {

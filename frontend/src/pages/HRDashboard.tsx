@@ -30,7 +30,7 @@ export function HRDashboard() {
       setIsLoading(true);
       const response = await apiClient.get('/hr/dashboard');
       setStats(response.data.data);
-    } catch (error: unknown) {
+    } catch (error) {
       console.error('Failed to load HR dashboard:', error);
     } finally {
       setIsLoading(false);

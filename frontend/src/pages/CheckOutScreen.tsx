@@ -4,6 +4,7 @@ import { useUISettings } from '@/stores/uiSettings';
 import { useAttendanceStore } from '@/stores/attendanceStore';
 import { BottomNav } from '@/components/layout';
 import { ROUTES } from '@/constants';
+import { getErrorMessage } from '@/utils/error';
 
 export function CheckOutScreen() {
   const navigate = useNavigate();
@@ -76,8 +77,8 @@ export function CheckOutScreen() {
       }
 
       navigate(ROUTES.DASHBOARD);
-    } catch (error: any) {
-      const message = error?.response?.data?.error?.message || error?.message || 'Check-out failed';
+    } catch (error) {
+      const message = getErrorMessage(error, 'Check-out failed');
       alert(message);
       console.error('Check-out failed:', message);
     } finally {
