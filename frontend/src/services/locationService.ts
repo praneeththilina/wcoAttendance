@@ -60,7 +60,7 @@ export async function getCurrentLocation(): Promise<LocationData> {
   });
 }
 
-export function validateLocation(
+export function validateLocationData(
   location: LocationData,
   clientLocation?: ClientLocation
 ): LocationValidationResult {
@@ -157,4 +157,16 @@ export function parseStoredLocation(locationStr: string): LocationData | null {
   } catch {
     return null;
   }
+}
+
+
+export function validateLocation(
+  lat: number,
+  lon: number,
+  allowedLat: number,
+  allowedLon: number,
+  maxDistance: number = 100
+): boolean {
+  const distance = calculateDistance(lat, lon, allowedLat, allowedLon);
+  return distance <= maxDistance;
 }

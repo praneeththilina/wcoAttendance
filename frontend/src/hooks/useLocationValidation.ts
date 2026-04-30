@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import {
   getCurrentLocation,
-  validateLocation,
+  validateLocationData,
   type LocationData,
   type LocationValidationResult,
   type ClientLocation,
@@ -30,7 +30,7 @@ export function useLocationValidation(): UseLocationValidationReturn {
       const locationData = await getCurrentLocation();
       setLocation(locationData);
 
-      const validationResult = validateLocation(locationData, clientLocation);
+      const validationResult = validateLocationData(locationData, clientLocation);
       setValidation(validationResult);
 
       return validationResult;
