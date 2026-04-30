@@ -6,7 +6,9 @@ import { BottomNav } from '@/components/layout';
 import { StatusBadge } from '@/components/ui';
 import { ROUTES } from '@/constants';
 
-export function EmployeeDashboard() {
+import { ReactNode } from 'react';
+
+export function EmployeeDashboard(): ReactNode {
   const navigate = useNavigate();
   const { user, logout } = useAuthStore();
   const { todayStatus: status, fetchTodayStatus, isSyncing, isOnline } = useAttendanceStore();
@@ -18,7 +20,7 @@ export function EmployeeDashboard() {
   useEffect(() => {
     let interval: NodeJS.Timeout;
     if (status?.status === 'checked_in' && status.checkInTime) {
-      const updateDuration = () => {
+      const updateDuration = (): void => {
         const checkInDate = new Date(status.checkInTime as string);
         const now = new Date();
         const diffInMs = Math.abs(now.getTime() - checkInDate.getTime());
@@ -30,7 +32,7 @@ export function EmployeeDashboard() {
     } else {
       setLiveDuration(status?.totalHours ? `${status.totalHours.toFixed(1)}h` : '---');
     }
-    return () => {
+    return (): void => {
       if (interval) clearInterval(interval);
     };
   }, [status]);
@@ -45,9 +47,9 @@ export function EmployeeDashboard() {
 
   useEffect(() => {
     fetchTodayStatus();
-  }, []);
+  }, [fetchTodayStatus]);
 
-  const handleCheckIn = async () => {
+  const handleCheckIn = async (): Promise<void> => {
     setIsCheckingIn(true);
     try {
       navigate(ROUTES.CLIENT_SELECTION);
@@ -58,7 +60,7 @@ export function EmployeeDashboard() {
     }
   };
 
-  const handleCheckOut = async () => {
+  const handleCheckOut = async (): Promise<void> => {
     try {
       navigate(ROUTES.CHECKOUT);
     } catch (error: unknown) {
