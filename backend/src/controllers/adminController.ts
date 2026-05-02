@@ -133,6 +133,11 @@ export const adminController = {
   // Staff Management
   getAllStaff: async (_req: Request, res: Response, next: NextFunction) => {
     try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      // ⚡ Bolt: Consolidated two queries and an O(N) manual mapping step into a single query.
+      // Uses Prisma's nested `select` to retrieve the latest attendance status directly from the DB.
       const users = await prisma.user.findMany({
         select: {
           id: true,
@@ -142,22 +147,14 @@ export const adminController = {
           email: true,
           role: true,
           isActive: true,
+          attendance: {
+            where: { checkInTime: { gte: today } },
+            orderBy: { checkInTime: 'desc' },
+            take: 1,
+            select: { status: true }
+          }
         },
         orderBy: { firstName: 'asc' }
-      });
-
-      // Get today's attendance status for all users if possible
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const records = await prisma.attendanceRecord.findMany({
-        where: { checkInTime: { gte: today } },
-        select: { userId: true, status: true },
-        orderBy: { checkInTime: 'desc' } // Get latest status
-      });
-
-      const userStatusMap = new Map();
-      records.forEach(r => {
-        if (!userStatusMap.has(r.userId)) userStatusMap.set(r.userId, r.status);
       });
 
       const data = users.map(user => ({
@@ -166,7 +163,7 @@ export const adminController = {
         email: user.email,
         role: user.role,
         status: user.isActive ? 'active' : 'inactive',
-        todayStatus: userStatusMap.get(user.id) || 'not_reported'
+        todayStatus: user.attendance.length > 0 ? user.attendance[0].status : 'not_reported'
       }));
 
       res.status(200).json({ success: true, data });
