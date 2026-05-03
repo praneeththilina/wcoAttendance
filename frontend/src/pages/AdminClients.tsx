@@ -26,18 +26,29 @@ export function AdminClients() {
     loadClients();
   }, []);
 
+  // ⚡ Bolt: Pre-calculate normalized search strings to avoid repeated O(N) .toLowerCase() allocations on every render.
+  // Impact: Significantly reduces CPU and memory overhead during rapid user typing in the search bar.
+  const normalizedClients = useMemo(() => {
+    return clients.map((client) => ({
+      ...client,
+      _normalizedName: client.name.toLowerCase(),
+      _normalizedCity: client.city.toLowerCase(),
+      _normalizedAddress: client.address?.toLowerCase() || '',
+    }));
+  }, [clients]);
+
   const filteredClients = useMemo(() => {
     if (searchQuery.trim() === '') {
-      return clients;
+      return normalizedClients;
     }
     const query = searchQuery.toLowerCase();
-    return clients.filter(
+    return normalizedClients.filter(
       (client) =>
-        client.name.toLowerCase().includes(query) ||
-        client.city.toLowerCase().includes(query) ||
-        client.address?.toLowerCase().includes(query)
+        client._normalizedName.includes(query) ||
+        client._normalizedCity.includes(query) ||
+        client._normalizedAddress.includes(query)
     );
-  }, [searchQuery, clients]);
+  }, [searchQuery, normalizedClients]);
 
   const loadClients = async () => {
     try {
