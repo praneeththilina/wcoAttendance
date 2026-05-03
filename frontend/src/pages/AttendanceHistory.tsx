@@ -80,8 +80,11 @@ export function AttendanceHistory() {
         <div className="p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
           <div className="flex gap-2 mb-3">
             <div className="flex-1">
-              <label className="text-xs text-slate-500 mb-1 block">From</label>
+              <label htmlFor="startDate" className="text-xs text-slate-500 mb-1 block">
+                From
+              </label>
               <input
+                id="startDate"
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
@@ -89,8 +92,11 @@ export function AttendanceHistory() {
               />
             </div>
             <div className="flex-1">
-              <label className="text-xs text-slate-500 mb-1 block">To</label>
+              <label htmlFor="endDate" className="text-xs text-slate-500 mb-1 block">
+                To
+              </label>
               <input
+                id="endDate"
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}

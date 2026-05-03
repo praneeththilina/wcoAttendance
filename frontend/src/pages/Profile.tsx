@@ -213,10 +213,14 @@ export function Profile() {
 
               {/* First Name */}
               <div className="mb-4">
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+                <label
+                  htmlFor="firstName"
+                  className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1"
+                >
                   First Name
                 </label>
                 <input
+                  id="firstName"
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
@@ -226,10 +230,14 @@ export function Profile() {
 
               {/* Last Name */}
               <div className="mb-6">
-                <label className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1">
+                <label
+                  htmlFor="lastName"
+                  className="block text-sm font-medium text-slate-600 dark:text-slate-400 mb-1"
+                >
                   Last Name
                 </label>
                 <input
+                  id="lastName"
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}

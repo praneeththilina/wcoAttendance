@@ -9,3 +9,6 @@
 ## 2024-05-15 - [Added aria-labels to icon-only back buttons]
 **Learning:** In the project, there is a recurring pattern of creating icon-only back buttons using either `<button>` tags without `aria-label`s or semantically incorrect `<div>` tags acting as buttons. This makes navigation significantly harder for screen-reader users, as they are left without context about the button's action.
 **Action:** When adding new navigation buttons or fixing existing ones, always ensure `aria-label`s exist for icon-only buttons. If the element is a `div` acting as a button, convert it to a semantic `<button type="button">` or at minimum add `role="button"` and `tabIndex={0}`. Adding proper `focus-visible` states using Tailwind (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary`) also drastically improves keyboard navigation.
+## 2024-05-03 - Form Field Accessibility Attributes Pattern
+**Learning:** React component forms in this app frequently lacked proper `htmlFor` and `id` linking between labels and inputs, hurting screen reader capabilities and making it impossible to click the label to focus the input.
+**Action:** When updating or creating forms, systematically check that all `<label>` tags use `htmlFor="someId"` and explicitly map to an `<input id="someId">`, expanding click targets and fixing accessibility.
