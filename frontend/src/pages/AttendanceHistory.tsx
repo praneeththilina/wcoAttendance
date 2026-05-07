@@ -179,6 +179,7 @@ export function AttendanceHistory() {
               <button
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
+                title={page === 1 ? 'Already on first page' : undefined}
                 className="px-3 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-sm disabled:opacity-50"
               >
                 Previous
@@ -189,6 +190,7 @@ export function AttendanceHistory() {
               <button
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
+                title={page === totalPages ? 'Already on last page' : undefined}
                 className="px-3 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-sm disabled:opacity-50"
               >
                 Next
