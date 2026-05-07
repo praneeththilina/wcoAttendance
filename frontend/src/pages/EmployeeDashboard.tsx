@@ -166,6 +166,7 @@ export function EmployeeDashboard() {
             <button
               onClick={() => navigate(ROUTES.CLIENT_SELECTION)}
               disabled={!isCheckedIn}
+              title={!isCheckedIn ? 'You must be checked in first' : undefined}
               className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg h-12 px-4 font-bold text-sm ${
                 isCheckedIn
                   ? isVariant1
@@ -180,6 +181,7 @@ export function EmployeeDashboard() {
             <button
               onClick={handleCheckOut}
               disabled={!isCheckedIn}
+              title={!isCheckedIn ? 'You must be checked in first' : undefined}
               className={`flex flex-1 cursor-pointer items-center justify-center rounded-lg h-12 px-4 font-bold text-sm ${
                 isCheckedIn
                   ? isVariant1

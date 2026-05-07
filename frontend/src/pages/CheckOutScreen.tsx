@@ -135,6 +135,7 @@ export function CheckOutScreen() {
             Daily Check-out
           </h1>
           <button
+            aria-label={`Switch to variant ${isVariant1 ? 2 : 1}`}
             onClick={() => setCheckOutVariant(isVariant1 ? 2 : 1)}
             className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary text-xs font-bold"
           >
@@ -257,7 +258,9 @@ export function CheckOutScreen() {
               }`}
             >
               <div className={`flex items-start gap-3 ${isVariant1 ? 'p-4' : ''}`}>
-                <span className="material-symbols-outlined text-primary mt-0.5">info</span>
+                <span aria-hidden="true" className="material-symbols-outlined text-primary mt-0.5">
+                  info
+                </span>
                 <div>
                   <p className="text-sm font-bold text-primary">Ready to wrap up?</p>
                   <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed mt-1">
