@@ -56,11 +56,19 @@ export function HRDashboard() {
             />
           </div>
           <div className="flex items-center gap-4">
-            <button className="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+            <button
+              aria-label="Notifications"
+              title="Notifications"
+              className="relative p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
               <span className="material-symbols-outlined">notifications</span>
               <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
             </button>
-            <button className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+            <button
+              aria-label="Help"
+              title="Help"
+              className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
               <span className="material-symbols-outlined">help</span>
             </button>
             <div className="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-1"></div>
@@ -223,7 +231,11 @@ export function HRDashboard() {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <button className="text-primary hover:text-primary/80 transition-colors">
+                            <button
+                              aria-label="More actions"
+                              title="More actions"
+                              className="text-primary hover:text-primary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg"
+                            >
                               <span className="material-symbols-outlined text-xl">more_vert</span>
                             </button>
                           </td>
