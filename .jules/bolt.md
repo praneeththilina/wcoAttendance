@@ -5,3 +5,6 @@
 ## 2024-03-24 - React Filter String Processing Optimization
 **Learning:** Performing multiple `.toLowerCase()` string transformations inside O(N) Array.filter loops inside React components can cause unnecessary allocation/overhead during frequent typing (e.g. typing in a search bar), even for small arrays. Combined with re-calculating the filter on every re-render (e.g. state changes not involving the search string or array), this causes significant performance drain on client devices.
 **Action:** When filtering arrays by strings, hoist `toLowerCase()` conversions of search terms *outside* the filter loop and wrap the filtering logic in `useMemo` so it only re-runs when the dependencies (array reference or search term) actually change.
+## 2024-05-11 - Prisma Database-Level Deduplication
+**Learning:** Deduplicating relational queries (like fetching the latest attendance record per user) inside application memory via JavaScript `Map` objects is inefficient when processing large datasets, causing excessive payload size from DB to Node server and higher memory consumption.
+**Action:** Utilize Prisma's `distinct: ['userId']` combined with `orderBy: { checkInTime: 'desc' }` to push deduplication down to the SQL engine, returning only the single newest relevant record directly from the database query.
