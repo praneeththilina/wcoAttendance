@@ -6,5 +6,10 @@
     "install": "cd backend && pnpm install && cd ../frontend && pnpm install",
     "build": "cd backend && pnpm build && cd ../frontend && pnpm build",
     "test": "cd backend && pnpm test && cd ../frontend && pnpm test"
+  },
+  "pnpm": {
+    "overrides": {
+      "serialize-javascript": "6.0.2"
+    }
   }
 }
