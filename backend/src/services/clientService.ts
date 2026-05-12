@@ -77,18 +77,11 @@ export async function getRecentClients(userId: string) {
     orderBy: {
       checkInTime: 'desc',
     },
-    take: 10,
+    distinct: ['clientId'],
+    take: 5,
   });
 
-  const clientMap = new Map();
-  const recentClients = recentAttendances
-    .filter((record) => {
-      if (clientMap.has(record.clientId)) return false;
-      clientMap.set(record.clientId, true);
-      return true;
-    })
-    .map((record) => record.client)
-    .slice(0, 5);
+  const recentClients = recentAttendances.map((record) => record.client);
 
   setCache(cacheKey, recentClients, 60);
   return recentClients;
