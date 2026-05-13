@@ -38,7 +38,10 @@ export function Settings() {
       <div className="flex-1 flex flex-col relative w-full overflow-x-hidden md:max-w-[calc(100vw-256px)]">
         {/* Header */}
         <header className="flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-primary/10 sticky top-0 z-10">
-          <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
+          <button
+            aria-label="Open menu"
+            className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center"
+          >
             <span className="material-symbols-outlined text-3xl">menu</span>
           </button>
           <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">Settings</h1>
@@ -77,8 +80,11 @@ export function Settings() {
                   <span className="text-sm">Dark Mode</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={isDark}
+                  aria-label="Toggle Dark Mode"
                   onClick={toggleTheme}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-800 ${
                     isDark ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -96,8 +102,11 @@ export function Settings() {
                   <span className="text-sm">Push Notifications</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={notifications}
+                  aria-label="Toggle Push Notifications"
                   onClick={() => setNotifications(!notifications)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-800 ${
                     notifications ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
@@ -115,8 +124,11 @@ export function Settings() {
                   <span className="text-sm">Location Tracking</span>
                 </div>
                 <button
+                  role="switch"
+                  aria-checked={locationTracking}
+                  aria-label="Toggle Location Tracking"
                   onClick={() => setLocationTracking(!locationTracking)}
-                  className={`w-12 h-6 rounded-full transition-colors ${
+                  className={`w-12 h-6 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-800 ${
                     locationTracking ? 'bg-primary' : 'bg-slate-300'
                   }`}
                 >
