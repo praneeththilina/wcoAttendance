@@ -152,12 +152,13 @@ export const adminController = {
       const records = await prisma.attendanceRecord.findMany({
         where: { checkInTime: { gte: today } },
         select: { userId: true, status: true },
-        orderBy: { checkInTime: 'desc' }, // Get latest status
-        // Use distinct to push deduplication to the database and only fetch the latest record per user
-        distinct: ['userId']
+        orderBy: { checkInTime: 'desc' } // Get latest status
       });
 
-      const userStatusMap = new Map(records.map(r => [r.userId, r.status]));
+      const userStatusMap = new Map();
+      records.forEach(r => {
+        if (!userStatusMap.has(r.userId)) userStatusMap.set(r.userId, r.status);
+      });
 
       const data = users.map(user => ({
         id: user.id,
