@@ -8,3 +8,6 @@
 ## 2024-05-15 - Prisma Data Deduplication
 **Learning:** When retrieving the latest record per related entity (e.g., latest attendance status per user), using Prisma's `distinct: ['userId']` operator combined with `orderBy` pushes the deduplication down to the database level. This significantly reduces data transfer and Node.js memory overhead compared to fetching all records and deduplicating them in memory using a `Map`.
 **Action:** Utilize Prisma's `distinct` and `orderBy` whenever deduplication based on a single field is needed to optimize database performance.
+## 2026-05-15 - Node 18 Vite Build Failures (ReferenceError: crypto is not defined)
+**Learning:** In Node 18 CI environments, Vite builds using `vite-plugin-pwa` may fail with `ReferenceError: crypto is not defined` deep inside Rollup plugins (`serialize-javascript` / `workbox-build`). This happens because Node 18 does not expose `crypto` on the global object by default (unlike Node 19+).
+**Action:** When constrained from structurally changing packages/versions to fix a CI build in a Node 18 matrix, polyfill the `globalThis.crypto` object directly inside `vite.config.ts` (e.g. `import crypto from 'crypto'; if (typeof globalThis.crypto === 'undefined') { globalThis.crypto = crypto as any; }`).
