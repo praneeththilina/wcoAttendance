@@ -38,7 +38,7 @@ export function Settings() {
       <div className="flex-1 flex flex-col relative w-full overflow-x-hidden md:max-w-[calc(100vw-256px)]">
         {/* Header */}
         <header className="flex items-center bg-background-light dark:bg-background-dark p-4 border-b border-primary/10 sticky top-0 z-10">
-          <button className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
+          <button aria-label="Open menu" className="text-primary dark:text-slate-100 flex size-10 shrink-0 items-center justify-center">
             <span className="material-symbols-outlined text-3xl">menu</span>
           </button>
           <h1 className="text-xl font-bold leading-tight tracking-tight flex-1 ml-2">Settings</h1>
@@ -144,7 +144,7 @@ export function Settings() {
                 </div>
                 <span className="material-symbols-outlined text-slate-400">chevron_right</span>
               </button>
-              <button className="w-full flex items-center justify-between py-2">
+              <button aria-label="Help and Support" className="w-full flex items-center justify-between py-2">
                 <div className="flex items-center gap-3">
                   <span className="material-symbols-outlined text-slate-400">help</span>
                   <span className="text-sm">Help & Support</span>
