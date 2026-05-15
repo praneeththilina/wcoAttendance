@@ -105,7 +105,7 @@ export function Clients() {
                   </div>
                   {(user?.role === 'admin' || user?.role === 'manager') && (
                     <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button className="text-slate-400 hover:text-primary">
+                      <button aria-label="Edit client" className="text-slate-400 hover:text-primary">
                         <span className="material-symbols-outlined text-sm">edit</span>
                       </button>
                     </div>
