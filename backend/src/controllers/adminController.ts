@@ -149,15 +149,17 @@ export const adminController = {
       // Get today's attendance status for all users if possible
       const today = new Date();
       today.setHours(0, 0, 0, 0);
+      // ⚡ Bolt: Offload distinct/latest status selection to database to reduce over-fetching and memory overhead
       const records = await prisma.attendanceRecord.findMany({
         where: { checkInTime: { gte: today } },
         select: { userId: true, status: true },
-        orderBy: { checkInTime: 'desc' } // Get latest status
+        orderBy: [{ userId: 'asc' }, { checkInTime: 'desc' }], // Get latest status, left-most must match distinct for PostgreSQL
+        distinct: ['userId'],
       });
 
       const userStatusMap = new Map();
       records.forEach(r => {
-        if (!userStatusMap.has(r.userId)) userStatusMap.set(r.userId, r.status);
+        userStatusMap.set(r.userId, r.status);
       });
 
       const data = users.map(user => ({
