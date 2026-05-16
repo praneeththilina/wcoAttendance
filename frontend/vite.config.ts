@@ -5,14 +5,12 @@ import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
 
-if (typeof globalThis.crypto === 'undefined') {
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  globalThis.crypto = crypto as any;
-}
-
-if (typeof global.crypto === 'undefined') {
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  global.crypto = crypto as any;
+// In Node 18 environments, globalThis.crypto may be undefined or lack getRandomValues
+// which is required by serialize-javascript used by workbox-build.
+if (typeof globalThis.crypto === 'undefined' || !globalThis.crypto.getRandomValues) {
+  Object.defineProperty(globalThis, 'crypto', {
+    value: crypto.webcrypto || crypto
+  });
 }
 
 // https://vitejs.dev/config/
