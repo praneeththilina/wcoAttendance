@@ -3,6 +3,12 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
+
+if (typeof globalThis.crypto === 'undefined') {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  globalThis.crypto = crypto as any;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
