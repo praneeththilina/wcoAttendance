@@ -3,6 +3,15 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
+
+// In Node 18 environments, globalThis.crypto may be undefined or lack getRandomValues
+// which is required by serialize-javascript used by workbox-build.
+if (typeof globalThis.crypto === 'undefined' || !globalThis.crypto.getRandomValues) {
+  Object.defineProperty(globalThis, 'crypto', {
+    value: crypto.webcrypto || crypto
+  });
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
