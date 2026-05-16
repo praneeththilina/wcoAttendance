@@ -10,6 +10,11 @@ if (typeof globalThis.crypto === 'undefined') {
   globalThis.crypto = crypto as any;
 }
 
+if (typeof global.crypto === 'undefined') {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  global.crypto = crypto as any;
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
