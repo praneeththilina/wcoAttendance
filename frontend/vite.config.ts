@@ -13,6 +13,10 @@ if (typeof globalThis.crypto === 'undefined' || !globalThis.crypto.randomUUID) {
     randomUUID: function () { return crypto.randomUUID(); }
   } as any;
 }
+if (typeof (global as any).crypto === 'undefined') {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  (global as any).crypto = globalThis.crypto;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
