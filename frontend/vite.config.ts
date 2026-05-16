@@ -4,10 +4,14 @@ import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 import fs from 'fs';
 
-import crypto from 'crypto';
-if (typeof globalThis.crypto === 'undefined') {
+import crypto from 'node:crypto';
+if (typeof globalThis.crypto === 'undefined' || !globalThis.crypto.randomUUID) {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  globalThis.crypto = crypto as any;
+  globalThis.crypto = {
+    ...crypto,
+    getRandomValues: function (buffer: any) { return crypto.randomFillSync(buffer); },
+    randomUUID: function () { return crypto.randomUUID(); }
+  } as any;
 }
 
 // https://vitejs.dev/config/
