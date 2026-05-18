@@ -3,6 +3,22 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 import fs from 'fs';
+import crypto from 'crypto';
+
+if (typeof globalThis.crypto === 'undefined' || !globalThis.crypto.randomUUID) {
+  (globalThis as any).crypto = {
+    ...crypto,
+    getRandomValues: function (buffer: any) {
+      return crypto.randomFillSync(buffer);
+    },
+    randomUUID: function () {
+      return crypto.randomUUID();
+    }
+  };
+}
+if (typeof (global as any) !== 'undefined' && typeof (global as any).crypto === 'undefined') {
+  (global as any).crypto = globalThis.crypto;
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
