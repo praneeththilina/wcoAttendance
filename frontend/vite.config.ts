@@ -19,6 +19,7 @@ if (typeof globalThis.crypto === 'undefined' || !globalThis.crypto.randomUUID) {
 if (typeof (global as any).crypto === 'undefined') {
   (global as any).crypto = globalThis.crypto;
 }
+Object.defineProperty(global, 'crypto', { value: globalThis.crypto, writable: true, configurable: true, enumerable: true });
 
 // https://vitejs.dev/config/
 export default defineConfig({
