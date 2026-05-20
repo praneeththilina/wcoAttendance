@@ -152,12 +152,13 @@ export const adminController = {
       const records = await prisma.attendanceRecord.findMany({
         where: { checkInTime: { gte: today } },
         select: { userId: true, status: true },
-        orderBy: { checkInTime: 'desc' } // Get latest status
+        distinct: ['userId'],
+        orderBy: [{ userId: 'asc' }, { checkInTime: 'desc' }] // Get latest status per user
       });
 
       const userStatusMap = new Map();
       records.forEach(r => {
-        if (!userStatusMap.has(r.userId)) userStatusMap.set(r.userId, r.status);
+        userStatusMap.set(r.userId, r.status);
       });
 
       const data = users.map(user => ({
