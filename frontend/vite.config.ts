@@ -4,6 +4,25 @@ import { VitePWA } from 'vite-plugin-pwa';
 import path from 'path';
 import fs from 'fs';
 
+// Polyfill crypto for Node 18 CI environments using vite-plugin-pwa / serialize-javascript
+import crypto from 'crypto';
+if (typeof globalThis.crypto === 'undefined') {
+  Object.defineProperty(globalThis, 'crypto', {
+    value: crypto.webcrypto,
+    writable: true,
+    configurable: true,
+    enumerable: true
+  });
+}
+if (typeof global.crypto === 'undefined') {
+  Object.defineProperty(global, 'crypto', {
+    value: globalThis.crypto,
+    writable: true,
+    configurable: true,
+    enumerable: true
+  });
+}
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
