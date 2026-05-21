@@ -146,19 +146,20 @@ export const adminController = {
         orderBy: { firstName: 'asc' }
       });
 
-      // Get today's attendance status for all users if possible
+      // ⚡ Bolt: Pushed deduplication to the database to reduce memory usage and CPU cycles.
+      // Used Prisma's `distinct` on `userId` combined with `orderBy` (requires `userId` as leftmost sort)
+      // instead of fetching all records and deduplicating in-memory.
+      // Impact: Reduces O(N) operations and memory allocations on the Node.js side.
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const records = await prisma.attendanceRecord.findMany({
         where: { checkInTime: { gte: today } },
         select: { userId: true, status: true },
-        orderBy: { checkInTime: 'desc' } // Get latest status
+        distinct: ['userId'],
+        orderBy: [{ userId: 'asc' }, { checkInTime: 'desc' }]
       });
 
-      const userStatusMap = new Map();
-      records.forEach(r => {
-        if (!userStatusMap.has(r.userId)) userStatusMap.set(r.userId, r.status);
-      });
+      const userStatusMap = new Map(records.map(r => [r.userId, r.status]));
 
       const data = users.map(user => ({
         id: user.id,
